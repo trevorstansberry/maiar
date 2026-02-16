@@ -1,0 +1,10 @@
+# Credentials — never commit
+.env
+
+# Work in progress (team can remove these lines to share drafts via git)
+drafts/
+published/
+
+# System files
+.DS_Store
+node_modules/
