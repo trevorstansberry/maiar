@@ -1,0 +1,10 @@
+node_modules/
+.env
+db/maiar.db
+db/maiar.db-shm
+db/maiar.db-wal
+db/migrations/
+clients/
+.DS_Store
+ui/.svelte-kit/
+ui/dist/

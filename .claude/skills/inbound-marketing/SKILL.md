@@ -1,11 +1,20 @@
 ---
 name: inbound-marketing
-description: Use when building inbound marketing strategies, creating content-driven lead generation systems, designing SEO and content flywheels, planning lead magnets, or mapping the inbound funnel from awareness to conversion.
+description: "Use when building inbound marketing strategies, content-driven lead generation, SEO and content flywheels, lead magnets, or attraction-based demand generation. Also use when the user says "inbound marketing", "attract leads organically", "lead magnet", "content flywheel", "how do we get people to find us", "blog strategy for leads", "organic lead gen", or "content-led growth". Applies HubSpot's Attract-Engage-Delight flywheel and Marcus Sheridan's They Ask You Answer framework."
 ---
 
 # Inbound Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**HubSpot / Dharmesh Shah — The Inbound Methodology**
+The original inbound framework: Stop interrupting. Start helping. The Attract-Engage-Delight flywheel replaced the traditional funnel because customers who are delighted become promoters who fuel the Attract stage for new prospects. Every piece of content should answer a question a prospect is already asking.
+
+**Marcus Sheridan — They Ask You Answer**
+The most powerful inbound strategy: answer every question your customers ask, even the uncomfortable ones (price, problems, comparisons, negatives, reviews). Companies that answer honestly become the trusted authority in their category. Sheridan calls this "The Big 5": pricing/cost, problems, comparisons, reviews, and best-of lists.
+
 
 Inbound marketing earns attention by creating content and experiences people actively seek out — the opposite of interrupting them. The goal is to attract the right people, engage them with value, and convert them into customers and advocates.
 

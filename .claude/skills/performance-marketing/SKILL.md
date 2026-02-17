@@ -1,11 +1,20 @@
 ---
 name: performance-marketing
-description: Use when optimizing paid marketing for measurable ROI, building full-funnel attribution models, managing CAC and LTV, planning channel mix, scaling profitable paid acquisition, or analyzing marketing efficiency metrics.
+description: "Use when optimizing paid marketing for measurable ROI, building attribution models, managing CAC and LTV, planning channel mix, or scaling paid acquisition. Also use when the user says "performance marketing", "marketing ROI", "CAC too high", "LTV:CAC ratio", "channel attribution", "marketing efficiency", "scale paid acquisition", "incrementality testing", or "marketing spend optimization". Applies Perry Marshall's profit maximization model and Andrew Chen's unit economics framework."
 ---
 
 # Performance Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Perry Marshall — The 80/20 of Marketing**
+80% of your results come from 20% of your marketing spend. Within that 20%, another 80/20 applies. The discipline of performance marketing is identifying and concentrating on the small number of campaigns, keywords, and audiences that generate the majority of profitable outcomes — then ruthlessly cutting everything else.
+
+**Andrew Chen — Unit Economics and Growth**
+The three laws of performance marketing: (1) Every channel eventually saturates — CAC rises as you exhaust the best audiences. (2) The channels that scale biggest are the ones with the largest total addressable audience. (3) Retention determines whether performance marketing works — if customers churn before you recoup CAC, the channel destroys value regardless of ROAS.
+
 
 Performance marketing is marketing where every dollar spent is tied to a measurable outcome. The goal isn't just to acquire customers — it's to acquire the right customers at a cost that makes the business model work.
 

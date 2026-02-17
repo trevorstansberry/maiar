@@ -23,13 +23,33 @@ Analyze any marketing asset — your own content, competitor content, or campaig
 /analyze our current positioning vs. [competitor]
 ```
 
+## Context Files
+
+**Always reads (core context):**
+- `context/company/brand-voice.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+
+**Also reads based on analysis type:**
+- Content/SEO: `context/products/[product]/seo-guidelines.md`
+- Competitive: `context/products/[product]/competitors.md`
+
 ## What Happens
 
-1. Reads relevant context files
-2. Fetches content from URL if provided
-3. Reads file if file path provided
-4. Applies appropriate analysis skills
-5. Returns insights with context-specific recommendations
+**Step 1 — Route the request.** If the analysis type isn't clear from the input, ask:
+> "What type of analysis? (1) Content/SEO quality, (2) Audience fit, (3) Competitive positioning, (4) Campaign performance"
+
+Each answer routes to the appropriate agent:
+- Content/SEO → `content-analyzer` agent
+- Audience fit → `audience-analyst` agent
+- Competitive → `competitor-alternatives` skill + `brand-marketing` skill
+- Campaign performance → `performance` agent (if data provided) or structured framework analysis
+
+**Step 2 — Gather the content.** Fetch URL, read file, or ask user to paste the content.
+
+**Step 3 — Run the analysis** using the routed agent and relevant skills.
+
+**Step 4 — Return structured insights** with context-specific recommendations.
 
 ## Analysis Types
 

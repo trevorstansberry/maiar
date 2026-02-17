@@ -1,6 +1,6 @@
 ---
 name: brand-researcher
-description: Research a brand online and populate all context files. Scrapes the company website, review sites (G2, Capterra, Trustpilot, ProductHunt), and social profiles. Presents findings, asks follow-up questions, then writes confirmed content to context/.
+description: Research a brand online and populate all context files. Scrapes the company website, review sites (G2, Capterra, Trustpilot, ProductHunt), and social profiles. Asks setup questions to determine product structure, presents findings, asks follow-up questions, then writes confirmed content to the two-tier context structure.
 ---
 
 # Brand Researcher Agent
@@ -27,6 +27,7 @@ Extract:
 - Target audience signals (language used, problems addressed)
 - Product/service names, pricing model, and tiers
 - Any taglines, brand mantras, or repeated phrases
+- Signals about whether this is a single-product or multi-product business
 
 ### Step 2: Review Site Research
 
@@ -82,21 +83,105 @@ Extract:
 
 ---
 
+## Setup Questions (Before Writing Anything)
+
+After research but before drafting or writing any files, ask these questions using the AskUserQuestion tool with dropdown options. The answers determine the file structure.
+
+**Check 1: Existing setup**
+
+Read `context/products.md` to see if it exists.
+
+- If it does NOT exist → this is first-time setup. Continue to Question A.
+- If it DOES exist → ask:
+
+```
+Question: "I see you already have products set up. What would you like to do?"
+Options:
+  - "Add a new product"
+  - "Update an existing product"
+  - "Update company-wide context (brand voice, guidelines, style)"
+```
+
+If updating an existing product: ask which product, then skip to the Write step for that product's folder only. Never overwrite `context/company/` without explicit confirmation.
+
+If adding a new product: proceed to Question B only (skip Question A, company context already exists).
+
+---
+
+**Question A: Product structure** (first-time setup only)
+
+```
+Question: "Does this business have one product/offering or multiple products targeting different buyers?"
+Options:
+  - "One product or offering"
+  - "Multiple products with different audiences"
+  - "Multiple tiers or plans of the same product"
+```
+
+- "One product or offering" or "Multiple tiers" → go to Question D (slug naming)
+- "Multiple products with different audiences" → continue to Question B and C
+
+**Question B: Competitive landscape** (only when multiple products exist)
+
+```
+Question: "Do your products compete with the same companies or different ones?"
+Options:
+  - "Same competitors across all products"
+  - "Each product has its own competitive landscape"
+  - "Mix — some shared, some unique per product"
+```
+
+→ "Same competitors" → write `context/company/competitors.md` only
+→ "Each product" → write `context/products/[slug]/competitors.md` per product
+→ "Mix" → write both
+
+**Question C: Positioning** (only when multiple products exist)
+
+```
+Question: "Does the company have one unified market positioning, or does each product occupy a different market category?"
+Options:
+  - "One unified company-wide positioning"
+  - "Each product has its own positioning in a different category"
+  - "Both — an umbrella brand position plus per-product positioning"
+```
+
+→ Determines whether `positioning.md` is written at company level, product level, or both
+
+**Question D: Product name(s)**
+
+For single product:
+> "What should we call this product? This becomes its context folder name (e.g., `acme-pro`, `health-plans`, `consumer-app`). If you only have one product, your company name works fine."
+
+For multiple products: collect slug + display name + one-line description for each product.
+
+---
+
 ## Synthesis & Drafting
 
-After research, draft content for each of these context files based on your findings:
+After research and setup questions, draft content for context files based on your findings:
 
-1. `context/brand-voice.md` — tone, personality, messaging pillars, CTA style
-2. `context/audience-profiles.md` — ICP, buyer personas (use review site data for personas)
-3. `context/products-services.md` — offerings, value props, pricing, differentiators, proof points
-4. `context/competitors.md` — primary competitors, positioning, how they win
-5. `context/channels.md` — active channels, social handles, review profiles
-6. `context/brand-guidelines.md` — brand name usage, any style signals found
-7. `context/content-examples.md` — URLs to notable blog posts or content pieces found
-8. `context/style-guide.md` — writing style signals extracted from website and social
-9. `context/goals-kpis.md` — inferred goals based on messaging and stage (mark as inferred)
-10. `context/seo-guidelines.md` — topics and keyword themes visible in blog/content
-11. `context/internal-links-map.md` — site structure based on navigation and pages found
+**Company-level files** (always written for first-time setup):
+1. `context/company/brand-voice.md` — tone, personality, messaging pillars, CTA style
+2. `context/company/brand-guidelines.md` — brand name usage, any style signals found
+3. `context/company/style-guide.md` — writing style signals extracted from website and social
+4. `context/company/content-examples.md` — URLs to notable blog posts or content pieces found
+
+**Company-level optional files** (written based on Question B/C answers):
+5. `context/company/competitors.md` — if all products share the same competitive set
+6. `context/company/positioning.md` — leave as stub; populated later by `/brand-positioning`
+
+**Product-level files** (written per product slug):
+7. `context/products/[slug]/overview.md` — offerings, value props, pricing, differentiators, proof points
+8. `context/products/[slug]/audience-profiles.md` — ICP, buyer personas (use review site data)
+9. `context/products/[slug]/goals-kpis.md` — inferred goals based on messaging and stage (mark as inferred)
+10. `context/products/[slug]/channels.md` — active channels, social handles, review profiles
+11. `context/products/[slug]/seo-guidelines.md` — topics and keyword themes visible in blog/content
+12. `context/products/[slug]/internal-links-map.md` — site structure based on navigation and pages found
+13. `context/products/[slug]/competitors.md` — if this product has a unique competitive set (per Question B)
+14. `context/products/[slug]/content-examples.md` — add only if this product's audience or format differs significantly from company-level examples
+
+**Registry file** (written once):
+15. `context/products.md` — product registry with slug, display name, description, and default
 
 ---
 
@@ -114,7 +199,7 @@ Present findings to the user in this format:
 [Summary of tone signals found]
 
 ### Target Audience
-[Summary of audience signals found]
+[Summary of audience signals found — note: for this product]
 
 ### Products & Pricing
 [Summary of offerings found]
@@ -146,8 +231,8 @@ Wait for the user's responses before writing files.
 
 Once the user confirms or corrects the findings:
 
-1. Write each context file to `context/[filename].md` with the confirmed information
-2. Mark any fields that are still uncertain with `<!-- TODO: confirm this -->`
+1. Write each context file to the correct path (company or product level, per setup answers)
+2. Mark any fields still uncertain with `<!-- TODO: confirm this -->`
 3. Tell the user which files were written and suggest they review each one
 4. Recommend committing the `context/` directory so the team has the latest brand context
 

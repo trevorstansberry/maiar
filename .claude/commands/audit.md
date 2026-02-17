@@ -23,12 +23,34 @@ Audit any marketing channel, content piece, or campaign to identify what's worki
 /audit our onboarding email sequence
 ```
 
+## Context Files
+
+**Always reads (core context):**
+- `context/company/brand-voice.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+
+**Also reads based on audit type:** seo-guidelines.md (SEO audits), internal-links-map.md (content audits), channels.md (social/email audits)
+
+## Agent Routing
+
+Audit type determines which agents run:
+
+| Audit Type | Agents Invoked | Skills Applied |
+|---|---|---|
+| SEO audit | `seo-optimizer` | `seo-audit`, `programmatic-seo` |
+| CRO / landing page audit | `cro-analyst` + `landing-page-optimizer` | `page-cro`, `signup-flow-cro`, `form-cro` |
+| Email audit | `editor` | `email-sequence`, `email-marketing` |
+| Content quality audit | `content-analyzer` | `content-marketing`, `copy-editing` |
+| Social / brand audit | `editor` | `social-media-marketing`, `brand-marketing` |
+| Paid audit | `cro-analyst` | `paid-ads`, `sem-ppc`, `page-cro` |
+
 ## What Happens
 
-1. Reads relevant context files for brand and audience standards
+1. Reads core context files + audit-type-specific context
 2. If given a URL: fetches and analyzes the content
 3. If given a file: reads and analyzes it
-4. Applies relevant skills (seo-audit, page-cro, email-sequence, etc. based on what's being audited)
+4. Routes to the appropriate agent(s) based on audit type
 5. Produces structured audit report with prioritized findings
 
 ## Audit Report Structure
@@ -55,16 +77,6 @@ Larger changes that require planning but have meaningful upside.
 ### Strengths
 What's working well (don't just focus on problems).
 
-## Audit Types Supported
-
-- **SEO audit:** Technical SEO, on-page optimization, content quality
-- **CRO audit:** Landing page, signup flow, forms, checkout
-- **Email audit:** Subject lines, content, segmentation, deliverability
-- **Social audit:** Profile completeness, content strategy, engagement
-- **Content audit:** Quality, relevance, SEO, conversion
-- **Paid audit:** Account structure, ad copy, targeting, landing pages
-- **Brand audit:** Consistency across channels, voice, messaging
-
 ---
 
-Identify what is being audited, fetch or read the content if needed, apply the relevant skill (seo-audit, page-cro, email-sequence, etc.), and produce a structured audit report with prioritized findings.
+Identify what is being audited, fetch or read the content if needed. Route to the appropriate agent(s) based on audit type: SEO → seo-optimizer; CRO/landing page → cro-analyst + landing-page-optimizer; email → editor; content → content-analyzer. Produce structured audit report with prioritized findings.

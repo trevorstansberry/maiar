@@ -1,6 +1,6 @@
 ---
 name: email-marketing
-description: Use when building email marketing programs, planning list growth strategies, setting up email automation, improving deliverability, segmenting audiences, designing drip campaigns, or auditing email performance beyond individual sequences.
+description: "Use when building email marketing programs, planning list growth strategies, setting up email automation, improving deliverability, segmenting audiences, designing drip campaigns, or auditing email program performance. Also use when the user says "email marketing", "email program", "email list", "email automation", "email deliverability", "email segmentation", "drip campaign", "email strategy", "email platform", or "email performance". Applies Andre Chaperon's AutoResponder Madness segmentation model and Ben Settle's email personality framework."
 ---
 
 # Email Marketing

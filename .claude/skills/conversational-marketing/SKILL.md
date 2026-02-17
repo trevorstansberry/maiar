@@ -1,6 +1,6 @@
 ---
 name: conversational-marketing
-description: Use when designing chatbot and live chat strategies, building conversational lead qualification flows, planning SMS marketing programs, creating conversational email sequences, or reducing friction in the buying process with real-time dialogue.
+description: "Use when designing chatbot and live chat strategies, building conversational lead qualification flows, planning SMS marketing, creating conversational email sequences, or reducing friction in the buying process with real-time dialogue. Also use when the user says "conversational marketing", "chatbot", "live chat", "bot strategy", "conversational AI", "SMS marketing", "chat qualification", "website chat", "Drift", "Intercom", or "real-time lead qualification". Applies Drift's conversational flywheel and David Cancel's bot-to-human handoff methodology."
 ---
 
 # Conversational Marketing
@@ -10,6 +10,64 @@ description: Use when designing chatbot and live chat strategies, building conve
 Conversational marketing replaces forms with conversations. Instead of making a potential customer fill out a form and wait, you engage them in real-time dialogue — qualifying, educating, and routing them to the right outcome in the moment.
 
 **The core insight:** B2B buyers expect B2C-speed experiences. A qualified prospect won't wait 24 hours for a response on a pricing inquiry.
+
+
+## Expert Foundations
+
+**Drift / David Cancel — Conversational Marketing Framework**
+Cancel's conversational flywheel: Engage → Understand → Recommend. The core insight: most website visitors leave without identifying themselves because they hit a form before they're ready to convert. Conversations intercept visitors in the moment of highest intent (on your pricing or product page) and qualify them instantly — replacing the "fill out this form and we'll get back to you in 48 hours" model with "talk to us right now."
+
+**The Buyer's New Reality**
+Modern buyers have completed 57-70% of their purchase decision before contacting sales (CEB/Gartner data). Conversational marketing catches them during that research phase — before they're ready for a formal sales conversation, but after they've shown intent.
+
+### The Conversational Flywheel
+
+**Engage:** Start a conversation at the right moment (right page, right visitor segment, right intent signal)
+**Understand:** Ask qualifying questions to learn about the visitor's need, role, and timeline
+**Recommend:** Route to the right next step — book a demo, watch a relevant video, start a trial, or talk to sales
+
+The fatal mistake: using chatbots to slow people down (form replacement) rather than speed them up (instant conversation routing).
+
+### Where to Deploy Conversations
+
+| Page | Visitor Intent | Recommended Play |
+|---|---|---|
+| Pricing page | High — comparing options | "What's your biggest question about pricing?" or "Want to see if we fit your budget?" |
+| Product/features page | Mid — evaluating fit | "Which team does this matter most to?" (qualification) |
+| Homepage | Low — exploring | General "What brings you here today?" |
+| Demo request page | High — ready to convert | "Book your demo in 30 seconds" with instant scheduling |
+| Blog / content | Low — learning | Subscribe or "Explore this topic" |
+| Return visitor (2nd+ visit) | Mid-High — considering | Personalized to what they viewed last session |
+
+### Bot-to-Human Handoff Logic
+
+Define exactly when to hand off to a human:
+- **VIP accounts** (ABM target list): Always route to human immediately
+- **High-intent signals** (pricing + demo page + returning visitor): Route to human
+- **Explicit request** ("I want to talk to someone"): Always human
+- **After 3+ bot exchanges** with no resolution: Offer human option
+- **After hours:** Capture email, notify sales for next-business-hour follow-up
+
+### Intent Scoring Integration
+
+Combine conversational signals with other intent data:
+- Pricing page visit: +15 points
+- Bot conversation initiated: +10 points
+- Demo requested in chat: +50 points
+- Company is on target account list: +25 points
+- Return visitor: +10 points
+
+When score crosses threshold → route to sales immediately or trigger SDR follow-up within same day.
+
+### Measurement
+
+| Metric | What It Measures |
+|---|---|
+| Conversation start rate | % of visitors who engage with bot |
+| Bot → human handoff rate | % of conversations escalated |
+| Meeting booked rate | % of conversations that result in demo |
+| Conversation-influenced pipeline | Pipeline from deals with chat touchpoint |
+| Time to response (human) | Speed of human follow-up after handoff |
 
 ## Conversational Channels
 

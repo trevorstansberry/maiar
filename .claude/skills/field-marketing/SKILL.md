@@ -1,6 +1,6 @@
 ---
 name: field-marketing
-description: Use when planning field marketing programs, building regional marketing strategies, creating territory-specific campaigns, enabling sales teams with local marketing, planning executive roundtables, or running pipeline acceleration events.
+description: "Use when planning field marketing programs, building regional marketing strategies, creating territory-specific campaigns, enabling sales teams with local marketing, or planning pipeline acceleration events. Also use when the user says "field marketing", "regional marketing", "territory marketing", "sales enablement events", "executive roundtable", "field event", "pipeline acceleration", "local marketing campaign", or "field marketing program". Applies Sangram Vajre's sales-marketing alignment framework adapted for regional execution."
 ---
 
 # Field Marketing
@@ -10,6 +10,64 @@ description: Use when planning field marketing programs, building regional marke
 Field marketing brings marketing into the field — supporting sales teams at the territory level with local events, customer engagement, and pipeline-building activities that corporate campaigns can't personalize to a region. The best field marketers think like a regional sales leader who happens to have marketing skills.
 
 **Field marketing's job:** Generate and accelerate pipeline for sales teams in specific territories or verticals.
+
+
+## Expert Foundations
+
+**Sangram Vajre — ABM and Field Marketing**
+Vajre's field marketing principle: field marketing is the connective tissue between corporate marketing and sales. It fails when it operates as a separate function. It succeeds when the field marketer is embedded with the sales team — owning the territory pipeline number, not just event attendance.
+
+**SiriusDecisions / Forrester Research**
+Research consensus: field marketing events generate 23% of total pipeline for enterprise B2B companies when executed with the right account targeting and sales follow-up. The key variable is post-event follow-up speed — deals sourced from events where sales followed up within 24 hours close 40% faster than those followed up after 72+ hours.
+
+### Field Marketing as Territory Ownership
+
+Field marketers own a geographic or vertical territory and are accountable for:
+- Pipeline generated from that territory
+- Relationships built at target accounts in that territory
+- Sales enablement for the sales team covering that territory
+
+**The field marketer's role is not to run events.** It's to accelerate revenue in a territory. Events are one tool.
+
+### Territory Mapping
+
+Before any field activity, map the territory:
+
+| Account | Tier | AE Owner | Current Stage | Next Event Touchpoint | Relationship Score |
+|---|---|---|---|---|---|
+
+**Tier 1 accounts** (top 10-20): Deserve custom field investment — private dinners, executive briefings, bespoke outreach
+**Tier 2 accounts** (next 50-100): Group events — regional roundtables, user groups, sponsored conferences
+**Tier 3 accounts** (next 200-500): Broad events and digital — webinars, sponsored conference presence
+
+### Event Types for Field Marketing
+
+| Event Type | Tier | Pipeline Yield | Time Investment |
+|---|---|---|---|
+| Executive dinner (8-12 people) | Tier 1 | High — intimate relationship building | High |
+| Customer roundtable (15-25) | Tier 1-2 | High — peer validation | Medium |
+| Regional roadshow (50-200) | Tier 2-3 | Medium — broad awareness | Medium |
+| Conference sponsorship | All tiers | Low-Medium — depends on follow-up | High cost |
+| Sponsored happy hour | Tier 2-3 | Medium — networking | Low |
+| Virtual event (field-hosted) | Tier 3 | Low | Low |
+
+### Sales Enablement Alignment
+
+Field marketing should produce for sales:
+- Pre-event target account list with context (what they care about, recent news)
+- Post-event follow-up email templates (send within 24 hours)
+- ROI metrics per event for quarterly business reviews
+- Competitive intelligence from field conversations
+
+### Field Marketing Metrics
+
+| Metric | Target / Benchmark |
+|---|---|
+| Pipeline sourced (events) | 15-25% of territory pipeline |
+| Pipeline influenced (events) | 30-40% of territory pipeline |
+| MQL to SQL conversion from events | 25-35% (vs. 10-15% for inbound) |
+| Cost per pipeline opportunity | $500-2,500 for regional events |
+| Post-event follow-up rate (sales) | >80% within 24 hours |
 
 ## Field Marketing vs. Corporate Marketing
 

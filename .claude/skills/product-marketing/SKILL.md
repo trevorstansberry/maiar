@@ -1,11 +1,20 @@
 ---
 name: product-marketing
-description: Use when developing go-to-market strategy, crafting product positioning and messaging, writing product launch plans, creating sales collateral, developing competitive intelligence, planning feature announcements, or building the narrative around a product or feature.
+description: "Use when developing go-to-market strategy, crafting product positioning and messaging, writing product launch plans, creating sales collateral, developing competitive intelligence, or building the narrative around a product or feature. Also use when the user says "product marketing", "GTM", "go-to-market", "product positioning", "product messaging", "feature launch", "sales enablement", "competitive battlecard", "product launch plan", "ICP messaging", or "value proposition". Applies April Dunford's Obviously Awesome positioning framework and Geoffrey Moore's Crossing the Chasm positioning template."
 ---
 
 # Product Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**April Dunford — Obviously Awesome**
+Dunford's positioning methodology: positioning is the foundation of all marketing. Her 5-component framework: (1) Competitive alternatives (what would customers do without you?), (2) Unique attributes (what do you have that alternatives don't?), (3) Value for customers (so what?), (4) Target segment (who cares most?), (5) Market category (what context makes your value obvious?). Most companies position badly because they describe features instead of value in context.
+
+**Geoffrey Moore — Crossing the Chasm**
+Moore's positioning template: "For [target customer] who [has the problem], our [product] is a [product category] that [key benefit]. Unlike [primary competitive alternative], our product [primary differentiation]." The template forces clarity on who you're for and why you're different — the two things most positioning statements omit.
+
 
 Product marketing is the connective tissue between product, sales, and the market. It answers: Who is this for? What problem does it solve? Why are we the best answer? And how do we communicate that in a way that resonates with the right buyer?
 

@@ -1,11 +1,20 @@
 ---
 name: social-media-marketing
-description: Use when building social media strategies, creating platform-specific content plans, setting up social media calendars, managing community engagement, conducting social listening, or measuring social performance.
+description: "Use when building social media strategies, platform-specific content plans, social calendars, community management, social listening, or measuring social performance. Also use when the user says "social media strategy", "which platforms should we be on", "social media plan", "social listening", "grow our social following", "social media calendar", "how to grow on LinkedIn/Instagram/TikTok", or "social media presence". Applies Gary Vaynerchuk's Jab-Jab-Right Hook model and Jay Baer's Youtility framework."
 ---
 
 # Social Media Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Gary Vaynerchuk — Jab, Jab, Jab, Right Hook**
+Give value relentlessly before asking for anything. "Jabs" are helpful, entertaining, or educational content. "Right hooks" are asks (buy, sign up, share). Most brands throw too many right hooks without earning the relationship first. Platform-native content — content that feels like it belongs on that platform, not repurposed from elsewhere — always outperforms.
+
+**Jay Baer — Youtility**
+The best marketing doesn't feel like marketing. Youtility is marketing so useful, people would pay for it. Social media content that genuinely helps your audience creates the deepest brand affinity — not content that simply promotes your product. Ask: "Is this content useful enough that someone would seek it out even if we weren't selling anything?"
+
 
 Social media is a distribution and relationship channel, not a billboard. The brands that win on social are those that show up consistently with genuine value, engage in real conversations, and have a distinct point of view — not those that post the most ads or chase every trend.
 

@@ -1,6 +1,6 @@
 ---
 name: sem-ppc
-description: Use when planning or building search engine marketing campaigns, writing Google Ads copy, structuring ad accounts, optimizing Quality Score, planning keyword strategy for paid search, managing PPC budgets, or improving ROAS on search campaigns.
+description: "Use for search engine marketing, Google Ads, PPC campaigns, paid search, keyword bidding strategy, Quality Score optimization, or search-specific ROAS improvement. Also use when the user says "Google Ads", "PPC", "paid search", "search campaign", "keyword bidding", "Quality Score", "Bing Ads", "why is my CPC high", "keyword match types", or "ad account structure". Applies Perry Marshall's 80/20 Google Ads framework and Brad Geddes's account structure best practices. For multi-platform ad copy, see paid-ads."
 ---
 
 # Search Engine Marketing (SEM / PPC)
@@ -10,6 +10,70 @@ description: Use when planning or building search engine marketing campaigns, wr
 SEM puts your message in front of people at the exact moment they're searching for what you offer. Unlike social ads (interruption-based), search ads intercept existing demand. The key to SEM success is matching intent precisely, then converting efficiently.
 
 **The SEM equation:** Right keyword + Right ad + Right landing page = Profitable conversion
+
+
+## Expert Foundations
+
+**Perry Marshall — 80/20 Sales and Marketing**
+Marshall's SEM insight: in any Google Ads account, 20% of keywords drive 80% of profit. The discipline is identifying those 20% early and ruthlessly cutting everything else. Most advertisers run 5x more keywords than they should. Clean accounts outperform bloated ones — fewer keywords, tighter ad groups, more relevant ads = higher Quality Score = lower CPCs.
+
+**Brad Geddes — Advanced Google Ads**
+Geddes's framework for account structure: organize by intent, not by product. A visitor searching "buy [product]" vs. "[product] review" vs. "how to [problem]" has radically different intent — and needs a different ad, different landing page, and different bid. One ad group for all three is the most common structural mistake in SEM.
+
+### Keyword Intent Tiers
+
+Every search query has an intent signal. Structure campaigns around intent:
+
+| Intent Tier | Query Pattern | Bid Strategy | Landing Page |
+|---|---|---|---|
+| High (buy now) | "[product] price", "buy [product]", "[brand] vs [competitor]" | Aggressive — maximize share | Demo / pricing / free trial |
+| Mid (evaluate) | "best [product]", "[product] review", "[problem] solution" | Moderate — capture consideration | Feature page / comparison / guide |
+| Low (learn) | "how to [problem]", "what is [concept]" | Low or exclude | Educational content / top-of-funnel |
+
+### Match Types
+
+| Match Type | What It Matches | When to Use |
+|---|---|---|
+| Exact `[keyword]` | Only that exact query | High-value, high-intent terms |
+| Phrase `"keyword"` | Queries containing that phrase | Controlled expansion around proven terms |
+| Broad match `keyword` | Google's interpretation — broad | Only with Smart Bidding + strong negative list |
+
+**Rule:** Start exact and phrase. Use broad only after you have conversion data and a comprehensive negative keyword list.
+
+### Quality Score Levers
+
+Quality Score (1-10) determines your ad rank and cost. Three factors:
+
+1. **Expected CTR** — Is your ad likely to get clicked? (Ad copy matters here)
+2. **Ad relevance** — How closely does your ad match the search query? (Tight ad groups matter here)
+3. **Landing page experience** — Does your page deliver what the ad promised? (Message match matters here)
+
+**Improving QS by 1 point can reduce CPC by 16-50%** (Google data).
+
+### Account Structure Principles
+
+- **Tight ad groups:** 5-20 keywords per ad group maximum; one theme per group
+- **Message match:** Ad headline must match the keyword + landing page headline must match the ad
+- **Negative keywords:** Build a negative list before launch; expand weekly from search term reports
+- **Bidding strategy:** Manual CPC while learning; switch to Target CPA/ROAS once you have 30+ conversions in 30 days
+
+### Budget Allocation Rule
+
+Start with a "learning budget" — enough spend to get statistical significance before optimizing:
+- Minimum: 5-10x your target CPA per month to learn
+- Example: Target CPA $100 → $500-1,000/month minimum to optimize effectively
+
+### SEM vs. SEO
+
+| Factor | SEM (Paid) | SEO (Organic) |
+|---|---|---|
+| Speed | Immediate — live within hours | Months to rank |
+| Cost | Pay per click | Time + content investment |
+| Control | Full control over messaging | Limited control |
+| Long-term | Traffic stops when budget stops | Traffic compounds over time |
+| Best use | High-intent, buying-stage queries | Informational, research-stage queries |
+
+*Run both: SEM for immediate conversion capture; SEO for long-term compounding reach.*
 
 ## Account Structure
 

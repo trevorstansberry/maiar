@@ -1,0 +1,11 @@
+# Caddyfile — copy to /etc/caddy/Caddyfile and edit your domain
+# Caddy auto-provisions HTTPS via Let's Encrypt — no cert config needed.
+
+app.yourdomain.com {
+    reverse_proxy localhost:3000
+}
+
+# Optional: redirect www → non-www
+# www.yourdomain.com {
+#     redir https://yourdomain.com{uri}
+# }

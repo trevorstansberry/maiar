@@ -22,13 +22,39 @@ Create marketing content of any type. Maiar reads your brand context and produce
 /write ad copy for Google Ads targeting "project management software"
 ```
 
+## Context Files
+
+**Company context (always reads):**
+- `context/company/brand-voice.md`
+- `context/company/style-guide.md`
+- `context/company/content-examples.md` *(if present)*
+
+**Product context (reads after resolving the active product):**
+- `context/products/[product]/overview.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+- `context/products/[product]/content-examples.md` *(if present — supplements company-level examples)*
+
+**Product resolution:** Reads `context/products.md` to determine which product to use. If only one product is configured, it is auto-selected. If multiple products exist and the product isn't clear from your input, a dropdown will appear before any work begins.
+
+## Agent Chain (SEO content)
+
+For SEO-optimized content, 4 agents run automatically after writing:
+
+1. `editor` — brand voice consistency, clarity, and structural quality
+2. `seo-optimizer` — keyword analysis, placement, density, and LSI keyword coverage
+3. `meta-creator` — title tag and meta description options
+4. `internal-linker` — internal link suggestions from `context/products/[product]/internal-links-map.md`
+
+For short-form content (social posts, short ads), only `editor` runs — no SEO pipeline needed.
+
 ## What Happens
 
-1. **Reads context:** Loads brand-voice.md, audience-profiles.md, style-guide.md, and relevant content-examples.md
-2. **Clarifies if needed:** If the content type or audience isn't clear from the request, asks before proceeding
+1. **Reads context:** Loads core context files + style-guide.md + content-examples.md
+2. **Clarifies if needed:** If the content type or audience isn't clear, asks one focused question before proceeding
 3. **Determines format:** Chooses the appropriate structure, length, and format for the content type
 4. **Writes:** Produces content in brand voice for the right audience
-5. **Reviews and scores:** Checks against brand voice, audience fit, SEO (if applicable), and readability
+5. **Routes:** Long-form/SEO content → 4-agent chain; short-form → editor only
 6. **Saves:** Suggests saving to `drafts/[filename].md`
 
 ## Content Types Supported
@@ -48,13 +74,6 @@ Create marketing content of any type. Maiar reads your brand context and produce
 - Newsletter content
 - Webinar or event descriptions
 
-## SEO Content
-
-For SEO-optimized content, the following agents run automatically after writing:
-- `seo-optimizer` — keyword analysis and optimization recommendations
-- `meta-creator` — title tag and meta description options
-- `internal-linker` — suggests internal links from `context/internal-links-map.md`
-
 ## Quality Check
 
 All content is evaluated against:
@@ -66,4 +85,4 @@ All content is evaluated against:
 
 ---
 
-Read the relevant context files, determine what's being requested, and produce the appropriate content. If the content type, format, or target audience is ambiguous, ask one focused clarifying question before writing.
+Read core context files, determine what's being requested, and produce the appropriate content. For SEO content: run through editor → seo-optimizer → meta-creator → internal-linker. For short-form content: run through editor only. If the content type, format, or target audience is ambiguous, ask one focused clarifying question before writing.

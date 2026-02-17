@@ -24,38 +24,50 @@ Generate marketing ideas, campaign concepts, or creative solutions for a specifi
 /ideas ABM tactics for 50 enterprise accounts
 ```
 
+## Context Files
+
+**Always reads (core context):**
+- `context/company/brand-voice.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+
+**Also reads:**
+- `context/products/[product]/channels.md` — to filter ideas to channels already active or feasible
+
+## Skills Applied
+
+`marketing-ideas`, `marketing-psychology`, plus discipline-specific skills based on the topic (e.g., `retention-lifecycle` for churn ideas, `b2b-marketing` for enterprise ideas, `growth-marketing` for acquisition ideas).
+
 ## What Happens
 
-1. Reads context files (especially goals-kpis.md, audience-profiles.md, channels.md)
-2. Applies `marketing-ideas`, `marketing-psychology`, and discipline-specific skills
-3. Generates ideas at multiple levels (quick wins, strategic plays, creative swings)
-4. Tags each idea by channel, time to execute, estimated impact, and effort
-5. Highlights top 3 recommendations based on context
+1. Reads core context files + channels.md
+2. Applies `marketing-ideas` + `marketing-psychology` + relevant discipline skill
+3. Generates ideas across three tiers (quick wins, strategic plays, creative swings)
+4. **Scores every idea** using an impact × effort matrix
+5. Surfaces top 3 recommendations based on current goals and audience fit
 
 ## Output Format
 
+### Scored Idea Table (all ideas)
+
+| Idea | Channel | Effort | Time to Impact | Confidence | Score |
+|---|---|---|---|---|---|
+| [Idea name] | [Channel] | Low/Med/High | Days/Weeks/Months | Low/Med/High | [1–9] |
+
+*Score = (Impact × Confidence) ÷ Effort. Rank and sort by score.*
+
 ### Top 3 Recommendations
-The 3 ideas with best fit for current goals, audience, and channels.
+The 3 highest-scoring ideas best fit for current goals and audience. For each:
+- **What to do:** Specific action
+- **Why it will work:** The insight, psychology, or data behind it
+- **How to start:** 3–5 concrete first steps
+- **Success metric:** How to know it's working
 
-### Quick Wins (can execute in days)
-5-10 ideas that are fast to implement
+### Quick Wins (execute in days, Low effort)
+Ideas scoring high on speed and ease.
 
-### Strategic Plays (require planning)
-5-10 ideas with higher upside but more effort
+### Strategic Plays (require planning, High impact)
+Ideas with larger upside that need investment.
 
 ### Creative Swings (unconventional)
-3-5 unexpected ideas that could generate outsized results if they work
-
----
-
-For each idea:
-- **Idea:** What to do
-- **Channel/format:** Where this happens
-- **Why it would work:** The insight or psychology behind it
-- **How to execute:** 3-5 steps to get started
-- **Effort:** Low / Medium / High
-- **Potential impact:** Low / Medium / High
-
----
-
-Read context files, apply marketing-ideas, marketing-psychology, and relevant skill(s), and generate a structured ideation session. Tailor ideas to the brand, audience, and active channels. Recommend the top 3 based on fit.
+3–5 unexpected ideas that could generate outsized results if they work.

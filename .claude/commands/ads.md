@@ -22,13 +22,31 @@ Write ad copy and strategy for paid advertising campaigns.
 /ads meta retargeting cart abandoners with discount offer
 ```
 
+## Context Files
+
+**Company context (always reads):**
+- `context/company/brand-voice.md`
+- `context/company/competitors.md` *(if present — company-wide competitive set)*
+
+**Product context (reads after resolving the active product):**
+- `context/products/[product]/overview.md` — offers, value props, differentiators
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+- `context/products/[product]/competitors.md` *(if present — product-specific competitive set)*
+
+**Product resolution:** If multiple products are configured and the product isn't clear from your input, a dropdown will appear before any work begins.
+
+## Agent Chain
+
+1. Writes ad copy using `paid-ads` + `sem-ppc` (for Google) + `marketing-psychology` skills
+2. `cro-analyst` agent reviews landing page fit and message-match recommendations
+
 ## What Happens
 
-1. Reads brand-voice.md, audience-profiles.md, products-services.md, and competitors.md
-2. Applies paid-ads, sem-ppc (for Google), and marketing-psychology skills
-3. Writes copy for all required ad formats for the platform
-4. Provides targeting recommendations
-5. Suggests landing page requirements for message match
+1. Reads core context files + products-services.md + competitors.md
+2. Writes copy for all required ad formats for the platform
+3. Provides targeting recommendations
+4. `cro-analyst` agent reviews landing page requirements for message match
 
 ## Output Per Platform
 
@@ -66,8 +84,8 @@ Write ad copy and strategy for paid advertising campaigns.
 - Platform-specific format and character limits respected
 - Targeting strategy brief
 - A/B test recommendation (what to test first)
-- Landing page message-match notes
+- Landing page message-match notes (from `cro-analyst`)
 
 ---
 
-Read context files, then write the ad copy for the specified platform using paid-ads, sem-ppc, and marketing-psychology skills. Include targeting strategy and landing page notes.
+Read core context files, then write the ad copy for the specified platform using `paid-ads`, `sem-ppc`, and `marketing-psychology` skills. Invoke `cro-analyst` agent for landing page message-match review.

@@ -1,11 +1,20 @@
 ---
 name: community-marketing
-description: Use when building brand communities, designing community-led growth strategies, creating online community spaces, planning community engagement programs, or turning customers into advocates and contributors.
+description: "Use when building brand communities, designing community-led growth strategies, creating online community spaces, planning community engagement programs, or turning customers into advocates. Also use when the user says "community marketing", "build a community", "community-led growth", "online community", "customer community", "community engagement", "brand advocates", "community platform", or "community strategy". Applies David Spinks's The Business of Belonging framework and Rosie Sherry's community-led growth model."
 ---
 
 # Community Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**David Spinks — The Business of Belonging**
+Spinks's framework: communities exist to fulfill a shared purpose, not to serve a brand's marketing goals. The three stages of community growth: discovery (people find the community), habit formation (they return regularly), and belonging (they identify with the community). Communities fail when brands treat members as an audience rather than participants.
+
+**Rosie Sherry — Community-Led Growth**
+The CLG framework: community isn't a marketing channel — it's a business strategy. Community creates compounding returns: members help each other (reducing CS costs), create content (reducing marketing costs), and become advocates (reducing CAC). Measure community ROI through retention improvement, support deflection, and referral rate, not engagement metrics alone.
+
 
 Community is the ultimate competitive moat. A strong brand community creates belonging — customers who don't just use your product but identify with it, advocate for it, and bring others in. Communities are hard to copy because they're made of relationships, not features.
 

@@ -1,11 +1,20 @@
 ---
 name: retention-lifecycle
-description: Use when building customer retention strategies, designing lifecycle marketing programs, reducing churn, creating win-back campaigns, building upsell and cross-sell sequences, or expanding customer LTV.
+description: "Use when building customer retention strategies, designing lifecycle marketing, reducing churn, creating win-back campaigns, building upsell/cross-sell sequences, or expanding customer LTV. Also use when the user says "retention", "churn", "win-back", "upsell", "lifecycle marketing", "customer success", "reduce churn", "expand accounts", "onboarding sequence", "NRR", "net revenue retention", or "customer health scoring". Applies Lincoln Murphy's Customer Success framework and David Skok's SaaS lifecycle model."
 ---
 
 # Retention & Lifecycle Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Lincoln Murphy — Customer Success**
+Murphy's foundational insight: churn is decided *during* onboarding, not at renewal. Customer success = desired outcome + appropriate experience. The "aha moment" (when a customer first realizes the product's value) must happen as fast as possible. Health scoring — measuring the signals that predict retention — is the CS team's primary tool.
+
+**David Skok — SaaS Metrics That Matter**
+Skok's SaaS lifecycle model identifies the key financial metrics of retention: NRR (Net Revenue Retention), GRR (Gross Revenue Retention), and CAC payback period. A business with >100% NRR grows without adding a single new customer because expansion revenue from existing customers exceeds churn. Target NRR: >110% for strong SaaS businesses.
+
 
 Acquiring a new customer costs 5-7× more than retaining an existing one. A 5% improvement in retention increases profits by 25-95% (Bain & Company). Retention is the highest-leverage thing most marketing teams ignore.
 

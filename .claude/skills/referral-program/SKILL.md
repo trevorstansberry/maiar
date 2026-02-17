@@ -1,7 +1,7 @@
 ---
 name: referral-program
 version: 1.0.0
-description: "When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' or 'partner program.' This skill covers program design, incentive structure, and growth optimization."
+description: "When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' or 'partner program.' This skill covers program design, incentive structure, and growth optimization. Applies Andrew Chen's viral loop analysis and Sean Ellis's product-market fit referral mechanics."
 ---
 
 # Referral & Affiliate Programs
@@ -245,6 +245,40 @@ For implementation, see the [tools registry](../../tools/REGISTRY.md). Key tools
 | **Stripe** | Payment processing (for commission tracking) | [stripe.md](../../tools/integrations/stripe.md) |
 
 ---
+
+
+## Word-of-Mouth Psychology
+
+### The 5 Motivations for Sharing (from WOM research)
+
+People share because of:
+1. **Social currency** — Sharing makes them look good, smart, or in-the-know
+2. **Triggers** — Environmental cues remind them to share (your product is part of daily life)
+3. **Emotion** — High-arousal emotions (awe, excitement, anxiety) drive sharing more than low-arousal (contentment)
+4. **Public visibility** — When product use is observable, it creates social proof automatically
+5. **Practical value** — Genuinely useful content gets shared because sharing is helpful
+
+*Jonah Berger's STEPPS framework (Contagious): Social Currency, Triggers, Emotion, Public, Practical Value, Stories*
+
+### Organic WOM Amplification
+
+Turn satisfied customers into active advocates:
+- **Testimonial collection:** Ask for reviews within 7 days of achieving their first win with the product
+- **G2/Capterra campaigns:** Email NPS 9-10 customers directly with a review link and specific guidance on what to say
+- **Social sharing moments:** Build in-product sharing triggers at milestone moments (not on first login)
+- **Case study pipeline:** Create a repeatable process to turn customer wins into published stories
+- **Community-powered sharing:** Members who identify with the community share on behalf of it
+
+### The Referral vs. WOM Distinction
+
+| Referral Program | Word-of-Mouth |
+|---|---|
+| Incentivized, tracked | Organic, voluntary |
+| Measurable attribution | Hard to attribute |
+| Works even with neutral sentiment | Only works with genuine satisfaction |
+| Structured trigger (invite link) | Natural trigger (conversation) |
+
+Both matter. Programs that layer structured referrals on top of genuine WOM outperform programs that use one alone.
 
 ## Related Skills
 

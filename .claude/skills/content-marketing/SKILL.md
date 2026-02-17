@@ -1,6 +1,6 @@
 ---
 name: content-marketing
-description: Use when building content marketing strategies, creating editorial calendars, planning pillar and cluster content architecture, designing content repurposing systems, or mapping content to the buyer journey.
+description: "Use when building content marketing strategies, creating editorial calendars, planning pillar and cluster content architecture, designing content repurposing systems, or mapping content to the buyer journey. Also use when the user says "content marketing", "content strategy", "editorial calendar", "pillar content", "content repurposing", "thought leadership content", "content program", "content calendar", or "content marketing plan". Applies Joe Pulizzi's content marketing methodology and Ann Handley's COPE (Create Once, Publish Everywhere) framework."
 ---
 
 # Content Marketing

@@ -1,6 +1,6 @@
 ---
 name: partner-channel-marketing
-description: Use when building partner marketing programs, designing channel partner strategies, creating co-marketing campaigns, developing reseller or referral partner programs, or enabling partners to market and sell your products.
+description: "Use when building partner marketing programs, designing channel partner strategies, creating co-marketing campaigns, developing reseller or referral partner programs, or enabling partners to sell and market your products. Also use when the user says "partner marketing", "channel marketing", "co-marketing", "reseller program", "partner enablement", "channel partner", "partner program", "co-sell", "technology partnership", or "ISV program". Applies Jay McBain's channel ecosystem research and partner tiering frameworks."
 ---
 
 # Partner & Channel Marketing
@@ -10,6 +10,65 @@ description: Use when building partner marketing programs, designing channel par
 Partner marketing multiplies your reach by leveraging others' audiences, relationships, and distribution channels. The best partnerships are win-win: your partner gets something valuable (revenue, better product, credibility for their audience), and you get access to customers you'd struggle to reach efficiently on your own.
 
 **Partner fit test:** Does your partner's audience/customer base contain a meaningful number of your ideal customers? If yes, explore. If not, even a "great relationship" won't produce results.
+
+
+## Expert Foundations
+
+**Jay McBain — Channel Ecosystem Research (Forrester)**
+McBain's channel ecosystem framework: the future of B2B go-to-market is ecosystem-led growth, not direct sales-led growth. By 2025, 75% of B2B technology purchasing decisions are influenced by a partner, advisor, or community. The implication: your most valuable sales channel isn't your sales team — it's the network of partners who advise your buyers before your sales team ever reaches them.
+
+**Peter Drucker — Distribution Channel Theory**
+Drucker's principle: the most underappreciated competitive advantage is distribution. A better product will lose to a better-distributed product every time. Partner channels multiply distribution without multiplying headcount.
+
+### Channel Partner Types
+
+| Partner Type | How They Drive Revenue | What They Need from You |
+|---|---|---|
+| Referral partners | Send leads, take a commission | Simple referral agreement, commission tracking, co-marketing |
+| Resellers | Buy and resell your product | Margins, sales training, sales collateral |
+| System integrators | Implement your product for clients | Technical certification, project support, lead sharing |
+| Technology partners (ISVs) | Bundle your product with theirs | API / integration support, joint marketing budget |
+| Agency / consultancy partners | Recommend your product to clients | Preferred partner status, co-sell support, co-marketing |
+| Distributors | Handle volume indirect sales | Volume discounts, inventory, admin support |
+
+### Partner Tiers
+
+Structure partners into tiers based on revenue contribution:
+
+| Tier | Revenue Threshold | Benefits |
+|---|---|---|
+| Gold / Strategic | Top 10-20% of partners | Dedicated partner manager, MDF, co-sell, executive access |
+| Silver / Select | Next 20-30% | Joint marketing support, deal registration, preferred pricing |
+| Registered | All others | Partner portal access, basic training, standard commission |
+
+### Partner Enablement Kit
+
+Every new partner needs:
+1. **Partner agreement** — commission terms, exclusivity (if any), rules of engagement
+2. **Product training** — positioning, demo, competitive differentiation
+3. **Sales collateral** — one-pager, pitch deck, case studies adapted for their clients
+4. **Lead registration process** — how they register deals to claim commission
+5. **Partner portal access** — marketing assets, deal tracking, commission reporting
+6. **Success metrics** — what good looks like; what triggers tier review
+
+### Co-Sell vs. Co-Market
+
+**Co-sell:** Joint selling motion — your AE and the partner's team both involved in closing a deal. Requires tight sales alignment, clean territory rules, and a clear commission split.
+
+**Co-market:** Joint marketing activities — joint webinar, co-branded content, shared email to each other's lists. Lower commitment, easier to start.
+
+*Start with co-marketing to build the relationship. Move to co-sell once trust and processes are established.*
+
+### Partner Program Metrics
+
+| Metric | What It Measures |
+|---|---|
+| Partner-sourced revenue | Revenue from partner-referred deals |
+| Partner-influenced revenue | Revenue where a partner was involved at any point |
+| Active partners (deals in last 90 days) | Program health |
+| Partner CAC vs. direct CAC | Partner channel efficiency |
+| Time to first deal (new partners) | Onboarding effectiveness |
+| Partner NPS | Program satisfaction |
 
 ## Partner Types
 

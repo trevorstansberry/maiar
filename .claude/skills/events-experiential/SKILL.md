@@ -1,6 +1,6 @@
 ---
 name: events-experiential
-description: Use when planning marketing events, virtual events, trade show strategy, webinars, conferences, experiential activations, or field events. Covers strategy, promotion, execution, and post-event follow-up.
+description: "Use when planning marketing events, virtual events, trade show strategy, webinars, conferences, experiential activations, or field events. Also use when the user says "event marketing", "virtual event", "webinar", "conference strategy", "trade show", "experiential marketing", "event promotion", "event ROI", "field event", "executive roundtable", or "event follow-up". Applies Julius Solaris's event ROI framework and the pre/during/post event promotion methodology."
 ---
 
 # Events & Experiential Marketing
@@ -10,6 +10,63 @@ description: Use when planning marketing events, virtual events, trade show stra
 Events create experiences that no other marketing channel can replicate — they build relationships, accelerate trust, and drive decisions in compressed timeframes. The best events leave attendees with a feeling, not just information.
 
 **ROI mindset:** Events are expensive. Every decision (venue, format, speakers) should trace back to a specific business outcome: pipeline generated, customers retained, brand positioned.
+
+
+## Expert Foundations
+
+**EventMB / Julius Solaris — Event Strategy Research**
+Solaris's event ROI framework: events are not measured by attendance — they're measured by business outcomes generated (pipeline, deals, relationships). A 50-person dinner that generates $500K in pipeline outperforms a 500-person conference that generates none. Before planning any event, define the one business outcome you are optimizing for and design the entire event around achieving it.
+
+**David Meerman Scott — Marketing Experiences**
+Scott's experience economy principle: people don't remember content, they remember experiences. The moment an event attendee tells a story about something that happened to them at your event — that's word-of-mouth that no ad can buy.
+
+### Event ROI Framework
+
+Before any event, define:
+1. **Primary business outcome:** Pipeline generated / relationships built / brand affinity / recruitment / customer retention
+2. **Target attendee profile:** Who specifically needs to be in the room?
+3. **Success metric:** What number will tell you if it worked?
+4. **Cost per qualified attendee:** Budget ÷ target attendees = benchmark for spend decisions
+
+### Event Types by Goal
+
+| Goal | Event Type | Size | Format |
+|---|---|---|---|
+| Pipeline generation | Executive dinner / roundtable | 10-30 | Intimate, hosted |
+| Awareness / brand | Conference sponsorship / speaking | 100-1000+ | Booth + session |
+| Customer retention | User conference / annual summit | 50-500 | Community-first |
+| Thought leadership | Hosted industry event | 50-200 | Brand as convener |
+| Product launch | Launch event + press | 50-200 | Announcement + demo |
+| Sales acceleration | Field event / regional roadshow | 20-100 | AE-hosted, intimate |
+
+### Pre/During/Post Promotion Framework
+
+**Pre-event (4-8 weeks out):**
+- Speaker announcements drive early registration
+- Email sequence: save the date → agenda reveal → speaker spotlight → final reminder
+- LinkedIn organic + targeted ads to target account list
+- Personal outreach from sales to target accounts
+
+**During event:**
+- Live social content (capture moments, not slides)
+- Networking programming that creates memorable connections
+- Clear recording strategy for post-event content
+
+**Post-event (1-2 weeks after):**
+- Day 1: Thank you email with key takeaways + recording
+- Week 1: Follow-up from sales to all attendees
+- Week 2: Blog post / content recap
+- Week 4: Pipeline review — which attendees are now in sales conversations?
+
+### Virtual vs. Live Comparison
+
+| Factor | In-Person | Virtual |
+|---|---|---|
+| Relationship depth | High — serendipitous interactions | Low — screen fatigue, exits easy |
+| Attendance | Lower — friction | Higher — no travel required |
+| Cost per attendee | High ($500-2,000+) | Low ($50-200) |
+| Best for | Pipeline acceleration, customer retention | Awareness, education, broad reach |
+| Hybrid consideration | Add virtual stream to extend reach | Add breakout rooms for engagement |
 
 ## Event Types & When to Use Them
 

@@ -1,6 +1,6 @@
 ---
 name: podcast-marketing
-description: Use when launching a branded podcast, growing podcast audience, booking podcast guest appearances, planning podcast content strategy, securing podcast sponsorships, or repurposing podcast content.
+description: "Use when launching a branded podcast, growing podcast audience, booking guest appearances, planning podcast content strategy, securing podcast sponsorships, or repurposing podcast content. Also use when the user says "podcast marketing", "branded podcast", "podcast strategy", "podcast guest", "podcast sponsorship", "show notes", "podcast SEO", "podcast audience growth", "podcast repurposing", or "podcast content plan". Applies Joe Pulizzi's owned media strategy and Dave Jackson's podcast listener journey framework."
 ---
 
 # Podcast Marketing
@@ -14,6 +14,51 @@ Podcasting builds the deepest audience relationship of any content format. Liste
 2. **Podcast PR / guest appearances** — You get booked on others' shows
 
 Both are legitimate strategies with different time horizons.
+
+
+## Expert Foundations
+
+**Joe Pulizzi — Content Marketing Institute / Podcasting**
+Pulizzi's core principle for podcast marketing: treat the show as a business, not a hobby. Define the content tilt (unique angle that differentiates your show in a crowded category) before recording episode one. Without a content tilt, you're competing on production quality alone — a race you can't win against established shows.
+
+**Dave Jackson — School of Podcasting**
+Jackson's listener journey framework: listeners are not one audience. They go from strangers who discover the show → new listeners judging if it's worth their time → regular listeners → superfans who promote the show. Each stage requires different content and calls to action.
+
+### Show Strategy Framework
+
+**Define before you launch:**
+1. **Content tilt:** What unique angle can you own in this category? Not "marketing tips" but "B2B SaaS marketing tactics with 6-figure budgets."
+2. **Target listener:** Who specifically? Job title, stage, problem they're solving.
+3. **Show promise:** What will every listener walk away with? Consistency in the promise builds loyalty.
+4. **Episode frequency:** Consistency > frequency. Monthly consistently beats weekly sporadically.
+5. **Format:** Interview / solo / panel / narrative. Pick based on what your audience prefers and what you can sustain.
+
+### Listener Journey
+
+| Stage | What They Need | What You Do |
+|---|---|---|
+| Discovery | Reason to try the show | Clear show description, targeted show title |
+| First episode | Immediate proof of value | Strong "listen to this first" episode |
+| Regular listener | Consistent quality + promise | Same format, same quality, same schedule |
+| Superfan | Insider access, community | Private community, early access, shoutouts |
+
+### Podcast as B2B Marketing Channel
+
+Podcasts work for B2B because:
+- Average listener is college-educated with above-average income
+- Listening happens in captive moments (commute, exercise) — no competition with inbox
+- Long-form = trust building over time
+- Guests become distribution channels (share the episode with their audience)
+
+**Guest selection as distribution strategy:** Target guests with email lists or social audiences that overlap your ICP. Their promotion of the episode is worth more than the content itself.
+
+### Monetization Ladder
+
+1. **Audience building** (0-6 months) — No monetization. Focus on building a loyal core audience.
+2. **Sponsorships** (1,000+ downloads/ep) — Mid-roll ads, host-read preferred. Rate: $25-50 CPM.
+3. **Premium content** (any stage) — Private feed, bonus episodes, early access for paid subscribers.
+4. **Courses / consulting** (any stage) — Show builds authority; CTA drives to paid offer.
+5. **Events** (established shows) — Live recordings, listener meetups, virtual summits.
 
 ## Running a Branded Podcast
 

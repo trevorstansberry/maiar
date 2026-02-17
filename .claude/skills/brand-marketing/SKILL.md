@@ -1,11 +1,23 @@
 ---
 name: brand-marketing
-description: Use when defining or refining brand positioning, developing brand architecture, planning brand awareness campaigns, measuring brand equity, building a brand platform, or differentiating a brand in a competitive market.
+description: "Use when working on brand positioning, brand strategy, brand awareness, brand identity, brand platform, brand architecture, brand equity, or brand differentiation. Also use when the user says 'brand positioning', 'how should we position', 'brand platform', 'awareness campaign', 'we're not differentiated', 'category creation', 'brand awareness', or 'who are we as a brand'. Applies Al Ries & Jack Trout's Positioning framework, Marty Neumeier's Brand Gap model, and Byron Sharp's mental availability principles."
 ---
 
 # Brand Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Al Ries & Jack Trout — Positioning: The Battle for Your Mind**
+The fundamental premise: marketing is a battle fought in the mind of the prospect, not in the marketplace. The first brand to own a position in the mind wins. To reposition a competitor, you must first dislodge their existing mental position. *Key principle:* It's better to be first in the mind than first in the marketplace.
+
+**Marty Neumeier — The Brand Gap**
+The gap between strategy (logic-driven) and customer experience (emotion-driven) destroys brands. Close it by building: differentiation, collaboration, innovation, validation, and cultivation. A brand is not what you say it is — it's what *they* say it is.
+
+**Byron Sharp — How Brands Grow**
+Brands grow by reaching buyers who are light or non-buyers, not by deepening loyalty among existing customers. The key levers: *mental availability* (being thought of in buying situations) and *physical availability* (being easy to buy). Distinctive brand assets — colors, logos, characters, sounds — build mental availability through consistent, repeated exposure.
+
 
 Brand marketing builds the mental availability that makes demand generation work better. When someone is ready to buy, the brand they think of first gets the consideration. That mental position is built over time through consistent, emotionally resonant messaging — not a single campaign.
 

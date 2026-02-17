@@ -22,12 +22,31 @@ Create social media content optimized for the platform.
 /social all-platforms our Q4 product launch
 ```
 
+## Context Files
+
+**Company context (always reads):**
+- `context/company/brand-voice.md`
+- `context/company/content-examples.md` *(if present)*
+
+**Product context (reads after resolving the active product):**
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+- `context/products/[product]/channels.md` — active handles and platform presence
+- `context/products/[product]/content-examples.md` *(if present — supplements company-level)*
+
+**Product resolution:** If multiple products are configured and the product isn't clear from your input, a dropdown will appear before any work begins.
+
+## Agent Chain
+
+1. Writes platform-formatted copy using `social-content` + `social-media-marketing` skills
+2. `editor` agent reviews for brand voice consistency and platform fit
+
 ## What Happens
 
-1. Reads brand-voice.md, channels.md (for active handles), and content-examples.md
+1. Reads core context files + channels.md + content-examples.md
 2. Adapts format to the target platform (length, structure, hashtags, CTA style)
 3. If "all-platforms": creates platform-specific versions for each active channel
-4. Applies social-content and social-media-marketing skills
+4. `editor` agent reviews for brand voice and clarity
 
 ## Platform-Specific Formatting
 
@@ -49,4 +68,4 @@ Create social media content optimized for the platform.
 
 ---
 
-Read context files, then create the social content for the specified platform(s). Apply social-content skill. Match brand voice while using the right format for each platform.
+Read core context files, then create the social content for the specified platform(s). Apply `social-content` and `social-media-marketing` skills. Pass to `editor` agent for brand voice review before delivering final output.

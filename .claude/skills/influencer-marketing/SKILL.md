@@ -1,11 +1,20 @@
 ---
 name: influencer-marketing
-description: Use when planning influencer marketing campaigns, identifying influencer partners, writing influencer briefs, structuring partnership terms, or measuring influencer campaign performance.
+description: "Use when planning influencer marketing campaigns, identifying influencer partners, writing influencer briefs, structuring partnership terms, or measuring influencer performance. Also use when the user says "influencer marketing", "influencer campaign", "creator partnership", "influencer brief", "micro-influencer", "find influencers", "influencer outreach", "creator program", or "influencer ROI". Applies Neal Schaffer's relationship-first influencer framework and influencer tier selection methodology."
 ---
 
 # Influencer Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Neal Schaffer — The Relationship-First Framework**
+Schaffer's core principle: influencer marketing isn't advertising — it's relationship building. The best programs start with genuine product fit, cultivate authentic relationships, and grow into long-term ambassador partnerships. One-off transactional sponsorships perform poorly; repeated, consistent association with a trusted creator builds durable brand affinity.
+
+**The Influencer Pyramid**
+The counterintuitive truth about scale: nano influencers (1K-10K followers) drive 8-10% engagement rates vs. 0.5-1.5% for celebrities. Micro influencers drive higher conversion because their audiences are hyper-targeted and trust is deep. For most brands, a portfolio of 10-20 micro influencers outperforms one celebrity deal.
+
 
 Influencer marketing works because trust is transferable. When a creator with genuine credibility with your audience endorses your product, they borrow their relationship with followers and lend it to your brand. The key word is "genuine" — audiences can detect inauthenticity immediately.
 

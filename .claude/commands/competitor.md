@@ -21,13 +21,13 @@ Research a competitor and produce a detailed competitive analysis.
 
 ## What Happens
 
-1. Reads `context/competitors.md` for existing competitive intelligence
+1. Reads `context/products/[product]/competitors.md` for existing competitive intelligence
 2. Fetches the competitor's website (homepage, pricing, features, about)
 3. Searches G2 and Capterra for their reviews and category positioning
 4. Searches for "[competitor] vs [your brand]" and "[competitor] alternatives" content
 5. Applies `competitor-alternatives` skill
 6. Produces a competitive analysis report
-7. Suggests updates to `context/competitors.md`
+7. Suggests updates to `context/products/[product]/competitors.md`
 
 ## Competitive Analysis Output
 
@@ -64,8 +64,8 @@ Research a competitor and produce a detailed competitive analysis.
 - Review themes they're losing on that you can claim
 
 ### Suggested Context Update
-- Recommended additions to `context/competitors.md`
+- Recommended additions to `context/products/[product]/competitors.md`
 
 ---
 
-Fetch competitor information, read existing competitive context, apply the competitor-alternatives skill, and produce a structured competitive analysis. Suggest updates to context/competitors.md.
+Fetch competitor information, read existing competitive context, apply the competitor-alternatives skill, and produce a structured competitive analysis. Suggest updates to `context/company/competitors.md` OR `context/products/[product]/competitors.md` (whichever is present for this product).

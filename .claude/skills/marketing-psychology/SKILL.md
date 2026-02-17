@@ -1,7 +1,7 @@
 ---
 name: marketing-psychology
 version: 1.0.0
-description: "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application."
+description: "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application. Applies Robert Cialdini's influence principles, Daniel Kahneman's dual-process theory, and BJ Fogg's behavior model."
 ---
 
 # Marketing Psychology & Mental Models

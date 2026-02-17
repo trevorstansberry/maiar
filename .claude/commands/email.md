@@ -23,13 +23,33 @@ Write marketing emails — single sends or complete automated sequences.
 /email cold outreach to fintech CTOs
 ```
 
+## Context Files
+
+**Company context (always reads):**
+- `context/company/brand-voice.md`
+- `context/company/style-guide.md`
+
+**Product context (reads after resolving the active product):**
+- `context/products/[product]/overview.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+
+**Product resolution:** If multiple products are configured and the product isn't clear from your input, a dropdown will appear before any work begins.
+
+## Agent Chain
+
+1. Writes the email draft using `email-marketing` + `email-sequence` skills
+2. Passes draft to `editor` agent for brand voice consistency check and line-level improvements
+3. For sequences: editor reviews each email and flags inconsistencies in tone or pacing
+
 ## What Happens
 
-1. Reads brand-voice.md, audience-profiles.md, and style-guide.md
+1. Reads core context files + style-guide.md
 2. If unclear: asks what type of email, who receives it, and what the desired action is
-3. Writes the email(s) with appropriate subject lines, preview text, and body
+3. Writes the email(s) with subject lines, preview text, and body copy
 4. For sequences: provides full sequence with day-by-day timing
-5. Applies `email-marketing` and `email-sequence` skills
+5. `editor` agent reviews draft(s) for brand voice consistency, clarity, and CTA strength
+6. Final output delivered with editor improvements applied
 
 ## Output Includes
 
@@ -61,4 +81,4 @@ For sequences:
 
 ---
 
-Read the relevant context files, identify the email type and audience, and write the email or sequence. Apply email-sequence and email-marketing skills.
+Read core context files, identify the email type and audience, and write the email or sequence. Apply `email-marketing` and `email-sequence` skills. Pass draft to `editor` agent for brand voice consistency review before delivering final output.

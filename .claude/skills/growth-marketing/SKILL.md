@@ -1,6 +1,6 @@
 ---
 name: growth-marketing
-description: Use when designing growth experiments, building growth loops, running the AARRR framework, designing product-led growth strategies, identifying growth levers, or creating a systematic experimentation process.
+description: "Use when designing growth experiments, building growth loops, running the AARRR framework, designing product-led growth strategies, identifying growth levers, or creating a systematic experimentation process. Also use when the user says "growth marketing", "growth hacking", "growth experiments", "growth loops", "AARRR", "viral coefficient", "product-led growth", "PLG", "growth framework", "experimentation", or "activation rate". Applies Sean Ellis's growth hacking methodology, Brian Balfour's Reforge growth model, and Andrew Chen's viral loop framework."
 ---
 
 # Growth Marketing

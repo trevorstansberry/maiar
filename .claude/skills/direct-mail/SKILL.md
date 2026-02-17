@@ -1,6 +1,6 @@
 ---
 name: direct-mail
-description: Use when planning direct mail campaigns, designing physical mail pieces, building targeted mailing lists, personalizing direct mail at scale, or integrating physical mail with digital marketing programs.
+description: "Use when planning direct mail campaigns, designing physical mail pieces, building targeted mailing lists, personalizing direct mail at scale, or integrating physical mail with digital programs. Also use when the user says "direct mail", "physical mail", "mailer", "postcard campaign", "EDDM", "mailing list", "direct response mail", "dimensional mail", or "mail personalization". Applies Dan Kennedy's No B.S. Direct Marketing irresistible offer construction and list segmentation principles."
 ---
 
 # Direct Mail
@@ -10,6 +10,73 @@ description: Use when planning direct mail campaigns, designing physical mail pi
 Direct mail gets a pass through the spam filter. Physical mail has 90%+ open rates, is held for an average of 17 days, and faces virtually zero competition in the mailbox for B2B audiences. In a digital-saturated world, a well-timed physical piece stands out precisely because it's unexpected.
 
 **When direct mail wins:** High-value accounts (ABM), re-engagement of lapsed customers, post-trade-show follow-up, executive outreach, and luxury/high-consideration B2C products.
+
+
+## Expert Foundations
+
+**Dan Kennedy — No B.S. Direct Marketing**
+Kennedy's direct marketing laws: every piece of direct mail must have a clear offer, a deadline, and a specific call to action. "Awareness" mail without an offer is a donation to the postal service. The three pillars: right list (50% of results) + right offer (30%) + right copy (20%). Most marketers over-invest in copy and under-invest in list quality.
+
+**Direct Marketing Association Research**
+DMA data: direct mail achieves a 4.4% average response rate vs. 0.12% for email. But the economics only work with a compelling offer and a targeted list. The response rate number is meaningless without response rate × average order value × margin.
+
+### Direct Mail in the Modern Marketing Mix
+
+Direct mail works because:
+- Physical mail gets attention in a digital-saturated environment
+- Personalization at scale is easy (variable data printing)
+- In B2B, a package to a VP's office gets past the email filter
+- Stays around — mail sits on desks; email gets deleted
+
+### List Selection (50% of Success)
+
+**B2B list sources:**
+- CRM export — existing contacts who haven't engaged digitally
+- Intent data platforms (Bombora, 6sense) — companies actively researching your category
+- Apollo / ZoomInfo — title, company size, geography targeting
+- Account list (ABM tie-in) — your top 50-200 target accounts
+
+**B2C list sources:**
+- Existing customers (highest response rate — already trust you)
+- Lookalike lists from list brokers (match your best customers)
+- Compiled lists by geography / demographics / purchase history
+
+**List hygiene rule:** Never mail a list you haven't validated in 12 months. Return mail rates above 10% tank deliverability scores and waste budget.
+
+### Offer Construction
+
+An irresistible direct mail offer has:
+1. **Clear value:** What they get, specifically
+2. **Reason to act now:** Deadline, limited quantity, time-sensitive discount
+3. **Low friction:** One action to take, not three
+
+**Offer types that work:**
+- Free consultation / discovery call (B2B)
+- Free sample or trial kit (product)
+- Discount code with expiration date
+- Invitation to an exclusive event
+- Free report or research study
+
+### Format Selection
+
+| Format | Best For | Typical Cost/Piece |
+|---|---|---|
+| Postcard | Announcement, promotion, event | $0.50-1.50 |
+| Letter package | Complex offer, relationship-building | $2-5 |
+| Lumpy mail (3D package) | High-value account, ABM, executive | $25-75 |
+| Catalog | E-commerce, product line | $3-10 |
+| Self-mailer | Simple message, high volume | $1-3 |
+
+### Response Tracking
+
+Every direct mail campaign needs a unique response path:
+- Unique landing page URL per campaign
+- Unique phone number (call tracking)
+- QR code with UTM parameters
+- Personalized URL (PURL) per recipient
+- Unique promo code
+
+**Minimum tracking metrics:** Response rate, cost per response, cost per conversion, revenue attributable
 
 ## When to Use Direct Mail
 

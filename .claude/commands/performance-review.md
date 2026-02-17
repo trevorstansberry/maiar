@@ -23,7 +23,7 @@ Run a data-driven performance review of your marketing content and channels.
 
 ## What Happens
 
-1. Reads `context/goals-kpis.md` for targets and current metrics
+1. Reads `context/products/[product]/goals-kpis.md` for targets and current metrics
 2. If data source integrations are configured (GA4, GSC, DataForSEO in `.env`), pulls live data
 3. If no integrations: asks user to provide performance data to analyze
 4. Applies `performance-analytics` skill

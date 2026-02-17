@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**At the start of every session: read `progress.md`** to understand the current state of the project, what was done last session, and what's next. Do this before responding to the first message.
+
 ---
 
 ## What Is Maiar
@@ -19,7 +21,12 @@ maiar/
 │   ├── agents/         Sub-agents invoked by commands for specialized tasks
 │   ├── skills/         Reusable discipline expertise (one folder per skill)
 │   └── integrations/   Publishing platform adapters (scaffold + template)
-├── context/            Brand/audience knowledge base — team-shared via git
+├── context/
+│   ├── products.md     Product registry — lists all products and sets the default
+│   ├── company/        Shared brand context (voice, guidelines, style) — constant across all products
+│   └── products/       Per-product context — one folder per product, offering, or line of business
+│       ├── _template/  Copy this to create a new product context folder
+│       └── [slug]/     Audience, goals, channels, competitors, positioning for one product
 ├── drafts/             Work in progress (gitignored by default)
 ├── published/          Completed content (gitignored by default)
 ├── research/           Research briefs and brand research output
@@ -29,19 +36,29 @@ maiar/
 
 ### How Context Flows
 
-Every command and agent reads from `context/` before producing output. Context files define brand voice, audience, products, competitors, channels, and goals. The quality of all outputs depends directly on the quality of these files.
+Every command reads `context/company/` first (shared brand identity), then resolves the active product from `context/products.md` and reads the matching `context/products/[slug]/` folder. Company context + product context are merged before any output is generated.
 
-**To populate context:** Run `/brand-research [your-website-url]` — it researches the brand online, drafts all context files, asks follow-up questions, and writes confirmed content to `context/`.
+**Single product:** The product is auto-selected — no friction, no extra questions.
 
-**To update context:** Edit the relevant file in `context/` directly. Commit the change so the whole team gets it on next `git pull`.
+**Multiple products:** If the product isn't clear from your input, you'll see a dropdown to select which product the command is for. If your input names the product (e.g., `/write blog post for health-plans`), the dropdown is skipped.
+
+**To set up:** Run `/brand-research [your-website-url]` — it researches the brand online, asks a few setup questions about your product structure, and writes all context files to the right paths automatically.
+
+**To add a second product:** Run `/brand-research [new-product-url]` again — it detects your existing setup and adds a new product folder without touching `context/company/`.
+
+**To update context:** Edit the relevant file directly. Commit the change so the whole team gets it on next `git pull`.
 
 ### How Skills Work
 
-Skills live in `.claude/skills/[skill-name]/SKILL.md`. Each has a YAML frontmatter `description:` field that tells Claude when to activate it. Skills provide deep discipline expertise — frameworks, best practices, mental models, and step-by-step procedures. Commands and agents reference skills by name.
+Skills live in `.claude/skills/[skill-name]/SKILL.md`. Each has a YAML frontmatter `description:` field that tells Claude when to activate it — this IS the trigger system. Skills provide deep discipline expertise: named frameworks, expert methodologies, best practices, and step-by-step procedures. Skills are knowledge libraries injected into context, not sub-processes.
 
 ### How Agents Work
 
-Agents live in `.claude/agents/`. They are invoked automatically by commands or manually by the user. Each agent has a single focused role (e.g., SEO optimization, headline generation, audience analysis). Commands often chain multiple agents in sequence.
+Agents live in `.claude/agents/`. They are sub-processes invoked by commands for specialized analysis or production. Each agent has a single focused role (e.g., SEO optimization, audience analysis, lifecycle planning). Commands route to agents; agents leverage skills. The distinction: **commands orchestrate → agents execute → skills inform**.
+
+### Core Context Always Loaded
+
+Every command reads `context/company/brand-voice.md` plus the active product's `overview.md`, `audience-profiles.md`, and `goals-kpis.md`. These are the foundational references for every marketing decision: who you're speaking to, how you speak, and what success looks like. Discipline-specific files (seo-guidelines.md, competitors.md, positioning.md) load on top based on task.
 
 ---
 
@@ -67,6 +84,9 @@ Agents live in `.claude/agents/`. They are invoked automatically by commands or 
 | `/abm` | `/abm [account or list]` | Build an ABM plan for target accounts |
 | `/influencer` | `/influencer [topic or campaign]` | Influencer identification and campaign brief |
 | `/repurpose` | `/repurpose [file] [format]` | Repurpose content across channels |
+| `/lifecycle` | `/lifecycle [stage]` | Design customer lifecycle sequences (onboarding, win-back, retention, expansion) |
+| `/brand-positioning` | `/brand-positioning` | Generate positioning statement, message hierarchy, and brand narrative |
+| `/persona` | `/persona [role or segment]` | Research and write a detailed buyer persona card |
 
 **Output format:** When the best output type is unclear (written content vs. strategy doc vs. audit vs. template), commands ask guided clarifying questions before proceeding.
 
@@ -74,21 +94,36 @@ Agents live in `.claude/agents/`. They are invoked automatically by commands or 
 
 ## Context Files
 
+### Company Context (shared across all products — `context/company/`)
+
 | File | What to Fill In |
 |---|---|
-| `context/brand-voice.md` | Tone, personality, messaging pillars, voice examples |
-| `context/audience-profiles.md` | ICP, buyer personas, segments |
-| `context/products-services.md` | Offerings, value props, pricing, differentiators |
-| `context/competitors.md` | Competitor positioning and how we win |
-| `context/channels.md` | Active channels, social handles, paid channels |
-| `context/brand-guidelines.md` | Brand name usage, writing standards, compliance |
-| `context/content-examples.md` | 3-5 approved content examples for style reference |
-| `context/style-guide.md` | Grammar, formatting, terminology preferences |
-| `context/goals-kpis.md` | Current marketing goals and success metrics |
-| `context/seo-guidelines.md` | Keyword targets, content standards, on-page rules |
-| `context/internal-links-map.md` | Site architecture and high-value pages for linking |
+| `brand-voice.md` | Tone, personality traits, messaging pillars, voice examples |
+| `brand-guidelines.md` | Brand name usage, writing standards, compliance rules |
+| `style-guide.md` | Grammar, formatting, terminology preferences |
+| `content-examples.md` | 3-5 approved content examples representing house style *(optional if product-level examples are sufficient)* |
+| `competitors.md` | Shared competitive set — only if all products compete with the same companies *(optional)* |
+| `positioning.md` | Company-wide positioning statement and brand narrative — only if one unified positioning applies *(optional)* |
 
-**Day 1 priorities:** `brand-voice.md`, `audience-profiles.md`, `content-examples.md`
+### Product Context (per product — `context/products/[slug]/`)
+
+One folder per product, offering, or line of business. Copy `context/products/_template/` to create a new one.
+
+| File | What to Fill In |
+|---|---|
+| `overview.md` | What this product does, who it's for, pricing, differentiators, proof points |
+| `audience-profiles.md` | ICP, buyer personas, and segments for this product |
+| `goals-kpis.md` | Marketing goals and success metrics for this product |
+| `channels.md` | Active channels and social handles for this product |
+| `competitors.md` | Competitive set for this product — only if different from company-wide *(optional)* |
+| `positioning.md` | Positioning statement and message hierarchy for this product *(optional)* |
+| `seo-guidelines.md` | Keyword targets, content standards, on-page rules for this product |
+| `internal-links-map.md` | Site architecture and high-value pages for this product |
+| `content-examples.md` | Product-specific content examples — add when this audience needs different formats or vocabulary *(optional)* |
+
+**Context resolution for optional files:** Commands check product level first, then fall back to company level. If both exist, they are read as complementary — company level provides the baseline, product level supplements or overrides.
+
+**Day 1 priorities:** `company/brand-voice.md`, `products/[slug]/overview.md`, `products/[slug]/audience-profiles.md`
 
 ---
 
@@ -124,7 +159,7 @@ Skills are organized by marketing discipline. All live in `.claude/skills/`.
 **Email:** email-sequence, email-marketing
 **Paid & Distribution:** paid-ads, affiliate-marketing, direct-mail
 **Strategy & Growth:** marketing-ideas, marketing-psychology, launch-strategy, pricing-strategy, product-marketing-context, product-marketing, growth-marketing, performance-marketing, brand-marketing, growth-lead, performance-analytics
-**Inbound / Outbound:** inbound-marketing, outbound-marketing, referral-program, referral-word-of-mouth, free-tool-strategy, competitor-alternatives
+**Inbound / Outbound:** inbound-marketing, outbound-marketing, referral-program, free-tool-strategy, competitor-alternatives
 **Social & Community:** social-media-marketing, community-marketing, influencer-marketing, conversational-marketing
 **B2B / Enterprise:** b2b-marketing, abm, partner-channel-marketing, field-marketing, events-experiential
 **B2C / Consumer:** b2c-marketing, retention-lifecycle, cause-marketing, guerrilla-marketing

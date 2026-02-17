@@ -1,11 +1,20 @@
 ---
 name: abm
-description: Use when building account-based marketing programs, creating targeted campaigns for named accounts, planning tiered ABM strategies (1:1, 1:few, 1:many), personalizing messaging by account, or aligning sales and marketing around target accounts.
+description: "Use when building account-based marketing programs, creating targeted campaigns for named accounts, planning tiered ABM strategies (1:1, 1:few, 1:many), personalizing messaging by account, or aligning sales and marketing around target accounts. Also use when the user says "ABM", "account-based marketing", "target accounts", "named accounts", "account list", "personalized campaigns for specific companies", "TAL", "account scoring", or "sales and marketing alignment". Applies Sangram Vajre's ABM tiering model and Jon Miller's account scoring and intent data frameworks."
 ---
 
 # Account-Based Marketing (ABM)
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Sangram Vajre — Account-Based Marketing for Dummies**
+Vajre's TEAM (Technology, Engagement, Activation, Measurement) framework is the operational model for ABM. The critical shift: measure accounts, not leads. A single account can generate 10 leads — measuring leads rewards marketing for creating noise. Measuring account engagement rewards marketing for advancing real opportunities.
+
+**Jon Miller — The ABM Evolution**
+Miller (Marketo co-founder, Demandbase co-founder) argues ABM works because it applies intent data to target accounts at the exact moment they are in-market. Intent signals from Bombora, G2, and 6sense let marketing activate campaigns when a company is actively researching your category — dramatically improving conversion rates.
+
 
 ABM flips the traditional marketing funnel. Instead of casting wide and filtering down, you start with a defined list of target accounts and build campaigns specifically for them. Quality over quantity — a smaller set of highly relevant accounts engaged more deeply.
 

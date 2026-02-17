@@ -1,11 +1,20 @@
 ---
 name: outbound-marketing
-description: Use when building outbound sales and marketing strategies, writing cold outreach sequences, designing SDR programs, crafting LinkedIn outreach, or planning account-targeted prospecting campaigns.
+description: "Use when building outbound marketing programs, writing cold email sequences, designing SDR programs, crafting LinkedIn outreach, or planning prospecting campaigns. Also use when the user says "cold email", "outbound", "SDR sequence", "cold outreach", "prospecting", "LinkedIn outreach", "sales sequence", "we need to reach out to prospects", or "outbound campaign". Applies Aaron Ross's Predictable Revenue framework and Josh Braun's Spear prospecting methodology."
 ---
 
 # Outbound Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Aaron Ross — Predictable Revenue**
+Ross's framework separated Cold Calling 2.0 from traditional outbound: never cold call, send email first to find the right person, use specialized roles (SDRs for prospecting, AEs for closing), and build a repeatable outbound system. The key insight: outbound should generate *predictable* pipeline, not random luck.
+
+**Josh Braun — Spear Prospecting**
+Braun's approach: stop interrupting and start being interesting. The Spear framework — Situation, Problem, Effect, Action, Role — structures outbound messages around the prospect's world, not your product. The best outbound opens with "I noticed..." followed by a trigger that shows genuine research.
+
 
 Outbound means going to your audience rather than waiting for them to come to you. Done right, it targets the right people with the right message at the right time. Done wrong, it annoys everyone and burns your domain reputation.
 

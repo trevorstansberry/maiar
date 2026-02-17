@@ -1,11 +1,20 @@
 ---
 name: affiliate-marketing
-description: Use when building or optimizing an affiliate marketing program, recruiting affiliates, structuring commission models, selecting affiliate platforms, or measuring affiliate channel performance.
+description: "Use when building or optimizing affiliate marketing programs, recruiting affiliates, structuring commission models, selecting affiliate platforms, or measuring affiliate channel performance. Also use when the user says "affiliate program", "affiliate marketing", "affiliate commission", "affiliate recruitment", "affiliate platform", "partner commissions", "referral commissions", or "affiliate fraud". Applies Geno Prussakov's affiliate program management framework and Pat Flynn's affiliate selection principles."
 ---
 
 # Affiliate Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Geno Prussakov — Affiliate Program Management**
+Prussakov's program management framework: affiliate programs fail not because of bad commissions, but because of poor recruitment, inadequate onboarding, and lack of ongoing activation. The lifecycle: recruit → onboard → activate → grow → retain. Most programs spend too much time recruiting and too little activating the affiliates they already have.
+
+**Pat Flynn — Affiliate Selection Principles**
+Flynn's framework: only promote products you use and believe in. Audience trust is the asset — one bad recommendation destroys years of goodwill. The best affiliate relationships are disclosed transparently, grounded in genuine experience, and positioned as recommendations from a trusted advisor, not advertisements.
+
 
 Affiliate marketing is performance-based distribution: others promote your product in exchange for a commission on results. Done well, it's one of the highest-ROI channels because you only pay for outcomes. Done poorly, it attracts low-quality traffic and brand-damaging promotions.
 

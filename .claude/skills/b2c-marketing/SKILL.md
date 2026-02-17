@@ -1,11 +1,20 @@
 ---
 name: b2c-marketing
-description: Use when building B2C marketing strategies, marketing directly to consumers, designing emotional campaigns, planning DTC marketing, building loyalty programs, or marketing high-volume lower-consideration products.
+description: "Use when building B2C marketing strategies, marketing directly to consumers, designing emotional campaigns, planning DTC marketing, building loyalty programs, or marketing high-volume lower-consideration products. Also use when the user says "B2C marketing", "consumer marketing", "DTC", "direct to consumer", "loyalty program", "consumer brand", "emotional marketing", "mass market", or "retail marketing". Applies Byron Sharp's How Brands Grow principles of mental and physical availability, and Donald Miller's StoryBrand framework."
 ---
 
 # B2C Marketing
 
 ## Core Philosophy
+
+## Expert Foundations
+
+**Byron Sharp — How Brands Grow**
+Sharp's research-backed principles challenge conventional marketing wisdom: (1) Reach light buyers, not just heavy users. (2) Build mental availability through distinctive brand assets. (3) Physical availability matters as much as mental — make the product easy to find and buy. (4) Loyalty programs have modest effects; broad reach matters more. The "double jeopardy law" — smaller brands have fewer buyers AND those buyers buy less frequently.
+
+**Donald Miller — Building a StoryBrand**
+Every B2C customer is the hero of their own story. Your brand is not the hero — it's the guide. The SB7 framework: Character (customer) → Problem → Guide (your brand) → Plan → Call to Action → Avoid Failure → Achieve Success. Brands fail when they position themselves as the hero instead of empowering the customer to be the hero.
+
 
 B2C marketing appeals to individuals making personal decisions — often emotional, identity-driven, or value-based choices rather than ROI calculations. Speed and volume matter. The buyer and user are usually the same person, and conversion windows are short.
 

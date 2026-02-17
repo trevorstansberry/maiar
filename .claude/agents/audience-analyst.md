@@ -18,7 +18,7 @@ When given a piece of content, campaign brief, or message, analyze:
 - Is this making assumptions about the audience that may not hold?
 
 ### 2. Persona Validation
-Read `context/audience-profiles.md` and assess:
+Read `context/products/[product]/audience-profiles.md` and assess:
 - Are the personas specific enough to drive decision-making?
 - Are there segments missing that should be represented?
 - Do the persona pain points and goals align with what you know about this market?
@@ -34,9 +34,9 @@ When a user asks about their audience, research and synthesize:
 ## Context to Read
 
 Always read before analyzing:
-- `context/audience-profiles.md`
-- `context/brand-voice.md`
-- `context/products-services.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/company/brand-voice.md`
+- `context/products/[product]/overview.md`
 
 ## Output Format
 
@@ -70,3 +70,44 @@ Present the persona in this format:
 - **Buying journey:** (how they discover, evaluate, and decide)
 - **What makes them say yes:**
 - **What makes them say no:**
+
+## Segment-Fit Scoring
+
+When evaluating whether a piece of content or campaign is right for a specific segment, score each dimension 1–5:
+
+| Dimension | Score (1–5) | Notes |
+|---|---|---|
+| Pain point relevance | | Does this address a top-3 pain for this segment? |
+| Language match | | Does the vocabulary and tone match how they speak? |
+| Journey stage alignment | | Does the CTA match their current stage? |
+| Channel fit | | Is this delivered where they already are? |
+| Offer relevance | | Is the offer meaningful to this specific person? |
+
+**Score interpretation:**
+- 20–25: Strong fit — proceed with confidence
+- 14–19: Moderate fit — targeted improvements needed
+- Below 14: Weak fit — rethink the approach before launching
+
+## Audience Red Flags
+
+Flag these patterns when reviewing content or campaigns:
+
+- **Too broad:** "This is for anyone who manages marketing" — no segment this wide responds well
+- **Assumed pain:** Describing problems the audience doesn't actually have (verify from reviews, interviews, community posts)
+- **Wrong buyer stage:** Asking for purchase commitment in awareness-stage content
+- **Internal language:** Using company jargon vs. the words customers actually use to describe their problem
+- **Demographic proxy:** Using job title as a proxy for mindset without validating the actual concerns of that role
+- **Single persona:** Treating a multi-stakeholder purchase as a single buyer decision
+- **Aspirational audience:** Targeting the audience you want rather than the audience you have
+
+## Audience Mismatch Patterns
+
+Common misalignments and how to fix them:
+
+| Mismatch | Symptom | Fix |
+|---|---|---|
+| Persona mismatch | High impressions, low engagement | Narrow targeting to the segment where pain is sharpest |
+| Stage mismatch | Clicks but no conversions | Move CTA earlier or later in journey depending on drop-off |
+| Channel mismatch | Low reach | Find where this persona actually spends time |
+| Language mismatch | Low resonance despite right targeting | Mine G2/Capterra/Reddit for their actual words |
+| Offer mismatch | Engagement but no action | Align the offer to the job-to-be-done for this segment |

@@ -21,13 +21,30 @@ Transform an existing piece of content into formats optimized for other channels
 /repurpose published/podcast-ep-47.md into blog post, clips guide, and email
 ```
 
+## Context Files
+
+**Always reads (core context):**
+- `context/company/brand-voice.md`
+- `context/products/[product]/audience-profiles.md`
+- `context/products/[product]/goals-kpis.md`
+
+**Also reads:**
+- `context/company/style-guide.md` — for tone and formatting rules
+- `context/products/[product]/channels.md` — active platforms to target
+
+## Agent Chain
+
+1. Reads source content and adapts it for each requested format using `social-content` + `copywriting` + relevant channel skills
+2. `editor` agent reviews each repurposed piece for brand voice consistency and platform fit
+
 ## What Happens
 
 1. Reads the source content
-2. Reads brand-voice.md and style-guide.md
+2. Reads core context files + style-guide.md + channels.md
 3. Determines which formats are being requested (or asks if unclear)
 4. Adapts content for each target format — not copy-paste, but properly reformatted for each channel
-5. Produces all requested formats, saving each to `drafts/`
+5. `editor` agent reviews each piece for brand voice and platform fit
+6. Saves final versions to `drafts/`
 
 ## Supported Output Formats
 
@@ -61,4 +78,4 @@ Each repurposed piece saved to `drafts/[original-name]-[format].md`
 
 ---
 
-Read the source content, understand what formats are requested, and adapt the content for each format with platform-appropriate structure, length, and style. Apply social-content, copywriting, and relevant channel skills.
+Read the source content, understand what formats are requested, and adapt the content for each format with platform-appropriate structure, length, and style. Apply `social-content`, `copywriting`, and relevant channel skills. Pass each piece to `editor` agent for brand voice consistency review before saving to `drafts/`.
