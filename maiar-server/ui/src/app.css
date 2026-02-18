@@ -22,16 +22,16 @@
   --bg-input:         rgba(255, 255, 255, 0.06);
 
   /* Borders */
-  --border:           rgba(255, 99, 15, 0.14);
-  --border-strong:    rgba(255, 99, 15, 0.32);
+  --border:           rgba(194, 101, 42, 0.14);
+  --border-strong:    rgba(194, 101, 42, 0.30);
   --border-subtle:    rgba(255, 255, 255, 0.05);
 
-  /* Accent — orange */
-  --accent:           #ff630f;
-  --accent-dark:      #e5550a;
-  --accent-light:     #ff8147;
-  --accent-glow:      rgba(255, 99, 15, 0.25);
-  --accent-muted:     rgba(255, 99, 15, 0.12);
+  /* Accent — muted burnt orange */
+  --accent:           #c2652a;
+  --accent-dark:      #a34f1e;
+  --accent-light:     #d4845a;
+  --accent-glow:      rgba(194, 101, 42, 0.22);
+  --accent-muted:     rgba(194, 101, 42, 0.10);
 
   /* Gold — highlights, user messages */
   --gold:             #F5A623;
@@ -55,13 +55,13 @@
   --shadow-sm:        0 1px 4px rgba(0,0,0,0.5);
   --shadow-md:        0 4px 20px rgba(0,0,0,0.55);
   --shadow-lg:        0 8px 40px rgba(0,0,0,0.6);
-  --shadow-glow:      0 0 28px rgba(255, 99, 15, 0.25);
+  --shadow-glow:      0 0 28px rgba(194, 101, 42, 0.22);
   --shadow-glow-gold: 0 0 20px rgba(245, 166, 35, 0.18);
 
   /* Glass */
   --glass-bg:         rgba(255, 255, 255, 0.04);
   --glass-blur:       12px;
-  --glass-border:     1px solid rgba(255, 99, 15, 0.12);
+  --glass-border:     1px solid rgba(194, 101, 42, 0.12);
 
   /* Radius */
   --radius-sm:        6px;
@@ -90,12 +90,12 @@
   --bg-glass-hover:   rgba(255, 255, 255, 0.9);
   --bg-input:         rgba(0, 0, 0, 0.04);
 
-  --border:           rgba(255, 99, 15, 0.16);
-  --border-strong:    rgba(255, 99, 15, 0.36);
+  --border:           rgba(194, 101, 42, 0.16);
+  --border-strong:    rgba(194, 101, 42, 0.36);
   --border-subtle:    rgba(0, 0, 0, 0.06);
 
-  --accent-glow:      rgba(255, 99, 15, 0.15);
-  --accent-muted:     rgba(255, 99, 15, 0.10);
+  --accent-glow:      rgba(194, 101, 42, 0.15);
+  --accent-muted:     rgba(194, 101, 42, 0.10);
   --gold-muted:       rgba(245, 166, 35, 0.12);
 
   --text-primary:     #1A1B2E;
@@ -107,10 +107,10 @@
   --shadow-sm:        0 1px 4px rgba(0,0,0,0.08);
   --shadow-md:        0 4px 20px rgba(0,0,0,0.10);
   --shadow-lg:        0 8px 40px rgba(0,0,0,0.12);
-  --shadow-glow:      0 0 28px rgba(255, 99, 15, 0.12);
+  --shadow-glow:      0 0 28px rgba(194, 101, 42, 0.12);
 
   --glass-bg:         rgba(255, 255, 255, 0.75);
-  --glass-border:     1px solid rgba(255, 99, 15, 0.14);
+  --glass-border:     1px solid rgba(194, 101, 42, 0.14);
 }
 
 /* ─── Reset + Base ──────────────────────────────────────────── */
@@ -127,7 +127,12 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+.font-decorative {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
 }
 
 body {

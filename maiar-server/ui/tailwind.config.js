@@ -6,13 +6,13 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter Variable', 'Inter', 'system-ui', 'sans-serif'],
-        heading: ['Syne', 'system-ui', 'sans-serif']
+        heading: ['EB Garamond', 'Georgia', 'serif']
       },
       colors: {
         accent: {
-          DEFAULT: '#ff630f',
-          dark: '#e5550a',
-          light: '#ff8147'
+          DEFAULT: '#c2652a',
+          dark: '#a34f1e',
+          light: '#d4845a'
         },
         gold: {
           DEFAULT: '#F5A623',

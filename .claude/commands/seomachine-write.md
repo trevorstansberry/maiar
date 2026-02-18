@@ -260,23 +260,13 @@ This new agent uses 5 specialized analysis modules:
 - **Output**: SEO optimization report and suggestions
 - **File**: `drafts/seo-report-[topic-slug]-[YYYY-MM-DD].md`
 
-### 3. Meta Creator Agent
-- **Agent**: `meta-creator`
+### 3. SEO Optimizer Agent (Meta + Links + Keywords)
+- **Agent**: `seo-optimizer`
 - **Input**: Article content and primary keyword
-- **Output**: Multiple meta title/description options
-- **File**: `drafts/meta-options-[topic-slug]-[YYYY-MM-DD].md`
+- **Output**: Meta title/description options, internal linking recommendations, keyword placement analysis
+- **File**: `drafts/seo-report-[topic-slug]-[YYYY-MM-DD].md`
 
-### 4. Internal Linker Agent
-- **Agent**: `internal-linker`
-- **Input**: Article content
-- **Output**: Specific internal linking recommendations
-- **File**: `drafts/link-suggestions-[topic-slug]-[YYYY-MM-DD].md`
-
-### 5. Keyword Mapper Agent
-- **Agent**: `keyword-mapper`
-- **Input**: Article and target keywords
-- **Output**: Keyword placement analysis and improvements
-- **File**: `drafts/keyword-analysis-[topic-slug]-[YYYY-MM-DD].md`
+*Note: `seo-optimizer` now handles meta creation, internal linking, and keyword analysis in a single pass.*
 
 ## Automatic Quality Loop
 

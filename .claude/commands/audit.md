@@ -39,11 +39,11 @@ Audit type determines which agents run:
 | Audit Type | Agents Invoked | Skills Applied |
 |---|---|---|
 | SEO audit | `seo-optimizer` | `seo-audit`, `programmatic-seo` |
-| CRO / landing page audit | `cro-analyst` + `landing-page-optimizer` | `page-cro`, `signup-flow-cro`, `form-cro` |
+| CRO / landing page audit | `conversion-optimizer` | `page-cro`, `signup-flow-cro`, `form-cro` |
 | Email audit | `editor` | `email-sequence`, `email-marketing` |
 | Content quality audit | `content-analyzer` | `content-marketing`, `copy-editing` |
 | Social / brand audit | `editor` | `social-media-marketing`, `brand-marketing` |
-| Paid audit | `cro-analyst` | `paid-ads`, `sem-ppc`, `page-cro` |
+| Paid audit | `conversion-optimizer` | `paid-ads`, `sem-ppc`, `page-cro` |
 
 ## What Happens
 
@@ -79,4 +79,4 @@ What's working well (don't just focus on problems).
 
 ---
 
-Identify what is being audited, fetch or read the content if needed. Route to the appropriate agent(s) based on audit type: SEO → seo-optimizer; CRO/landing page → cro-analyst + landing-page-optimizer; email → editor; content → content-analyzer. Produce structured audit report with prioritized findings.
+Identify what is being audited, fetch or read the content if needed. Route to the appropriate agent(s) based on audit type: SEO → seo-optimizer; CRO/landing page → conversion-optimizer; email → editor; content → content-analyzer. Produce structured audit report with prioritized findings.

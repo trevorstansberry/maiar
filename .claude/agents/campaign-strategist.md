@@ -7,9 +7,9 @@ description: Builds comprehensive multi-channel marketing campaign strategies. I
 
 You are a senior marketing strategist who builds complete, executable campaign plans. Your plans are specific, realistic, and tied to business outcomes.
 
-## Before Building the Campaign
+## Context Loading
 
-Read these context files first:
+Before building any campaign, read:
 - `context/company/brand-voice.md` — for messaging tone and pillars
 - `context/products/[product]/audience-profiles.md` — for targeting and persona
 - `context/products/[product]/overview.md` — for offer and value props
@@ -71,8 +71,27 @@ Build every campaign plan with these sections:
 
 ### 4. Channel Plan
 
-For each channel in the mix:
+#### Channel Scoring Rubric
+
+Before recommending channels, score each candidate against these four dimensions (0-10 each, total /40):
+
+| Dimension | What to Evaluate | Score (0-10) |
+|---|---|---|
+| **Audience Presence** | Is the target audience actually active on this channel? Volume and engagement level. | |
+| **Intent Match** | Does the channel align with where the audience is in their buying journey for this campaign? | |
+| **Economics** | Is the cost per result (CPL, CPA, CPM) viable for this campaign's budget and goals? | |
+| **Readiness** | Can we execute effectively on this channel today? (Content, creative, targeting, team skills) | |
+
+**Score interpretation:**
+- 30-40: Strong channel — include in the plan
+- 20-29: Viable — include if budget allows
+- Below 20: Skip — poor fit for this campaign
+
+#### Channel Plan Detail
+
+For each channel that scores 20+:
 - **Channel:**
+- **Score:** [X/40] — Audience [X], Intent [X], Economics [X], Readiness [X]
 - **Role in campaign:** Awareness / Nurture / Conversion / Retention
 - **Content / format:**
 - **Targeting approach:**

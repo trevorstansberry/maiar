@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { rateLimit } from 'express-rate-limit'
 import { lucia, requireAuth } from '../lib/auth.js'
 import { db } from '../lib/db.js'
-import { users, passwordResetTokens } from '../db/schema.js'
+import { users, passwordResetTokens, clients } from '../db/schema.js'
 import { eq, and, isNull, gt, lt, isNotNull, or } from 'drizzle-orm'
 import { config } from '../lib/config.js'
 import { sendPasswordResetEmail } from '../lib/email.js'
@@ -71,14 +71,26 @@ authRouter.post('/login', loginLimiter, async (req, res) => {
     const session = await lucia.createSession(user.id, {})
     const sessionCookie = lucia.createSessionCookie(session.id)
 
+    // Look up bot persona from client workspace
+    const [clientRow] = await db.select({
+      botName: clients.botName,
+      botPersonality: clients.botPersonality,
+      botAvatarUrl: clients.botAvatarUrl
+    }).from(clients).where(eq(clients.slug, user.clientSlug))
+
     res.setHeader('Set-Cookie', sessionCookie.serialize())
     res.json({
       user: {
         id: user.id,
         email: user.email,
+        name: user.name ?? null,
         clientSlug: user.clientSlug,
         role: user.role,
-        onboardingComplete: user.onboardingComplete ?? false
+        onboardingComplete: user.onboardingComplete ?? false,
+        mustChangePassword: user.mustChangePassword ?? false,
+        botName: clientRow?.botName ?? null,
+        botPersonality: clientRow?.botPersonality ?? null,
+        botAvatarUrl: clientRow?.botAvatarUrl ?? null
       }
     })
   } catch (err) {
@@ -119,14 +131,26 @@ authRouter.get('/session', async (req, res) => {
       res.setHeader('Set-Cookie', sessionCookie.serialize())
     }
 
+    // Look up bot persona from client workspace
+    const [clientRow] = await db.select({
+      botName: clients.botName,
+      botPersonality: clients.botPersonality,
+      botAvatarUrl: clients.botAvatarUrl
+    }).from(clients).where(eq(clients.slug, user.clientSlug))
+
     res.json({
       user: {
         id: user.id,
         email: user.email,
+        name: user.name ?? null,
         clientSlug: user.clientSlug,
         role: user.role,
         active: user.active,
-        onboardingComplete: user.onboardingComplete ?? false
+        onboardingComplete: user.onboardingComplete ?? false,
+        mustChangePassword: user.mustChangePassword ?? false,
+        botName: clientRow?.botName ?? null,
+        botPersonality: clientRow?.botPersonality ?? null,
+        botAvatarUrl: clientRow?.botAvatarUrl ?? null
       }
     })
   } catch (err) {
@@ -250,7 +274,7 @@ authRouter.post('/change-password', requireAuth, async (req, res) => {
     }
 
     const passwordHash = await bcrypt.hash(newPassword, 12)
-    await db.update(users).set({ passwordHash }).where(eq(users.id, req.user.id))
+    await db.update(users).set({ passwordHash, mustChangePassword: false }).where(eq(users.id, req.user.id))
 
     // Invalidate all sessions, then create a fresh one so the user stays logged in
     await lucia.invalidateUserSessions(req.user.id)

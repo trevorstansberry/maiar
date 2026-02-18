@@ -244,11 +244,8 @@ Example: `drafts/optimization-report-podcast-analytics-2025-10-15.md`
 
 ## Integration with Agents
 The `/optimize` command triggers final review from all agents:
-- **content-analyzer** (NEW!): Comprehensive analysis with search intent, keyword density & clustering, content length comparison, readability score, and SEO quality rating (0-100)
-- **seo-optimizer**: Technical SEO final check
-- **meta-creator**: Best meta title/description options
-- **internal-linker**: Last opportunity internal linking suggestions
-- **keyword-mapper**: Final keyword distribution analysis
+- **content-analyzer**: Comprehensive analysis with search intent, keyword density & clustering, content length comparison, readability score, and SEO quality rating (0-100)
+- **seo-optimizer**: Technical SEO check, meta title/description options, internal linking suggestions, keyword distribution analysis
 
 ### New: Content Analyzer Module
 The optimize command now includes advanced SEO analysis:

@@ -7,10 +7,11 @@
   import { auth } from '$lib/api/client'
   import AppShell from '$lib/components/layout/AppShell.svelte'
 
+  const publicRoutes = ['/login', '/forgot-password', '/reset-password']
+
   let loaded = false
 
   onMount(async () => {
-    const publicRoutes = ['/login']
     const isPublic = publicRoutes.some(r => $page.url.pathname.startsWith(r))
 
     try {
@@ -36,7 +37,7 @@
     <AppShell>
       <slot />
     </AppShell>
-  {:else if $page.url.pathname.startsWith('/login')}
+  {:else if publicRoutes.some(r => $page.url.pathname.startsWith(r))}
     <slot />
   {/if}
 {/if}

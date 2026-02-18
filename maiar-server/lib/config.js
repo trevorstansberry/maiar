@@ -15,13 +15,8 @@ export const config = {
   model: 'claude-sonnet-4-5-20250929',
   maxTokens: 8192,
   sessionExpiry: 60 * 60 * 24 * 7, // 7 days in seconds
-  smtp: {
-    host: process.env.SMTP_HOST ?? 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT ?? '587'),
-    user: process.env.SMTP_USER ?? '',
-    pass: process.env.SMTP_PASS ?? '',
-    from: process.env.SMTP_FROM ?? 'admin@maiar.work'
-  },
+  resendApiKey: process.env.RESEND_API_KEY ?? '',
+  emailFrom: process.env.EMAIL_FROM ?? 'Maiar <noreply@maiar.work>',
   appUrl: process.env.APP_URL ?? 'http://localhost:5173'
 }
 

@@ -3,23 +3,37 @@
   import { goto } from '$app/navigation'
   import ParticleField from '$lib/components/ui/ParticleField.svelte'
   import Toggle from '$lib/components/ui/Toggle.svelte'
-  import { user, isAdmin } from '$lib/stores/auth'
+  import { user, isAdmin, isClientAdmin } from '$lib/stores/auth'
   import { auth } from '$lib/api/client'
   import {
     MessageSquare, FileText, Send, BookOpen, Target,
-    Microscope, Layout, Settings, LogOut, Activity, Shield
+    Microscope, Layout, Settings, LogOut, Shield, Layers
   } from 'lucide-svelte'
+  import WizardIcon from '$lib/components/ui/WizardIcon.svelte'
+
+  export let onClose: (() => void) | null = null
 
   const navItems = [
     { label: 'Chat',      href: '/chat',              icon: MessageSquare, section: 'workspace' },
-    { label: 'Drafts',    href: '/assets/drafts',     icon: FileText,      section: 'library' },
-    { label: 'Published', href: '/assets/published',  icon: Send,          section: 'library' },
-    { label: 'Campaigns', href: '/assets/campaigns',  icon: Target,        section: 'library' },
-    { label: 'Research',  href: '/assets/research',   icon: Microscope,    section: 'library' },
+    { label: 'Drafts',    href: '/assets/drafts',     icon: FileText,      section: 'work' },
+    { label: 'Published', href: '/assets/published',  icon: Send,          section: 'work' },
+    { label: 'Assets',    href: '/creations',         icon: Layers,        section: 'creations' },
+    { label: 'Campaigns', href: '/campaigns',          icon: Target,        section: 'creations' },
+    { label: 'Research',  href: '/assets/research',   icon: Microscope,    section: 'creations' },
+    { label: 'Templates', href: '/assets/templates',  icon: Layout,        section: 'context' },
     { label: 'Context',   href: '/context',           icon: BookOpen,      section: 'context' },
+    { label: 'Settings',  href: '/settings',          icon: Settings,      section: 'account' },
   ]
 
+  const sectionLabels: Record<string, string> = {
+    work: 'Work',
+    creations: 'Creations',
+    context: 'My Business',
+    account: 'Account'
+  }
+
   async function handleLogout() {
+    onClose?.()
     await auth.logout()
     user.set(null)
     goto('/login')
@@ -37,20 +51,21 @@
   <div class="relative z-10 px-5 pt-5 pb-4" style="border-bottom: 1px solid var(--border-subtle)">
     <div class="flex items-center gap-2.5">
       <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background: var(--accent); box-shadow: var(--shadow-glow)">
-        <Activity size={15} color="white" />
+        <WizardIcon size={15} />
       </div>
-      <span class="font-semibold tracking-tight" style="color: var(--text-primary); font-size: 1rem">Maiar</span>
+      <span class="font-decorative tracking-tight" style="color: var(--text-primary); font-size: 1.05rem">Maiar</span>
+      <span class="text-[10px] px-1.5 py-0.5 rounded-full font-semibold uppercase tracking-wider" style="background: var(--accent-muted); color: var(--accent-light)">Beta</span>
     </div>
   </div>
 
   <!-- Navigation -->
   <nav class="relative z-10 flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
-    {#each ['workspace', 'library', 'context'] as section}
+    {#each ['workspace', 'work', 'creations', 'context', 'account'] as section}
       {@const sectionItems = navItems.filter(i => i.section === section)}
       {#if section !== 'workspace'}
         <div class="px-2 pt-3 pb-1">
           <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint)">
-            {section === 'library' ? 'Library' : 'Context'}
+            {sectionLabels[section] ?? section}
           </span>
         </div>
       {/if}
@@ -58,6 +73,7 @@
         {@const active = $page.url.pathname === item.href || $page.url.pathname.startsWith(item.href + '/')}
         <a
           href={item.href}
+          on:click={() => onClose?.()}
           class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-all duration-150 group"
           style="
             background: {active ? 'var(--accent-muted)' : 'transparent'};
@@ -71,17 +87,18 @@
       {/each}
     {/each}
 
-    {#if $isAdmin}
+    {#if $isClientAdmin}
       <div class="px-2 pt-3 pb-1">
         <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint)">Admin</span>
       </div>
       <a
         href="/admin"
+        on:click={() => onClose?.()}
         class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-all duration-150"
         style="color: var(--text-secondary)"
       >
         <Shield size={16} />
-        <span class="text-sm font-medium">Dashboard</span>
+        <span class="text-sm font-medium">{$isAdmin ? 'Dashboard' : 'Team'}</span>
       </a>
     {/if}
   </nav>
@@ -90,7 +107,14 @@
   <div class="relative z-10 px-3 py-3 space-y-2" style="border-top: 1px solid var(--border-subtle)">
     <Toggle />
     <div class="flex items-center justify-between px-1">
-      <span class="text-xs" style="color: var(--text-faint)">{$user?.email}</span>
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[10px] font-semibold" style="background: var(--accent-muted); color: var(--accent-light)">
+          {($user?.name || $user?.email || '?')[0].toUpperCase()}
+        </div>
+        <span class="text-xs truncate" style="color: var(--text-faint)">
+          {$user?.name || $user?.email}
+        </span>
+      </div>
       <button
         on:click={handleLogout}
         class="p-1 rounded transition-colors"

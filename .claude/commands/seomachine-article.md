@@ -537,10 +537,7 @@ If score < 70:
 ### 4. Run Optimization Agents
 After passing quality threshold:
 - `content-analyzer` agent
-- `seo-optimizer` agent
-- `meta-creator` agent
-- `internal-linker` agent
-- `keyword-mapper` agent
+- `seo-optimizer` agent (includes meta creation, internal linking, and keyword analysis)
 
 ---
 

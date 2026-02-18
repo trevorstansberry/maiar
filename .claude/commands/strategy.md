@@ -28,7 +28,7 @@ Build a comprehensive strategy document for any marketing discipline or channel.
 ## What Happens
 
 1. Reads all context files (especially goals-kpis.md and channels.md)
-2. Invokes `channel-selector` agent to validate channel recommendations against context
+2. Invokes `campaign-strategist` agent to score and validate channel recommendations (audience presence, intent match, economics, readiness — scored 0-10 each)
 3. Applies the relevant skill(s) for the strategy discipline
 4. Builds a complete strategy document
 5. Saves to `campaigns/strategy-[type]-[date].md`

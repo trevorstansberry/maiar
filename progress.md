@@ -69,25 +69,23 @@ abm, affiliate-marketing, b2b-marketing, b2c-marketing, brand-marketing, cause-m
 
 *Note: `referral-word-of-mouth` merged into `referral-program` — WOM psychology and STEPPS framework now live in referral-program skill.*
 
-### Agents — 16 total in `.claude/agents/`
+### Agents — 11 total in `.claude/agents/`
 
-**Ported from SEOMachine (10):**
-content-analyzer, seo-optimizer, meta-creator, internal-linker, keyword-mapper, editor, headline-generator, cro-analyst, landing-page-optimizer, performance
-
-**Newly created (8):**
+*(Consolidated from 18 → 11. See "2026-02-18 — Agent & Command Consolidation" session log for details.)*
 
 | Agent | Role |
 |---|---|
-| `brand-researcher` | Researches brand online, populates all context files |
-| `campaign-strategist` | Builds complete multi-channel campaign plans |
-| `audience-analyst` | Validates audience fit, segment-fit scoring, mismatch patterns |
-| `channel-selector` | Recommends best channels for a given goal |
-| `output-formatter` | Determines right output type; asks guided questions when ambiguous |
-| `publishing-adapter` | Formats and publishes content to connected platforms |
-| `brand-strategist` | Synthesizes research into positioning statement + message hierarchy |
-| `lifecycle-planner` | Designs multi-stage customer lifecycle sequences (Lincoln Murphy framework) |
-
-*Note: `content-analyzer` fully rewritten — removed broken Python module references, replaced with 6-module framework-only analysis (search intent, keyword coverage, content depth, readability, E-E-A-T, content gap).*
+| `editor` | Rewrites content for human voice, engagement, headline quality. Returns improved draft + change summary |
+| `seo-optimizer` | On-page SEO: keywords, structure, meta titles/descriptions, internal linking |
+| `conversion-optimizer` | CRO: psychology (Cialdini, cognitive load, trust) + structural (above-fold, CTAs, friction) |
+| `content-analyzer` | 6-module content analysis (search intent, keywords, depth, readability, E-E-A-T, gaps) |
+| `performance` | Data-driven prioritization from GA4, GSC, DataForSEO — opportunity scoring, priority queue |
+| `campaign-strategist` | Multi-channel campaign plans with channel scoring rubric (audience/intent/economics/readiness) |
+| `audience-analyst` | Persona validation, audience fit scoring, segment-fit mismatch patterns |
+| `lifecycle-planner` | Customer lifecycle sequences — onboarding, retention, win-back, advocacy (Lincoln Murphy) |
+| `brand-strategist` | Positioning statement, message hierarchy, brand narrative (April Dunford framework) |
+| `brand-researcher` | Web research → auto-populate all context files |
+| `publishing-adapter` | Format and publish content to connected platforms |
 
 ### Commands — 41 total in `.claude/commands/`
 
@@ -143,7 +141,7 @@ Scaffolded and ready to activate — add credentials to `.env` to enable each:
 | Directory structure | ✅ Complete | All folders created |
 | Context files | ✅ Two-tier architecture | Company + product layer; supports multi-product businesses; run `/brand-research` to populate |
 | Skills (52) | ✅ Complete + Optimized | All descriptions enriched for keyword activation; Expert Foundations added to 23 thin skills; referral-word-of-mouth merged into referral-program |
-| Agents (18) | ✅ Complete + Optimized | content-analyzer fully rewritten; audience-analyst, channel-selector, campaign-strategist expanded; brand-strategist + lifecycle-planner added; keyword-mapper consolidated into seo-optimizer |
+| Agents (18→11) | 🔄 Consolidating | Reducing from 18 to 11: editor rewrite (content not reports), cro-optimizer merger, brand ref cleanup, narrow agents absorbed. See 2026-02-18 session log. |
 | Commands (42) | ✅ Complete + Optimized | 22 Maiar native + 20 SEOMachine reference; /save added for session progress tracking |
 | CLAUDE.md | ✅ Updated | Added instruction to read `progress.md` at session start; previously updated for commands, agents, context architecture |
 | Integrations | ✅ Scaffolded | Architecture ready; credentials needed to activate |
@@ -161,9 +159,86 @@ Scaffolded and ready to activate — add credentials to `.env` to enable each:
 | Level 2A — multi-message conversations | ✅ Fixed | Chat history now stores brief references for content commands; context window no longer bloats on multi-turn |
 | Level 2A — filesystem agnosticism | ✅ Complete | ADMIN_WORKSPACE env var aligns Claude Code + web UI to same directory; Library shows files from either source |
 | Level 2A — security hardening | ✅ Complete | helmet, rate limiting, history injection blocked, CSV injection fixed, cross-client isolation, path safety |
-| Level 2A — password reset flow | ✅ Complete | Email-based reset (nodemailer + SMTP), change-password endpoint, SHA-256 hashed tokens, 30-min expiry, session invalidation, global error handler |
-| Level 2A — SMTP configured | ✅ Complete | Google Workspace App Password in `.env`, SPF/DKIM/DMARC guidance in `.env.example` |
+| Level 2A — password reset flow | ✅ Complete | Email-based reset (Resend API), change-password endpoint, SHA-256 hashed tokens, 30-min expiry, session invalidation, global error handler |
+| Level 2A — email provider | ✅ Switched to Resend | Replaced nodemailer/SMTP with Resend SDK; `.env` uses `RESEND_API_KEY` + `EMAIL_FROM` |
 | Level 2A infrastructure | ⬜ Pending | Domain, Cloudflare, Caddy — requires manual setup on Mac Mini (see README) |
+| Level 2B — chat reliability | ✅ Complete | try/finally onDone, safety finishStreaming, SSE buffer flush, `[chat]` logging; tested end-to-end |
+| Level 2B — agent orchestration | ✅ Complete | `commandRegistry.js` maps 21 commands → agent chains + skills; `agentRunner.js` runs multi-step chains with `agent_step` SSE events |
+| Level 2B — skills loading | ✅ Complete | `loadSkills()` loads relevant SKILL.md files per command; `buildAgentPrompt()` for agent steps; `buildCommandPrompt()` for skills-only commands |
+| Level 2B — canvas-first content | ✅ Complete | Content commands stream to canvas (not chat bubble); `content_start` SSE event; compact "Draft saved" card in chat; 85% token reduction (56k → 8.5k) |
+| Level 2B — agent step tags | ✅ Complete | Real-time agent badges during streaming; persistent tags on completed messages; stored in conversation JSON |
+| UI refresh — muted burnt orange | ✅ Complete | `#ff630f` → `#c2652a` across all CSS variables + Tailwind config |
+| UI refresh — wizard icon + favicon | ✅ Complete | Custom WizardIcon.svelte replacing Activity icon in Sidebar, login, forgot/reset-password; matching favicon |
+| UI refresh — EB Garamond fonts | ✅ Complete | Syne → EB Garamond for headings; `.font-decorative` for italic serif flair |
+| UI refresh — fantasy flair | ✅ Complete | Warm amber particles with sparkle, updated gradients, decorative text |
+| UI refresh — agent badges | ✅ Complete | "Powered by" footer strip on assistant messages; "routed to" badges on user command messages |
+| UI refresh — Library rename | ✅ Complete | Backend rename endpoint + inline rename UI on file cards and panel header |
+| UI refresh — template rename | ✅ Complete | Pencil icon + inline rename + delete button in Context template editor |
+| UI refresh — wizard icon (FA7) | ✅ Complete | Replaced custom SVG with Font Awesome 7 `hat-wizard` solid icon + matching favicon |
+| UI refresh — context-aware onboarding | ✅ Complete | `GET /context/status` endpoint; ChatView checks context fill on mount; shows OnboardingFlow if empty (all users) |
+| UI refresh — chat input redesign | ✅ Complete | Removed square border/shadow; soft bottom border with focus glow; wizard icon flair when empty |
+| UI refresh — rotating suggestions | ✅ Complete | 12-item pool, 4 visible in 2×2 grid, rotate every 8s, agent badges on each card |
+| Level 2B — templates to navbar | ✅ Complete | Templates moved from Context tab to sidebar Library section |
+| Level 2B — smart chat naming | ✅ Complete | `generateTitle()` parses commands into "Topic — Asset Type"; PATCH rename endpoint; inline rename UI |
+| Level 2B — campaign system | ✅ Complete | `campaigns` table, full CRUD routes, detail page with asset checklist, conversation linking, chat integration with `campaignId` |
+| Level 2B — thinking indicator | ✅ Complete | `ThinkingIndicator.svelte` with dynamic verbs per agent, pulsing dot, step counter |
+| Level 2B — client management | ✅ Complete | `clients` table, workspace CRUD endpoints, migration script, admin page restructured with Workspaces/Users/Usage tabs |
+| Level 2B — beta tag | ✅ Complete | Beta badge next to Maiar logo in sidebar |
+| Login bug fixes | ✅ Complete | publicRoutes guard fixed (forgot/reset-password now accessible); requireAuth try/catch added (Express 4 async safety) |
+| Three-tier role system | ✅ Complete | `super_admin` / `client_admin` / `client`; migration script ran; scoped admin routes; role-based dashboard views |
+| User profile + settings | ✅ Complete | `/settings` page with Personal (name, avatar, change password) + Company (name, logo, website); `/api/profile` CRUD + multer uploads |
+| Chat input — wand icon | ✅ Complete | MDI auto-fix wand SVG replaces WizardIcon in chat input; wizard hat stays as logo |
+| Chat input — command palette | ✅ Replaced | Replaced by visual ActionMenu; keyboard nav preserved |
+| Chat input — keyword highlighting | ✅ Complete | Transparent overlay highlights recognized keywords (commands, agents, categories) with accent underline |
+| Sidebar — settings + initials | ✅ Complete | Settings nav in new Account section; user initials circle + name in bottom bar |
+| Admin — name column + displayName fix | ✅ Complete | `name` column persisted on user create; shown in admin table with initials avatar |
+| UI — sidebar "My Business" section | ✅ Complete | Templates moved under "My Business" (renamed from Context); Context + Templates grouped together |
+| UI — 404 error page | ✅ Complete | `+error.svelte` with styled branding, status code, "Back to Chat" link |
+| UI — mobile hamburger menu | ✅ Complete | Sidebar opens as overlay on mobile; hamburger in top bar; backdrop click to close |
+| UI — admin route guard | ✅ Complete | Reactive `$:` guard redirects non-admin users; prevents content flash |
+| UI — forgot password in settings | ✅ Complete | "Forgot password?" link in Change Password section |
+| Canvas fix — producesContent sync | ✅ Complete | `/competitor` server→true, `/brand-research` client→true; canvas closes on stream errors |
+| Chat input — command chip badges | ✅ Complete | Command selection renders styled badge chip with agent pills; Backspace/Escape to clear |
+| Chat input — skills field | ✅ Complete | `skills: string[]` added to all 21 commands in `commandList.ts`; `getCommandSkills()` helper |
+| Chat — conversation tools strip | ✅ Updated | Moved below input; agents + skills accumulate beneath command line |
+| Chat input — free-form commands | ✅ Complete | Command chips allow any text (or none); generic placeholder instead of args-specific |
+| Per-client isolation fixes | ✅ Complete | `contextLoader.js` fixed to use `clientRoot()`; `conversations.clientSlug` added + backfilled; conversation routes filter by clientSlug directly |
+| Assets DB architecture | ✅ Complete | `assets` table (id, clientSlug, conversationId FK, campaignId FK, title, filePath, folder, status); `routes/assets-db.js` CRUD at `/api/asset-records`; chat auto-registers assets after draft save |
+| File-DB sync | ✅ Complete | Rename/move/delete in `routes/assets.js` now sync to `assets` table; admin workspaces show `assetCount` |
+| Sidebar — Work + Creations | ✅ Complete | Library renamed; nav restructured: Chat → Work (Drafts, Published) → Creations (Assets, Campaigns, Research) → My Business → Account |
+| Creations page | ✅ Complete | `/creations` page: card grid of all assets, status badges, linked chat/campaign chips, slide-in detail panel, "Link to Campaign" and "Open in Canvas" actions |
+| Cross-linking UI | ✅ Complete | ChatView shows linked asset chips below input; campaign detail shows "Linked Assets" section; asset cards show linked conversation + campaign |
+| Per-client bot persona | ✅ Complete | Schema + auth session + system prompt injection + settings UI + API |
+| Action menu | ✅ Complete | Visual grid menu replacing CommandPalette; Wand2 trigger; icon + category per command |
+| Rich asset cards | ✅ Complete | Asset title, campaign chip, Open in Canvas + View in Creations in message bubble |
+| Persona-driven welcome | ✅ Complete | "Hi, I'm {botName}" + personality subtitle + natural language suggestions + bot-voiced thinking |
+| Priority skills per client | ✅ Complete | `prioritySkills` JSON column on `clients` table; merged into all 3 prompt builders; Settings page skill picker; admin workspace endpoint |
+| Chat QOL — copy on hover | ✅ Complete | Copy/Check icons on assistant message hover |
+| Chat QOL — code block copy | ✅ Complete | Copy button injected into `<pre>` blocks via afterUpdate DOM manipulation |
+| Chat QOL — stop generation | ✅ Complete | AbortController in chat store; Square button in ChatInput; signal passed through fetch |
+| Chat QOL — scroll-to-bottom | ✅ Complete | Floating ChevronDown button when >200px from bottom; auto-scroll only near bottom during streaming |
+| Chat QOL — message regeneration | ✅ Complete | RefreshCw button on last assistant message; removes response and re-sends user message |
+| Chat QOL — image upload | ✅ Complete | Paperclip button + paste + drag-drop; multer upload endpoint; Anthropic vision content blocks |
+| Admin — user edit/reset/delete | ✅ Complete | Edit modal (name/email/role), send reset link, set temp password, delete with confirm; client admin scoped |
+| Admin — mustChangePassword | ✅ Complete | Warning banner in AppShell; clears on password change in Settings; set by admin set-password endpoint |
+| Login fix — Secure cookie | ✅ Fixed | `Secure` flag on session cookie blocked login over HTTP; use `npm run dev` for local dev |
+| Login fix — seed script | ✅ Fixed | `seed-admin.js` role `'admin'` → `'super_admin'` to match three-tier enum |
+| Login fix — password reset | ✅ Done | Admin + wizard passwords reset via bcrypt; stale sessions cleared |
+| Org audit — cleanup | ✅ Complete | Removed orphan `acme-corp` test client + user (0 conversations, 0 assets); 2 clean workspaces remain |
+| Arcane Academy — bot persona | ✅ Complete | "Archimedes" — wise arcane librarian with scholarly warmth and dry humor |
+| Arcane Academy — priority skills | ✅ Complete | 8 skills: content-marketing, email-sequence, social-content, copywriting, launch-strategy, retention-lifecycle, referral-program, content-strategy |
+| Arcane Academy — draft content | ✅ Complete | 4 drafts: LinkedIn wand post, blog (Apprentice→Journeyman), welcome email sequence (4 emails), Twitter potion kit thread |
+| Arcane Academy — published content | ✅ Complete | Spellcasting Safety Guide (evergreen, cross-sells Enchanted Artifacts) |
+| Arcane Academy — context enrichment | ✅ Complete | channels.md for both products + company style-guide.md |
+| Agent system — Phase 1 (Choice Events) | ✅ Complete | `ChoiceCards.svelte` + chat store `pendingChoices` + SSE `choices` event wiring |
+| Agent system — Phase 2 (Intent Classification) | ✅ Complete | `intentClassifier.js` + `guidedFlows.js` + routing in `chat.js`; natural language routes to agent chains without slash commands |
+| Agent system — Phase 3 (Agent Activity) | ✅ Complete | `AgentActivityPanel.svelte` replaces ConversationToolsStrip with full chain timeline |
+| Agent system — Phase 4 (Simplified UX) | ✅ Complete | Static ActionCards replace rotating suggestions; ChatInput simplified (removed keyword highlighting, command chip; wand moved secondary); canvas auto-detection heuristic (400+ words or 200+ with headings) |
+| Agent system — Phase 5 (Org/Sharing) | ⏸ Deferred | Schema ready (`userId` + `visibility` on assets); runtime filtering + Library toggle deferred until multi-user sharing needed |
+| Chat/Canvas separation — Round 1 | ✅ Complete | Delta target routing, content tag parser, intent classifier fence fix, system prompt instructions |
+| Chat/Canvas separation — Round 2 | ✅ | Stream all agents to canvas, smarter intent classification, primary Maiar agent identity |
+| Chat/Canvas separation — Round 3 | ✅ | Content tag routing in agent chains, conversation state isolation, canvas perf fixes |
+| Domain (maiar.work) | ⬜ Planned | Purchased on GoDaddy; DNS → Cloudflare → Mac Mini pending |
 
 ---
 
@@ -193,34 +268,34 @@ All items from the system-wide audit plan are complete. Summary of work done in 
 
 **E. Test all 21 Maiar commands** against a real brand context and refine based on outputs.
 
-### Next Steps (Hosted Product — Level 2A)
+### Next Steps (Hosted Product — Post Agent System)
 
-Local dev is running. Next:
+All Level 2B phases + agent system Phases 1–4 complete. Remaining: Phase 5 (Organization/Sharing), testing, infrastructure, go-live.
 
-**1. End-to-end test multi-message** — Send `/write a blog post`, then send a follow-up message in the same conversation — confirm Claude retains context and history stays lean (no full content in history).
+**0. Agent system Phase 5 (Organization/Sharing) — Deferred**
+Schema groundwork done (`userId` + `visibility` columns on `assets` table). Runtime not built: no query-time visibility filtering on asset list (currently filesystem-based), no "My Drafts / All Published" Library toggle. Defer until multi-user workspace sharing is needed — current single-workspace-per-client architecture makes this a no-op. When ready to build:
+- `routes/assets.js` GET `/:folder` — query DB with `WHERE visibility = 'org' OR userId = ?` instead of raw `listFiles()`
+- `ui/src/routes/assets/[folder]/+page.svelte` — add tab/toggle for "My Drafts" vs "Published (Team)"
+- ~~Delete dead file: `ui/src/lib/components/chat/ConversationToolsStrip.svelte`~~ ✅ Done
 
-**2. End-to-end test canvas redesign** — Run `/write`, confirm streaming shows in chat bubble (not canvas), canvas opens AFTER done event with split editor loaded from disk. Edit in left pane, confirm right preview updates live and "Saved" appears in header.
+**1. End-to-end test session** — Start server with `npm run dev`, verify: `/creations` page loads, assets register on `/write`, linked chat/campaign chips appear, sidebar Work/Creations sections render, canvas opens from asset detail panel, Arcane Academy drafts/published appear in Library.
 
-**3. End-to-end test filesystem agnosticism** — Create a file directly in `Maiar/drafts/` (via Claude Code or by dropping a file), open the web UI Library, confirm it appears without any DB registration.
+**2. Test Arcane Academy workspace** — Log in as `wizard@maiar.work`, verify: Archimedes welcome screen, 4 drafts + 1 published in Library, priority skills in Settings, context files load in chat.
 
-**4. Test "Open in Canvas" from Library** — Click the columns icon on any Library file, confirm navigation to `/chat` with canvas pre-loaded and editable.
+**3. Fix remaining Svelte 5 warnings (non-blocking)** — Batch-fix self-closing tag warnings across all `.svelte` files. Also add Inter variable font to `ui/static/fonts/` to clear the 404.
 
-**5. End-to-end test onboarding** — Create a test client user in Admin (now with role selector), log in, walk through the 3-screen wizard, confirm `/brand-research` fires and context populates. Verify wizard does not reappear on next login.
+**4. Configure Resend** — Add `RESEND_API_KEY` and `EMAIL_FROM` to `.env`; verify domain in Resend dashboard for production sends.
 
-**6. Populate brand context** — Use the Context page in the UI, or run `/brand-research [url]` in Claude Code to fill context. New client users will be guided through this by the onboarding wizard automatically.
-
-**5. Fix remaining Svelte 5 warnings (non-blocking)** — Batch-fix self-closing tag warnings across all `.svelte` files. Also add Inter variable font to `ui/static/fonts/` to clear the 404.
-
-**6. Mac Mini infrastructure:**
-- Register domain → point to Cloudflare → `A` record → Mac Mini IP
+**5. Mac Mini infrastructure + maiar.work domain:**
+- Point GoDaddy nameservers to Cloudflare → `A` record → Mac Mini IP
 - `brew install caddy` → copy `Caddyfile.example` to `/etc/caddy/Caddyfile` → `brew services start caddy`
 - Copy repo to Mac Mini, create fresh `.env` with Mac Mini paths
 - `npm run build` → `npm start` (production mode)
 
-**7. First client:**
-- Log in as admin at `/admin` → create client → share credentials → client completes onboarding wizard
+**6. First client:**
+- Log in as super admin at `/admin` → create workspace → create client_admin user → share credentials → client completes onboarding wizard
 
-**8. Backups:**
+**7. Backups:**
 - Edit `scripts/backup.sh` BACKUP_DEST → `chmod +x` → add to cron (2am nightly)
 
 ---
@@ -266,6 +341,149 @@ The better the context files, the better every output. Run `/brand-research` fir
 ---
 
 ## Session Log
+
+### 2026-02-17 — Chat/Canvas separation + Agent UI fix
+
+**Problem:** Intent classifier JSON parse fails (Claude wraps in markdown fences) → falls back to general → no agents activate → no AgentActivityPanel. All Claude output (thinking + content) streams into both chat bubble AND canvas. Saved files include preamble.
+
+**Plan (6 files):**
+
+1. `lib/intentClassifier.js` — Strip markdown fences before JSON.parse (the #1 blocker)
+2. `routes/chat.js` — Add `target` field to delta events (`chat` vs `canvas`), add `canvasContent` accumulator, route agent chain output to canvas only, send brief chat messages before/after, save only canvas content to disk, add `<content>` tag parser for non-agent paths
+3. `lib/systemPrompt.js` — Add `<content>` tag instructions to `buildSystemPrompt()` and `buildCommandPrompt()` so Claude wraps deliverables in tags (not needed for `buildAgentPrompt()` since agent chains route directly)
+4. `ui/src/lib/stores/chat.ts` — Modify `appendDelta(text, target)` to route chat-targeted text to `streamingText` and canvas-targeted text to `canvasContent` (no more mirroring)
+5. `ui/src/lib/components/chat/ChatView.svelte` — Pass `event.target` to `appendDelta`, auto-open canvas on first canvas delta
+6. Verify with `vite build`
+
+**Round 1 implemented (6 files changed):** ✅
+- `intentClassifier.js` — fence stripping
+- `routes/chat.js` — delta target routing, content router, canvasContent accumulator
+- `systemPrompt.js` — `<content>` tag instructions
+- `stores/chat.ts` — appendDelta with target param
+- `ChatView.svelte` — pass event.target, auto-open canvas
+- Build verified clean
+
+**Round 1 test results (screenshots in `screenshots/`):**
+- Screenshot 1: "Write a blog post about reducing churn" — intent classified correctly, agents ran (editor → seo-optimizer → meta-creator → internal-linker), AgentActivityPanel visible. BUT canvas only showed last agent's (internal-linker) output — not the evolving blog post.
+- Screenshot 2: "What's the best time to post on LinkedIn?" — Misclassified as SEO intent, routed to seo-optimizer agent which responded confused. Canvas opened unnecessarily.
+
+**Round 2 plan (3 fixes, 6 files):**
+
+**Fix 1 — Stream ALL agents to canvas, not just last**
+- `lib/agentRunner.js` — Remove `isLastAgent` branching. Stream every agent. Send `canvas_clear` event between agents so canvas shows each agent's refined version of the document.
+- `routes/chat.js` — Wrap `sendEvent` in agent chain to reset `canvasContent` on `canvas_clear` (disk save captures final agent only)
+- `ui/stores/chat.ts` — Add `clearCanvas()` method
+- `ui/ChatView.svelte` — Handle `canvas_clear` event
+
+**Fix 2 — Smarter intent classification**
+- `lib/intentClassifier.js` — Update prompt: questions/advice → general, action requests → specific intents. Add examples.
+- `routes/chat.js` — Add confidence threshold (>= 0.7). Low confidence falls to general chat.
+
+**Fix 3 — Primary Maiar agent identity**
+- `lib/systemPrompt.js` — Add marketing guru identity to `buildSystemPrompt()`. Answer questions conversationally, propose actions when appropriate ("Want me to write a blog post about that?"), don't produce content unprompted, don't identify as a sub-agent.
+
+**Full plan:** `.claude/plans/joyful-squishing-mango.md`
+
+**Round 2 implemented (6 files changed):** ✅
+- `lib/agentRunner.js` — Removed `isLastAgent` branching; all agents stream to canvas with `canvas_clear` between them
+- `lib/intentClassifier.js` — Updated prompt with question vs action classification rules
+- `lib/systemPrompt.js` — Added `MAIAR_AGENT_IDENTITY` to `buildSystemPrompt()` (marketing guru persona, conversational for questions, proposes actions)
+- `routes/chat.js` — Added confidence threshold >= 0.7, wrapped `sendEvent` to reset `canvasContent` on `canvas_clear`
+- `ui/stores/chat.ts` — Added `clearCanvas()` method
+- `ui/ChatView.svelte` — Added `canvas_clear` event handler
+- Build verified clean
+
+---
+
+### 2026-02-18 — Round 3: Canvas preamble fix, state isolation, performance
+
+**Problem:** Round 2 testing revealed: (1) Canvas still shows agent preamble/thinking ("I need to gather context...") because agent chains bypass the `<content>` tag router — all agent output goes directly to canvas. (2) Clicking between conversations carries over streaming state (agent panel, badges) because `loadConversation()` only resets messages, not transient UI state. (3) UI freezes during long streaming because `MarkdownRenderer` re-parses with `marked()` + `highlight.js` on every delta, and `AgentActivityPanel` iterates all messages on every store update.
+
+**Done (8 files, 4 fixes):**
+
+**Fix 1 — Content tag routing in agent chains**
+- Created `lib/contentRouter.js` — extracted `createContentRouter()` from `routes/chat.js` into shared module
+- Updated `lib/agentRunner.js` — each agent's output now routes through content router: preamble (outside `<content>` tags) → chat, deliverable (inside tags) → canvas
+- Updated `lib/systemPrompt.js` — added `CONTENT_TAG_INSTRUCTIONS` to `buildAgentPrompt()` so agents know to wrap deliverables in `<content>` tags
+- Updated `routes/chat.js` — imports content router from shared module instead of defining inline
+
+**Fix 2 — Conversation state isolation**
+- Updated `ui/stores/chat.ts` `loadConversation()` — now resets ALL transient state (`...initial` spread), aborts any in-flight streaming via `abortController.abort()` before switching
+
+**Fix 3 — Canvas streaming performance**
+- Updated `ui/CanvasPane.svelte` — replaced `<MarkdownRenderer>` with raw `<pre>` during streaming. Markdown parsing only happens after streaming completes. Eliminates thousands of `marked()` + `highlight.js` calls per generation.
+
+**Fix 4 — Reactive computation optimization**
+- Updated `ui/AgentActivityPanel.svelte` — `sessionAgents`/`sessionSkills` only recompute when `!isStreaming && messages.length changes`, not on every delta
+- Updated `ui/ChatView.svelte` — auto-scroll uses `requestAnimationFrame` instead of direct `scrollTo` on every delta
+
+**Build:** `vite build` passes clean.
+
+**Decisions:**
+- `MAIAR_AGENT_IDENTITY` stays in `buildSystemPrompt()` only (general chat), NOT in `buildAgentPrompt()` — agents are specialists, the Maiar personality shows through the brief chat messages before/after agent chains
+- Content router is shared module (`lib/contentRouter.js`) used by both `chat.js` and `agentRunner.js`
+
+**Next:**
+- End-to-end test all three scenarios: write command (canvas shows only content), conversational question (stays in chat), conversation switching (no stale state)
+- Verify no freezing during long content generation
+
+---
+
+### 2026-02-17 — Cleanup + server restart + first live test
+
+**Done:**
+- Deleted dead file `ui/src/lib/components/chat/ConversationToolsStrip.svelte` (last remaining cleanup from Agent-First UX Rethink)
+- Killed stale processes on ports 3000/5173/5174 and restarted dev server successfully
+- First live test: server started, user logged in, sent a message — intent classifier ran, content auto-detected (2116 words), auto-saved to `drafts/`, asset registered, conversation created
+
+**Observed issues:**
+- Intent classifier JSON parse failed on first message (backtick-wrapped JSON from Claude) — fell back to `general` intent. Non-blocking but should be fixed (strip markdown fences from classifier response before parsing)
+- Inter font 404 (`/fonts/inter-var.woff2`) — font file not in `ui/static/fonts/`
+- Svelte 5 self-closing tag warnings still present (non-blocking)
+
+**Next:**
+- Fix intent classifier JSON parsing (strip ```json fences)
+- Add Inter variable font to `ui/static/fonts/`
+- Continue end-to-end testing (items 1–2 in Next Steps)
+
+---
+
+### 2026-02-17 — Agent-First UX plan review
+
+**Done:**
+- Reviewed all 5 phases of the Agent-First UX Rethink plan against the codebase
+- Phases 1 (Choice Events), 2 (Intent Classification), 3 (Agent Visibility) — fully complete, all artifacts exist and wired
+- Phase 4 (Greeting + Canvas) — complete per progress.md; built as flat 6-card grid (plan specified tiered layout with secondary row)
+- Phase 5 (Org/Sharing) — schema done (`userId` + `visibility` columns on `assets` table), runtime not built (no query-time filtering, no Library toggle)
+- Identified dead file: `ConversationToolsStrip.svelte` (replaced by `AgentActivityPanel`, not imported anywhere)
+
+**Decisions:**
+- Phase 5 runtime deferred — single-workspace-per-client makes sharing features a no-op until multi-user workspaces are active
+- Phase 4 greeting deviation accepted — flat 6-card grid works; tiered layout is a polish item, not a blocker
+
+**Remaining cleanup:**
+- Delete `ui/src/lib/components/chat/ConversationToolsStrip.svelte` (dead file)
+
+**Next:**
+- Continue with "Next Steps (Hosted Product)" items 1–7 (testing, infrastructure, go-live)
+
+---
+
+### 2026-02-17 — Agent system Phase 4 complete (Simplified UX)
+
+**Done:**
+- Replaced rotating suggestion grid (12 items, 4 visible, 8s rotation) with 6 static ActionCards in a 2×3 grid — each has an icon, label, description, and sends natural language (routed by intent classification)
+- Simplified ChatInput: removed keyword highlighting overlay (`highlightKeywords`, `buildHighlightHtml`, `escapeHtml`), removed command chip badge system (`selectedCommand`, agent pills), moved wand/ActionMenu trigger to secondary position (right side, after image upload). Command selection now inserts text into input instead of creating a chip.
+- Added canvas auto-detection heuristic in `routes/chat.js`: responses with 400+ words, or 200+ words with markdown headings, auto-save to drafts and send `content_detected` SSE event to open canvas — no explicit `producesContent` flag needed for general chat
+- Build verified clean (`vite build` succeeds)
+
+**Files changed:**
+- `ui/src/lib/components/chat/ChatView.svelte` — ActionCard grid, removed rotation logic + Bot import + onDestroy
+- `ui/src/lib/components/chat/ChatInput.svelte` — simplified (removed ~80 lines of keyword/chip code)
+- `ui/src/lib/components/chat/ActionCard.svelte` — added Mail + Share2 icons
+- `maiar-server/routes/chat.js` — canvas auto-detection heuristic in handleCompletion
+
+---
 
 ### 2026-02-16 — Session workflow hardened: progress.md auto-read at session start
 
@@ -566,6 +784,711 @@ The better the context files, the better every output. Run `/brand-research` fir
 - Deleted `scripts/reset-password.js` — replaced by self-service email flow
 
 **Next:**
-- End-to-end test password reset flow
-- Git push (security scan passed — no secrets in staged files)
+- End-to-end test password reset flow (start server, walk through forgot → email → reset → login)
 - Mac Mini infrastructure when ready to go live
+
+*Git pushed: `064c259` — 167 files, security scan clean, no secrets in commit.*
+
+---
+
+### 2026-02-16 — Level 2B planning + Phase 1 chat reliability fixes started
+
+**Done:**
+
+*Architecture planning (8-phase plan):*
+- Explored entire codebase: chat flow (routes/chat.js → lib/claude.js → chat.ts → ChatView.svelte), system prompt construction, skill/agent loading, sidebar navigation, database schema, admin routes
+- Identified root cause of second-message failure: `done` event not guaranteed to fire if conversation persistence throws; no safety net after SSE stream closes
+- Identified canvas not opening: auto-save may fail silently, leaving `savedTo` null
+- Confirmed web chat uses Anthropic API directly (NOT Claude Code) — skills and agents are NOT loaded into system prompt
+- Created comprehensive 8-phase implementation plan at `.claude/plans/validated-jingling-lamport.md`
+
+*Phase 1 fixes applied (3 files modified):*
+- `routes/chat.js` — Restructured `onDone` callback with `try/finally` to guarantee `done` event always fires. Moved `conversation_id` event send before `done`. Added `[chat]` logging throughout (stream start, onDone, auto-save, conversation persist, done event).
+- `ui/src/lib/components/chat/ChatView.svelte` — Added safety net: if `$chat.streaming` is still true after SSE loop exits, force `finishStreaming()` with console.warn. Added logging for canvas restore.
+- `ui/src/lib/api/client.ts` — Added SSE buffer flush after reader exits: parses any remaining `data:` line that didn't end with `\n`.
+
+**Decisions:**
+- Agent orchestration: multi-step API calls (separate call per agent in chain), not single-call. Each agent gets its own system prompt. Higher cost but matches Claude Code quality.
+- Skills loading: load relevant skills per command (not all 52 always)
+- Chat naming: programmatic parsing (no LLM call) — "/write blog post about churn" → "Reducing Churn — Blog Post"
+- Campaign system: full implementation with DB tables, detail page, asset checklist, chat/template linking
+- Client management: formal `clients` table, multiple users per workspace, aggregate usage in admin
+- Thinking indicator: Claude Code-style dynamic verbs during streaming
+
+**Next:**
+- Start server, test Phase 1 fixes (second message + canvas opening)
+- Continue through Phase 2 (agent orchestration) → Phase 8 (beta tag) per plan
+
+---
+
+### 2026-02-17 — Phase 1 tested + Phase 2 built: agent orchestration, canvas-first content, 85% token reduction
+
+**Done:**
+
+*Phase 1 — chat reliability (tested and verified):*
+- Started server, tested multi-message conversations via curl
+- First message streams correctly, `[chat]` logging confirms event ordering
+- Second message works with existing `conversationId`
+- Rate limit errors properly caught as SSE error events (not 500s)
+- Earlier 500 error was a stale session cookie, not a code bug
+
+*Phase 2a — agent orchestration (5 files):*
+- **`lib/commandRegistry.js`** — new file; maps all 21 Maiar commands to agent chains, skill slugs, and `producesContent` flag
+- **`lib/agentRunner.js`** — new file; executes multi-step agent chains (one API call per agent); emits `agent_step` SSE events before each agent starts; intermediate agents run non-streaming, final agent streams
+- **`lib/systemPrompt.js`** — added `buildAgentPrompt()` (agent prompt + skills + context), `loadSkills()` (loads SKILL.md by slug), `buildCommandPrompt()` (single command .md + skills + context), `sanitizeContext()` extracted as reusable function
+- **`routes/chat.js`** — three-way routing: (1) agent-orchestrated commands → `runAgentChain()`, (2) skills-only commands → `buildCommandPrompt()`, (3) general chat → `buildSystemPrompt()`; imports `resolveCommand` and `runAgentChain`
+
+*Phase 2b — canvas-first content display (5 files):*
+- **`routes/chat.js`** — emits `content_start` SSE event before streaming for commands with `producesContent: true`
+- **`ui/src/lib/stores/chat.ts`** — added `AgentStep` interface, `activeAgent`/`agentSteps` state, `setActiveAgent()` method; `appendDelta()` now mirrors text to `canvasContent` when canvas is open; `finishStreaming()` stores agent steps on messages
+- **`ui/src/lib/components/chat/ChatView.svelte`** — handles `content_start` (opens canvas immediately), `agent_step` events; content commands show compact "Writing to canvas..." indicator instead of streaming markdown; non-command messages still render markdown in bubble
+- **`ui/src/lib/components/chat/MessageBubble.svelte`** — when `savedTo` exists, renders compact "Draft saved" card with FileText icon instead of full markdown; agent step badges render above the card; removed Badge import, added FileText from lucide-svelte
+- **`ui/src/lib/components/canvas/CanvasPane.svelte`** — new streaming mode: when `$chat.streaming && editContent`, shows read-only preview with "Generating..." spinner (no editor textarea); switches to split editor/preview after streaming finishes
+
+*Token reduction — 85% savings:*
+- Before: ~56k input tokens per call (CLAUDE.md + all 40+ command .md files + context)
+- After: ~8.5k tokens for agent calls (agent prompt + relevant skills + context only)
+- Dropped full command catalog from system prompt entirely — commands are now handled by the orchestration layer
+- `buildSystemPrompt()` no longer loads command definitions
+- Multi-turn conversations now viable within API rate limits
+
+**Decisions:**
+- Three prompt tiers: `buildAgentPrompt` (agent + skills + context) for orchestrated commands, `buildCommandPrompt` (single command + skills + context) for skills-only commands, `buildSystemPrompt` (CLAUDE.md + context) for general chat
+- Canvas opens on `content_start` event (before deltas arrive), not after `done`
+- Streaming text mirrors to `canvasContent` via `appendDelta()` for live preview in canvas
+- `MessageBubble` compact card replaces full markdown render when `savedTo` is set — content lives in canvas only
+- Agent step tags persist in conversation JSON (no schema change) and show on restored conversations
+
+**Next:**
+- Test in browser: verify canvas opens and streams content, chat shows compact cards, agent tags appear
+- Phase 3 (Templates to navbar)
+- Phase 4 (Smart chat naming)
+- Phase 5 (Campaign system)
+- Phase 6–8 (Thinking indicator, Client management, Beta tag)
+
+---
+
+### 2026-02-16 — UI refresh: muted burnt orange, wizard icon, EB Garamond, agent badges, rename
+
+**Done:**
+
+*Palette + fonts (4 files):*
+- `ui/src/app.css` — All accent colors shifted to muted burnt orange (`--accent: #c2652a`, `--accent-dark: #a34f1e`, `--accent-light: #d4845a`); border/glow rgba updated; heading font `Syne` → `EB Garamond`; added `.font-decorative` utility class (italic serif)
+- `ui/src/app.html` — Google Fonts link: Syne → EB Garamond
+- `ui/tailwind.config.js` — heading font family + accent hex values updated
+
+*Wizard icon + favicon (6 files):*
+- **New:** `ui/src/lib/components/ui/WizardIcon.svelte` — custom SVG wizard hat with star at tip
+- `ui/static/favicon.svg` — wizard hat on `#c2652a` rounded rect
+- `ui/src/lib/components/layout/Sidebar.svelte` — Activity → WizardIcon; brand name uses `.font-decorative`
+- `ui/src/routes/login/+page.svelte` — Activity → WizardIcon; subtitle decorative; gradient updated
+- `ui/src/routes/forgot-password/+page.svelte` — Activity → WizardIcon; gradient updated
+- `ui/src/routes/reset-password/+page.svelte` — Activity → WizardIcon; gradient updated
+
+*Fantasy flair (3 files):*
+- `ui/src/lib/components/ui/ParticleField.svelte` — purple → warm amber (`194, 130, 60`); 1-in-6 sparkle particles with pulsing alpha
+- `ui/src/lib/components/chat/ChatView.svelte` — welcome area uses WizardIcon + "What shall we craft?" decorative text
+- `ui/src/routes/assets/[folder]/+page.svelte` — empty state text uses `.font-decorative`
+
+*Agent badges (2 files):*
+- `ui/src/lib/utils/commandList.ts` — added `agents: string[]` to all 21 commands + `getCommandAgents()` helper
+- `ui/src/lib/components/chat/MessageBubble.svelte` — rewritten: assistant messages get "Powered by" footer strip with Bot icon + left accent bar; user command messages get "routed to" badges below gold bubble
+
+*Rename for Library files (3 files):*
+- `routes/assets.js` — new `POST /:folder/:filename/rename` endpoint using `moveFile()`
+- `ui/src/lib/api/client.ts` — added `assets.rename()` method
+- `ui/src/routes/assets/[folder]/+page.svelte` — inline rename on file cards (Pencil icon) + rename in panel header
+
+*Rename for Context templates (1 file):*
+- `ui/src/routes/context/+page.svelte` — Pencil icon + inline rename in template editor header; delete button added
+
+**Decisions:**
+- Muted burnt orange (`#c2652a`) over vivid orange (`#ff630f`) — warmer, less aggressive
+- EB Garamond for headings only; Inter remains body font; `.font-decorative` for sparing italic serif usage
+- Agent badges below content (not above) — footer strip pattern with "Powered by" / "routed to" labels
+- User command badges map specific agents per command (not just command name) — shows the full chain
+- Rename uses existing `moveFile()` (same folder, new name) — no new filesystem helpers needed
+
+**Next:**
+- Test in browser: verify new colors, fonts, wizard icon, agent badges, rename functionality
+- Phase 3 (Templates to navbar)
+- Phase 4 (Smart chat naming)
+- Phase 5–8 remaining
+
+---
+
+### 2026-02-16 — FA7 wizard icon, context-aware onboarding gate, chat input redesign, rotating suggestions
+
+**Done:**
+
+*Wizard icon swap (2 files):*
+- `ui/src/lib/components/ui/WizardIcon.svelte` — replaced custom hand-drawn SVG with Font Awesome 7 `hat-wizard` solid icon (`viewBox="0 0 640 640"`, filled path)
+- `ui/static/favicon.svg` — updated favicon to use same FA7 hat-wizard icon scaled into 32×32 rounded rect
+
+*Context-aware onboarding gate (3 files):*
+- `routes/context.js` — new `GET /context/status` endpoint; checks if `brand-voice.md` or any product `overview.md` is filled (200+ bytes); returns `{ ready: boolean }`
+- `ui/src/lib/api/client.ts` — added `context.status()` method
+- `ui/src/lib/components/chat/ChatView.svelte` — replaced old `onboardingComplete` DB flag check with live context status check on mount; applies to ALL users (admins included); fails open on API error; shows OnboardingFlow when context is empty, welcome+suggestions when ready
+
+*Chat input redesign (1 file):*
+- `ui/src/lib/components/chat/ChatInput.svelte` — removed `border: 1px solid var(--border)` and `box-shadow`; replaced with soft `border-bottom: 2px solid` that glows accent on focus; added faded WizardIcon (14px, 30% opacity) that appears when input is empty and disappears on typing; removed "Enter to send" helper text
+
+*Rotating suggestions with agent badges (in ChatView.svelte):*
+- Pool of 12 diverse suggestions covering `/write`, `/ideas`, `/social`, `/email`, `/campaign`, `/research`, `/ads`, `/strategy`, `/audit`, `/lifecycle`, `/competitor`, `/brand-positioning`
+- Shuffled on mount, 4 visible in 2×2 grid
+- Every 8 seconds, one card swaps to a new suggestion from the pool
+- Each card shows command in accent, description in muted, plus agent badge pills (Bot icon + agent name) pulled via `getCommandAgents()`
+
+**Decisions:**
+- Context check replaces `onboardingComplete` DB flag — purely file-based, no stale state
+- Check runs on mount only (empty chat state) — never interrupts active conversations
+- Fails open on API error — chat always accessible
+- Admins see onboarding too if context is empty — context readiness matters for all roles
+- FA7 `hat-wizard` solid icon chosen over custom SVG for consistency and recognizability
+
+**Next:**
+- Test in browser: full end-to-end (context check → onboarding → suggestions → chat)
+- Phase 3 (Templates to navbar)
+- Phase 4 (Smart chat naming)
+- Phase 5–8 remaining
+
+---
+
+### 2026-02-16 — Level 2B complete: campaigns, workspace management, thinking indicator, smart naming, templates, beta tag
+
+**Done:**
+
+*Phase 5 — Campaign system (completed):*
+- `db/schema.js` — added `campaigns` table (id, userId, clientSlug, title, status, planPath, assetPlan JSON, timestamps) + `campaignId` FK on `conversations`
+- `routes/campaigns.js` — new file: full CRUD (list/get/create/update/delete) + conversation linking/unlinking, scoped by clientSlug
+- `ui/src/routes/campaigns/+page.svelte` — campaign list with status badges, grid cards, "New Campaign" button
+- `ui/src/routes/campaigns/[id]/+page.svelte` — detail page: editable title, status dropdown, plan viewer, asset checklist, linked conversations
+- `routes/chat.js` — accepts `campaignId` in POST body, stores on conversation record
+- `ui/src/lib/api/client.ts` — `streamChat` now passes `campaignId`; full `campaigns` API object added
+- `ui/src/lib/components/chat/ChatView.svelte` — reads `campaignId` + `prefill` from URL query params; clears campaignId after conversation created
+- `ui/src/lib/components/chat/ChatInput.svelte` — added `initialValue` prop for campaign prefill
+- `ui/src/lib/components/ui/Badge.svelte` — added `info` variant
+- `server.js` — mounted campaignRouter at `/api/campaigns`
+- `ui/src/lib/components/layout/Sidebar.svelte` — Campaigns href changed to `/campaigns`
+
+*Phase 7 — Client workspace management (completed):*
+- `db/schema.js` — added `clients` table (id, slug unique, displayName, active, createdAt)
+- `scripts/migrate-clients.js` — new migration script: backfills clients from distinct clientSlug values; ran successfully (3 clients: admin, acme-corp, arcane-academy)
+- `routes/admin.js` — 4 new workspace endpoints: `GET /workspaces` (list with user counts + aggregate usage), `POST /workspaces` (create + dirs + master context copy), `PATCH /workspaces/:id` (update), `GET /workspaces/:id/users`
+- `ui/src/lib/api/client.ts` — workspace API methods (list, create, update, getUsers)
+- `ui/src/routes/admin/+page.svelte` — full rewrite with 3 tabs: Workspaces (expandable cards with user/usage counts), Users (full table with workspace + role badges), Usage (token counts + est cost)
+
+*Previously completed in this session (Phases 3, 4, 6, 8):*
+- Phase 3: Templates moved from Context tab to sidebar Library section
+- Phase 4: `generateTitle()` in chat.js + PATCH rename endpoint + inline rename UI
+- Phase 6: `ThinkingIndicator.svelte` with dynamic verbs per agent, pulsing dot, step counter
+- Phase 8: Beta badge in sidebar next to Maiar logo
+
+*Builds verified passing (exit code 0).*
+
+**Decisions:**
+- Campaign detail page links to chat with `?prefill=/command&campaignId=X` query params — no special routing needed
+- `clients` table is separate from `users` (workspace entity vs user entity) — users reference client via `clientSlug`
+- Admin page restructured around workspaces as the primary entity, with users and usage as secondary views
+
+**Next:**
+- End-to-end test all Level 2B features in browser
+- Mac Mini infrastructure + maiar.work domain setup
+- First client onboarding via workspace management
+
+---
+
+### 2026-02-16 — Standard app functionality: roles, profile/settings, login fixes, chat input polish
+
+**Done:**
+
+*Critical bug fixes (2 files):*
+- `ui/src/routes/+layout.svelte` — `publicRoutes` hoisted to module scope, now includes `/forgot-password` and `/reset-password`; slot rendering condition updated to cover all public routes (was hardcoded to `/login` only)
+- `lib/auth.js` — `requireAuth` middleware wrapped in try/catch; Express 4 async middleware errors now return 500 instead of becoming unhandled rejections
+
+*Chat input polish (3 files):*
+- `ui/src/lib/components/chat/ChatInput.svelte` — WizardIcon replaced with inline MDI `auto-fix` wand SVG (wizard hat stays as logo elsewhere); keyword highlighting overlay added (recognized commands, agents, categories get accent underline); keyboard navigation for command palette (ArrowUp/Down, Enter to select, Tab to autocomplete, Escape to close)
+- `ui/src/lib/components/chat/CommandPalette.svelte` — rewritten: commands grouped by category with colored section headers; agent badge pills (Bot icon + name) on each command; highlight index tracks keyboard selection; exported `moveUp()`/`moveDown()`/`selectCurrent()` methods for parent keyboard control
+- `ui/src/lib/utils/commandList.ts` — unchanged (already had all data needed)
+
+*Three-tier role system (8 files + migration script):*
+- `scripts/migrate-roles.js` — one-time script: `UPDATE users SET role = 'super_admin' WHERE role = 'admin'`; migrated 1 user
+- `db/schema.js` — role enum changed from `['client', 'admin']` to `['client', 'client_admin', 'super_admin']`; added 5 nullable profile columns: `name`, `avatarUrl`, `companyName`, `companyLogo`, `companyWebsite`
+- `lib/auth.js` — `requireAdmin` now checks `super_admin`; new `requireClientAdmin` middleware (client_admin OR super_admin); `getUserAttributes` returns `name`; `requireAuth` has try/catch
+- `routes/admin.js` — removed router-level middleware; all super admin routes get per-route `requireAuth, requireAdmin`; added 3 client admin scoped routes: `GET /my/users`, `POST /my/users` (role forced to client), `GET /my/usage`; `POST /clients` now validates 3 roles and persists `displayName` as `name`; `GET /clients` returns `name` column
+- `routes/auth.js` — login and session responses now include `name`
+- `ui/src/lib/stores/auth.ts` — `SessionUser.role` type updated; `isAdmin` checks `super_admin`; added `isClientAdmin` derived store
+- `ui/src/lib/api/client.ts` — added `admin.listMyUsers()`, `admin.createMyUser()`, `admin.getMyUsage()`; added full `profile` export (get, update, uploadAvatar, uploadCompanyLogo)
+- `ui/src/routes/admin/+page.svelte` — guard uses `isClientAdmin`; conditional data loading (super admin sees all, client admin sees own workspace); role selector shows 3 roles for super admin, hidden for client admin; role badges with 3 variants; Name column with initials avatar in user table
+
+*User profile and settings (4 files):*
+- `routes/profile.js` — new file: `GET /api/profile`, `PATCH /api/profile` (name, companyName, companyWebsite), `POST /api/profile/avatar` (multer, 2MB limit, JPEG/PNG/WebP), `POST /api/profile/company-logo`
+- `server.js` — mounted profileRouter at `/api/profile`; added `express.static` for `/avatars` directory
+- `ui/src/routes/settings/+page.svelte` — new page with 3 sections: Personal (avatar upload + preview, name, email read-only), Change Password (current + new + confirm, strength indicator), Company (logo upload, company name, website)
+- `ui/src/lib/components/layout/Sidebar.svelte` — Settings nav item in new "Account" section; Admin section now visible to `isClientAdmin`; bottom bar shows user initials circle + name (or email fallback)
+
+**Decisions:**
+- Three-tier roles: `super_admin` (Trevor, full platform), `client_admin` (manage own workspace team + usage), `client` (regular user)
+- Client admins can only create `client` role users in their own workspace — no slug field, no role selector
+- `name` included in session response (lightweight). `avatarUrl`, company fields fetched on demand via `/api/profile` (not in every session validation)
+- Avatars stored in `ui/static/avatars/[userId].ext` — served via Express static in both dev and production
+- Keyword highlighting uses a transparent overlay div with `pointer-events: none` over the textarea — no third-party dependency
+- Domain `maiar.work` purchased on GoDaddy — hosting setup deferred to next session
+
+**Next:**
+- Start server, end-to-end test: login → settings → profile save → admin dashboard → role-based views
+- Fix SMTP credentials (Google App Password rejected)
+- Set up maiar.work domain (GoDaddy → Cloudflare → Mac Mini)
+- Continue Level 2B phases: templates to navbar, smart naming, campaigns, thinking indicator
+
+---
+
+### 2026-02-17 — UI polish: sidebar restructure, 404 page, mobile menu, canvas fix, command badges, tools strip
+
+**Done:**
+
+*Sidebar restructure (1 file):*
+- `ui/src/lib/components/layout/Sidebar.svelte` — Templates moved from `library` to `context` section; section renamed from "Context" to "My Business"; added `onClose` prop for mobile overlay; nav links and logout call `onClose`
+
+*Standard web app functionality (4 files):*
+- `ui/src/routes/+error.svelte` — **new file**: styled 404/error page with status code, message, and "Back to Chat" link; self-contained (no AppShell dependency)
+- `ui/src/lib/components/layout/AppShell.svelte` — rewritten: mobile hamburger menu (`lg:hidden`) with sidebar overlay + backdrop; replaces `display: none` media query
+- `ui/src/routes/admin/+page.svelte` — reactive `$:` role guard prevents non-admin content flash (supplements existing `onMount` guard)
+- `ui/src/routes/settings/+page.svelte` — "Forgot password?" link added to Change Password section
+
+*Canvas & asset fix (3 files):*
+- `lib/commandRegistry.js` — `/competitor` `producesContent: false` → `true` (was mismatched with client)
+- `ui/src/lib/utils/commandList.ts` — `/brand-research` `producesContent: false` → `true` (was mismatched with server)
+- `ui/src/lib/components/chat/ChatView.svelte` — canvas closes on stream error and safety-net (prevents blank canvas stuck open)
+
+*Command bar badges + tools strip (3 files):*
+- `ui/src/lib/components/chat/ChatInput.svelte` — rewritten: selecting a command from palette renders it as a styled badge chip (accent border, dot indicator, agent pills, ✕ to clear); Backspace on empty input clears chip; textarea holds only arguments; placeholder shows expected args; submit reconstructs full message
+- `ui/src/lib/utils/commandList.ts` — `skills: string[]` added to `Command` interface and all 21 commands (copied from `commandRegistry.js`); `getCommandSkills()` helper added
+- `ui/src/lib/components/chat/ConversationToolsStrip.svelte` — **new file**: derives unique agents from `$chat.messages[].agentSteps` and skills from user command messages; renders as horizontal badge strip (agents in accent, skills in blue); "Session tools" label; only visible when tools have been used
+
+*Wiring:*
+- `ui/src/lib/components/chat/ChatView.svelte` — imports and renders `ConversationToolsStrip` between messages and `ChatInput`
+
+*Build verified passing (exit code 0).*
+
+**Decisions:**
+- Sidebar section renamed to "My Business" (user preference) — Templates + Context grouped as business configuration
+- Command chip replaces raw text insertion on palette select — keeps textarea for arguments only, reconstructs full command on submit
+- Skills derived client-side from `COMMANDS[].skills` matching user message commands — no server round-trip needed
+- Canvas closes on error instead of staying blank — better UX for failed content commands
+- `producesContent` is the single source of truth for canvas behavior — must match between `commandRegistry.js` (server) and `commandList.ts` (client)
+
+**Next:**
+- Start server, end-to-end test all changes in browser
+- Mac Mini infrastructure + maiar.work domain setup
+- Populate brand context via `/brand-research`
+
+---
+
+### 2026-02-17 — Command bar UX: tools strip repositioned, free-form command input
+
+**Done:**
+
+*Tools strip repositioned (2 files):*
+- `ui/src/lib/components/chat/ChatView.svelte` — Swapped render order: `ChatInput` now renders before `ConversationToolsStrip`; agents and skills accumulate beneath the input where users type
+- `ui/src/lib/components/chat/ConversationToolsStrip.svelte` — Removed `border-top` separator; adjusted padding (`pb-3 pt-1`) to connect naturally below the input area
+
+*Free-form command input (1 file):*
+- `ui/src/lib/components/chat/ChatInput.svelte` — Placeholder when command chip is selected changed from args-specific text (e.g., "topic or type") to generic "Add context or press Enter to run..."; users can type anything or send immediately with no args
+
+**Decisions:**
+- Tools strip belongs below the input (not between messages and input) — users see accumulated agents/skills in their peripheral vision while typing
+- Command chips should not prescribe what to type — generic placeholder signals that any context (or none) is valid
+- Submit already handled empty args (`selectedCommand.name` sent alone) — no backend changes needed
+
+**Next:**
+- Start server, end-to-end test tools strip position + free-form commands
+- Mac Mini infrastructure + maiar.work domain setup
+- Populate brand context via `/brand-research`
+
+---
+
+### 2026-02-17 — Assets architecture, cross-linking, per-client isolation, sidebar restructure
+
+**Done:**
+
+*Per-client isolation fixes (3 files):*
+- `lib/fileSystem.js` — exported `clientRoot()` so other modules can import it
+- `lib/contextLoader.js` — replaced 4 hardcoded `join(config.maiarRoot, 'clients', clientSlug, ...)` with `join(clientRoot(clientSlug), ...)` — fixes ADMIN_WORKSPACE bypass bug where admin context was loaded from wrong path
+- `db/schema.js` — added nullable `clientSlug` column to `conversations` table
+- `routes/chat.js` — writes `clientSlug` on conversation insert; filters by `clientSlug` on list/get/delete (removed secondary users join for isolation checks)
+- `scripts/migrate-conversation-client-slug.js` — backfilled 21 existing conversations
+
+*Assets DB architecture (4 files):*
+- `db/schema.js` — new `assets` table: id, clientSlug, conversationId (FK, onDelete: set null), campaignId (FK, onDelete: set null), title, filePath, folder, status, timestamps
+- `routes/assets-db.js` — new file: full CRUD at `/api/asset-records` with query filters (?conversationId, ?campaignId, ?folder); enriches list with conversation/campaign titles
+- `routes/chat.js` — after auto-saving a draft, inserts asset record linked to conversation; links asset to newly created conversation when conversationId wasn't known at save time
+- `routes/assets.js` — rename/move/delete now sync to `assets` table (update filePath/folder/status or delete record)
+- `routes/admin.js` — `GET /workspaces` now includes `assetCount` per workspace
+- `server.js` — mounted `assetsDbRouter` at `/api/asset-records`
+- `scripts/migrate-assets.js` — backfill script (0 legacy files found — new assets auto-register going forward)
+
+*Sidebar + Creations page (3 files):*
+- `ui/src/lib/components/layout/Sidebar.svelte` — nav restructured: Chat → **Work** (Drafts, Published) → **Creations** (Assets, Campaigns, Research) → My Business (Templates, Context) → Account
+- `ui/src/routes/creations/+page.svelte` — new page: card grid of all assets with status badges, linked chat chips (→ `/chat?convId=X`), linked campaign chips (→ `/campaigns/Y`); slide-in detail panel with "Open in Canvas", "Link to Campaign" dropdown, and campaign unlinking
+- `ui/src/lib/api/client.ts` — added `assetRecords` API object (list, get, update, delete)
+
+*Cross-linking UI (2 files):*
+- `ui/src/lib/components/chat/ChatView.svelte` — loads linked assets when conversation opens; shows asset chips below input with "Open in Canvas" click
+- `ui/src/routes/campaigns/[id]/+page.svelte` — new "Linked Assets" section in right sidebar showing all assets linked to this campaign with status badges
+
+*Schema pushed + migrations run. Build verified passing (exit 0).*
+
+**Decisions:**
+- `assets` table is the relational layer on top of the existing filesystem — file is source of truth for content, DB is source of truth for relationships
+- Separate `routes/assets-db.js` from `routes/assets.js` to avoid disrupting existing file CRUD that CanvasPane and Library depend on
+- `conversations.clientSlug` is nullable for SQLite ALTER TABLE compatibility (same pattern as `onboardingComplete`)
+- Asset registration happens inside the auto-save try block in chat.js; failure is logged but doesn't break the chat flow
+- Sidebar section names: "Work" for active drafts/published, "Creations" for the entity-level views (assets, campaigns, research)
+- Arcane-academy content confirmed properly isolated in `clients/arcane-academy/` — no action needed
+
+**Next:**
+- Start server, end-to-end test: `/creations` page loads, assets register on `/write`, linked chips appear, sidebar sections render correctly
+- Mac Mini infrastructure + maiar.work domain setup
+- Populate brand context via `/brand-research`
+
+---
+
+### 2026-02-17 — Standalone app transformation: bot persona, action menu, asset cards, persona-driven welcome
+
+**Done:**
+
+*Phase 1 — Per-client bot persona (8 files):*
+- `db/schema.js` — added `botName`, `botPersonality`, `botAvatarUrl` nullable columns to `clients` table
+- `routes/auth.js` — login + session endpoints join `clients` table to include persona fields in response
+- `ui/src/lib/stores/auth.ts` — extended `SessionUser`; added `botDisplayName` and `botPersonalityText` derived stores
+- `lib/systemPrompt.js` — added `buildPersonaSection()` helper; all 3 prompt builders accept `persona` param; prepends "You are {botName}..." identity block
+- `lib/agentRunner.js` — accepts and passes `persona` through to `buildAgentPrompt`
+- `routes/chat.js` — looks up persona from `clients` table per request; passes to all prompt builders
+- `routes/admin.js` — added `GET /my/workspace` (any auth user) and `PATCH /workspaces/:id/persona` (client_admin+)
+- `ui/src/lib/api/client.ts` — added `persona.getMyWorkspace()` and `persona.update()` methods
+- `ui/src/routes/settings/+page.svelte` — "Assistant Persona" section for client_admin/super_admin: bot name input, personality textarea, save
+
+*Phase 2 — Action menu replacing command palette (3 files):*
+- `ui/src/lib/utils/commandList.ts` — added `displayName` and `icon` fields to `Command` interface and all 21 entries; added `CATEGORY_ICONS` map; `filterCommands` searches displayName
+- `ui/src/lib/components/chat/ActionMenu.svelte` — **new file**: visual grid menu with search, category grouping, icons, agent badges, keyboard navigation
+- `ui/src/lib/components/chat/ChatInput.svelte` — rewritten: imports ActionMenu (replaces CommandPalette); persistent Wand2 button; placeholder uses `$botDisplayName`; keyword highlighting overlay; command chip shows displayName
+
+*Phase 3 — Rich asset cards in chat (4 files):*
+- `routes/chat.js` — includes `assetTitle` and `campaignTitle` in `done` SSE event
+- `ui/src/lib/stores/chat.ts` — added `assetTitle`, `campaignTitle` to `Message` interface and `finishStreaming`
+- `ui/src/lib/components/chat/ChatView.svelte` — passes assetTitle/campaignTitle in finishStreaming call
+- `ui/src/lib/components/chat/MessageBubble.svelte` — rich asset card: title with icon, Draft/Published badge, campaign chip, "Open in Canvas" + "View in Creations" buttons
+
+*Phase 4 — Persona-driven welcome & suggestions (2 files):*
+- `ui/src/lib/components/chat/ChatView.svelte` — welcome screen: "Hi, I'm {botDisplayName}" with personality subtitle; suggestion cards use natural language display with category labels (internally map to slash commands)
+- `ui/src/lib/components/chat/ThinkingIndicator.svelte` — default verbs use bot persona name ("Luna is thinking..." instead of "Thinking...")
+
+*All phases verified with passing builds.*
+
+**Decisions:**
+- Persona lives on `clients` table (per-workspace, not per-user) — all users in a workspace see the same bot identity
+- ActionMenu replaces CommandPalette entirely — old component still exists on disk but is no longer imported
+- Suggestions display natural language ("Write a blog post about reducing churn") but send slash commands internally — backend routing unchanged
+- Bot persona injected as identity block at top of system prompt — every response uses the personality
+
+**Next:**
+- Start server, end-to-end test: set persona in Settings → verify welcome screen + thinking indicator + system prompt
+- Test action menu: wand button → visual grid → select command → chip + submit
+- Test asset cards: run `/write` → verify rich card with title, campaign chip, Open in Canvas
+- Mac Mini infrastructure + maiar.work domain setup
+
+---
+
+### 2026-02-17 — Four-feature build: Resend email, priority skills, chat QOL, admin management
+
+**Done:**
+
+*Phase 1 — Resend email (4 files):*
+- `lib/config.js` — replaced `smtp` config block with `resendApiKey` + `emailFrom`
+- `lib/email.js` — rewrote from nodemailer to Resend SDK; same exported interface
+- `.env.example` — replaced SMTP vars with `RESEND_API_KEY` + `EMAIL_FROM`
+- `package.json` — swapped `nodemailer` for `resend` (v4.8.0 installed)
+
+*Phase 2 — Priority skills per client (6 files):*
+- `db/schema.js` — added `prioritySkills` (JSON text) to `clients` table; `mustChangePassword` to `users` table; schema pushed
+- `lib/systemPrompt.js` — added `mergeSkills()` dedup helper; all 3 prompt builders accept `prioritySkills` param
+- `lib/agentRunner.js` — accepts and passes `prioritySkills` to `buildAgentPrompt`
+- `routes/chat.js` — fetches `prioritySkills` from clients table, passes to all prompt paths
+- `routes/admin.js` — extended `PATCH /workspaces/:id` for prioritySkills; added `PATCH /my/workspace/skills` for client admin
+- `ui/src/routes/settings/+page.svelte` — searchable skill picker grouped by 11 categories; toggle pills; save to backend
+
+*Phase 3 — Chat QOL (8 files):*
+- `MessageBubble.svelte` — copy-on-hover (Copy/Check icons, group-hover); regenerate button (isLast prop, RefreshCw)
+- `MarkdownRenderer.svelte` — afterUpdate injects copy buttons into `<pre>` blocks with hover reveal
+- `ChatInput.svelte` — image upload (Paperclip, paste, drag-drop, previews); stop generation (Square button)
+- `chat.ts` — AbortController in state; `startStreaming()` returns controller; `stopStreaming()` + `removeLastMessage()`
+- `ChatView.svelte` — scroll-to-bottom button (ChevronDown); abort signal to streamChat; AbortError handling; isLast/regenerate; `{message, images}` dispatch format
+- `client.ts` — `streamChat` accepts `signal` + `images`; passes to fetch
+- `routes/chat.js` — `POST /upload-image` (multer, 5MB, jpeg/png/gif/webp); main POST accepts `images` array; builds Anthropic content blocks
+- `lib/claude.js` — accepts content arrays (image blocks) as `userContent`
+- `lib/agentRunner.js` — passes images as content blocks in first agent step
+- `server.js` — `express.json({ limit: '20mb' })` for base64 payloads
+
+*Phase 4 — Admin account management (4 files):*
+- `routes/admin.js` — 7 new endpoints: edit user, send reset link, set temp password, delete user, client admin toggle, client admin scoped reset link, priority skills self-service
+- `lib/auth.js` — returns `mustChangePassword` in session attributes
+- `routes/auth.js` — includes `mustChangePassword` in login/session; clears on change-password
+- `ui/src/routes/admin/+page.svelte` — full Actions column: edit modal, send reset link, set password modal, delete confirmation; client admin scoped toggle + reset; toast notifications
+- `ui/src/lib/components/layout/AppShell.svelte` — mustChangePassword warning banner with link to Settings
+- `ui/src/lib/stores/auth.ts` — `mustChangePassword` in SessionUser
+- `ui/src/lib/api/client.ts` — admin.editUser, sendResetLink, setPassword, deleteUser, toggleMyUser, sendMyUserResetLink
+
+*Build verified passing (exit 0).*
+
+**Decisions:**
+- Resend over nodemailer — API-based, no SMTP credentials to manage, verified domain sending
+- Priority skills merge with command-specific skills via `mergeSkills()` dedup — priority skills append, never override
+- Image upload uses multer memory storage + base64 encoding for Anthropic API content blocks
+- Stop generation uses AbortController signal passed through fetch to SSE reader
+- `mustChangePassword` flag auto-set when admin uses set-password; clears on next password change
+- Scroll-to-bottom only auto-scrolls during streaming when user is near bottom (>200px threshold shows button)
+
+**Next:**
+- Start server, end-to-end test all 4 features
+- Configure Resend API key and verify domain for production email
+- Mac Mini infrastructure + maiar.work domain setup
+
+---
+
+### 2026-02-17 — Login fix, org audit, Arcane Academy populated with example content
+
+**Done:**
+
+*Login diagnosis + fix (3 issues found):*
+- **Secure cookie flag** — root cause of browser login failures. Lucia sets `Secure` on session cookie when `NODE_ENV=production`, which browsers silently reject over HTTP on localhost. Fix: use `npm run dev` for local development (no `Secure` flag).
+- **seed-admin.js** — `role: 'admin'` on line 43 changed to `role: 'super_admin'` to match the three-tier enum `['client', 'client_admin', 'super_admin']`. Old value would fail on any new admin user creation.
+- **Password reset** — Reset passwords for `admin@maiar.work` and `wizard@maiar.work` to `maiar-admin-2026` via inline bcrypt script. Cleared 10 stale sessions to force fresh session creation.
+
+*Organization audit + cleanup:*
+- Queried all DB tables: `users`, `clients`, `sessions`
+- Found 3 users, 3 clients. Role migration had already run correctly (`super_admin` in DB).
+- Removed orphan `acme-corp` test client + user (`admin+test@maiar.work`): 0 conversations, 0 assets, no directory on disk. Clean removal.
+- Final state: 2 workspaces (Admin, Arcane Academy), 2 users, all roles and slugs correctly mapped.
+
+*Arcane Academy workspace population:*
+- **Bot persona** set in DB: "Archimedes" — a wise, witty arcane librarian with scholarly warmth and dry humor about modern shortcuts to ancient problems.
+- **Priority skills** set: content-marketing, email-sequence, social-content, copywriting, launch-strategy, retention-lifecycle, referral-program, content-strategy (8 skills).
+- **4 draft files** created in `maiar-server/clients/arcane-academy/drafts/`:
+  1. `2026-02-17-social-a1b2c3d4.md` — LinkedIn post: "The Right Wand Changes Everything" (Enchanted Artifacts product marketing)
+  2. `2026-02-17-write-e5f6g7h8.md` — Blog: "5 Signs You're Ready to Level Up from Apprentice to Journeyman" (Spellcasting Mastery course marketing)
+  3. `2026-02-17-email-i9j0k1l2.md` — Welcome email sequence (4 emails: welcome, assessment reminder, workshop invite, 2-week check-in)
+  4. `2026-02-17-social-m3n4o5p6.md` — Twitter/X thread: "Why Our Potion Kits Outsell Everything" (subscription box marketing)
+- **1 published file**: `spellcasting-safety-guide.md` — evergreen reference with Three Laws, safety equipment table, Headmaster quote
+- **3 context files** added:
+  - `context/products/spellcasting-mastery/channels.md` — website, email, LinkedIn, YouTube, forum, paid channels
+  - `context/products/enchanted-artifacts/channels.md` — e-commerce, email, Instagram, TikTok, Pinterest, paid channels
+  - `context/company/style-guide.md` — capitalization, numbers, terminology, formatting standards by channel
+
+*Important discovery: dual `clients/` directories.*
+- Content originally written to `Maiar/clients/arcane-academy/` (project root)
+- Server uses `Maiar/maiar-server/clients/arcane-academy/` (per `MAIAR_ROOT` in `.env`)
+- All files copied to correct server-side location. Both directories now contain the files.
+
+*Verified end-to-end:*
+- Admin login returns 200 with `role: super_admin` ✅
+- Wizard login returns 200 with `role: client_admin`, Archimedes persona ✅
+- Assets API returns 4 drafts + 1 published for arcane-academy ✅
+- Admin workspaces API shows both workspaces with correct metadata ✅
+
+**Decisions:**
+- `npm run dev` for local development (not `npm start`) — avoids Secure cookie issue on HTTP
+- "Archimedes" chosen as bot name — owl-librarian archetype fits the scholarly wizard academy brand voice
+- 8 priority skills selected to cover arcane-academy's core needs: content for courses, email for enrollment, social for brand, copywriting for product pages, launch for new courses, retention for subscriptions
+- Orphan test data (acme-corp) deleted rather than kept — no conversations, no assets, no disk presence
+
+**Next:**
+- End-to-end browser test: log in as wizard, verify Archimedes welcome, check Library for all content, open files in canvas
+- Configure Resend API key for production email
+- Mac Mini infrastructure + maiar.work domain setup
+- Note: when deploying to production (behind HTTPS/Caddy), `npm start` will work correctly since `Secure` cookie is appropriate over HTTPS
+
+---
+
+### 2026-02-17 — Login fix (password reset) + password visibility toggle
+
+**Done:**
+- **Password reset** — Cleared 9 stale sessions and reset passwords for both `admin@maiar.work` and `admin+wizard@maiar.work` to `Admin1234!` via inline bcrypt script. Root cause: stale/forgotten password (same recurring issue as previous sessions).
+- **Password visibility toggle** — Added show/hide eye button to login page password field (`ui/src/routes/login/+page.svelte`). Uses inline SVGs (eye / eye-off), positioned inside input with opacity hover effect. `tabindex="-1"` so it doesn't interrupt form tab flow.
+- **Port conflict diagnosis** — Server failed to start with `EADDRINUSE` on :3000 due to orphan background processes from diagnostic curl tests. Killed stale processes on :3000, :5173, :5174 to restore clean state.
+
+**Decisions:**
+- Used inline SVGs for eye icons instead of lucide-svelte to avoid icon library version issues
+- Both user passwords reset to same value (`Admin1234!`) for simplicity during dev
+
+**Next:**
+- End-to-end browser test: log in as wizard, verify Archimedes welcome, check Library for all content, open files in canvas
+- Configure Resend API key for production email
+- Mac Mini infrastructure + maiar.work domain setup
+
+---
+
+### 2026-02-17 — Agent-first UX rethink: Phases 1–3 complete, Phase 4 started
+
+**Done:**
+
+*Planning:*
+- Full 5-phase plan at `.claude/plans/steady-jumping-orbit.md` covering: structured choice events, intent classification, agent activity panel, agent-first greeting + canvas heuristic, organization/sharing model
+- User chose: always-LLM classify, click → add context → send, keep slash commands as secondary, full chain timeline
+
+*Phase 1 — Structured Choice Events (4 files):*
+- `ui/src/lib/stores/chat.ts` — added `Choice`, `ChoiceSet`, `AgentChainEntry` interfaces; `pendingChoices`, `agentChain`, `activeSkills` state; `setAgentChain()`, `setChoices()`, `clearChoices()` methods; updated `setActiveAgent()` to transition chain timeline; updated `finishStreaming()` to clear new state
+- `ui/src/lib/components/chat/ChoiceCards.svelte` — **new file**: renders server-sent choices as cards/buttons/list; icon mapping; dispatches `select` event
+- `ui/src/lib/components/chat/ChatView.svelte` — handles `choices`, `agent_chain`, `content_detected` SSE events; renders `ChoiceCards` when `$chat.pendingChoices` non-null; `handleChoiceSelect()` populates input via `prefillValue`
+- `ui/src/lib/components/chat/ChatInput.svelte` — reactive statement for external `initialValue` changes (choice selection → populate input)
+
+*Phase 3 — Agent Activity Panel (2 files):*
+- `ui/src/lib/components/chat/AgentActivityPanel.svelte` — **new file**: replaces `ConversationToolsStrip`; during streaming shows full agent chain timeline (pending/active/complete states with pulsing animation); after completion shows compact chip strip; integrates ThinkingIndicator
+- `lib/agentRunner.js` — emits `agent_chain` SSE event before chain loop with full agent list + skills
+
+*Phase 2 — Intent Classification + Agent-First Routing (5 files):*
+- `lib/intentClassifier.js` — **new file**: LLM-based classification via `claude-haiku-4-5-20251001`; compact prompt listing all 21 intents + high-level categories; returns `{ intent, topic, confidence }`
+- `lib/guidedFlows.js` — **new file**: `GUIDED_FLOWS` for `create` (6 choices) and `plan` (4 choices); `INTENT_TO_COMMAND` mapping 21 intents to slash commands
+- `lib/commandRegistry.js` — added `resolveIntent(commandSlash, topic)` function
+- `routes/chat.js` — new routing: slash command → intent classification → guided flows for categories → specific intent → general chat fallback; `sendChoices()` helper
+- `lib/systemPrompt.js` — updated persona section: "Guide users naturally. Never mention slash commands."
+
+*Phase 4 — Agent-First Greeting + Canvas (started):*
+- `ui/src/lib/components/chat/ActionCard.svelte` — **new file**: reusable glass card with icon, label, description; normal + small sizes; lucide icon mapping
+
+*All builds verified passing after each phase.*
+
+**Decisions:**
+- Every non-slash message gets a fast Haiku classification call (~0.5s) — best accuracy for intent routing
+- Choice cards populate input (not auto-execute) — user adds context before sending
+- Slash commands preserved as secondary via wand/ActionMenu button
+- Agent chain timeline replaces ConversationToolsStrip — shows pending/active/complete during streaming
+- Intent classifier is server-side — frontend sends natural language, server decides routing
+- Canvas heuristic planned: 400+ words OR 200+ words with markdown headings → auto-save + content_detected event
+
+**Next (Phase 4 remaining):**
+- Update `ChatView.svelte` — replace rotating suggestion grid with static action cards (Create Content / Plan a Campaign / Research + secondary row: Audit, Optimize, Ideas, Strategy)
+- Simplify `ChatInput.svelte` — move wand to secondary position, remove command chip + agent sub-chips + keyword highlighting overlay
+- Add canvas auto-detection heuristic in `routes/chat.js` handleCompletion (word count > 400 or structured > 200)
+- Handle `content_detected` event in ChatView (already wired in Phase 1)
+
+**Phase 5 (pending):**
+- Organization/sharing model: userId + visibility columns on assets table, migration, access filtering, frontend "My Drafts" / "All Published (Team)" tabs
+
+---
+
+### 2026-02-18 — Agent & Command Consolidation
+
+**Problem:** Agent roster grew to 18 organically (10 SEOMachine ports + 8 new). Several issues:
+- Editor agent produces analytical reports instead of editing content — misaligned with `/write` flow
+- `/write` runs 4 sequential agents (editor → seo-optimizer → meta-creator → internal-linker) — slow
+- Hardcoded "Castos" / "podcast creators" brand refs in 4+ SEOMachine-ported agents
+- Narrow single-function agents (headline-generator, meta-creator, internal-linker) don't justify separate sub-processes
+- cro-analyst + landing-page-optimizer always invoked together — redundant split
+
+**Consolidation: 18 → 11 agents**
+
+| Action | Agent | Detail |
+|---|---|---|
+| REWRITE | `editor` | Mission: produce rewritten content (not reports). Absorbs headline-generator formulas. Output = improved draft + brief change summary |
+| REWRITE | `seo-optimizer` | Remove brand refs → read from context. Absorbs internal-linker methodology |
+| NEW (merger) | `cro-optimizer` | Merges cro-analyst (psychology) + landing-page-optimizer (structural CRO) into single agent |
+| REWRITE | `performance` | Remove "Castos" brand refs → read from context |
+| KEEP | `content-analyzer` | 6-module content analysis — already well-scoped |
+| KEEP | `brand-researcher` | Web research → populate context files |
+| KEEP | `brand-strategist` | Positioning, message hierarchy, brand narrative |
+| KEEP + EXPAND | `campaign-strategist` | Absorbs channel-selector scoring rubric into Channel Plan section |
+| KEEP | `lifecycle-planner` | Customer lifecycle sequences |
+| KEEP | `audience-analyst` | Persona validation, audience fit scoring |
+| KEEP | `publishing-adapter` | Format & publish to external platforms |
+
+**Agents removed:**
+
+| Agent | Disposition |
+|---|---|
+| `keyword-mapper` | DELETE — already deprecated |
+| `headline-generator` | MERGE into editor |
+| `meta-creator` | DELETE — not needed in write pipeline |
+| `internal-linker` | MERGE into seo-optimizer |
+| `output-formatter` | DELETE — routing logic belongs in commands |
+| `channel-selector` | MERGE rubric into campaign-strategist |
+| `landing-page-optimizer` | MERGE into cro-optimizer |
+
+**`/write` pipeline change:** 4-agent chain → 2-agent pipeline (editor → seo-optimizer). Short-form: editor only.
+
+**`/audit` CRO routing:** 2 agents (cro-analyst + landing-page-optimizer) → 1 agent (cro-optimizer).
+
+**Context loading standardization:** Every content-facing agent gets explicit "Context Loading" section at top — agents run as Task sub-processes and can't see what the main Claude context loaded.
+
+**Design decisions:**
+- No "writer" agent needed — main Claude context IS the writer (has conversation history, can iterate, skills provide expertise)
+- Editor returns rewritten content directly, not scored reports
+- Meta-creator removed from `/write` — not needed unless crafting meta ads
+- Channel scoring absorbed into campaign-strategist rather than kept as separate agent
+
+**Implementation phases:**
+1. Delete deprecated agents (keyword-mapper, output-formatter, channel-selector)
+2. Genericize brand references (seo-optimizer, performance)
+3. Agent mergers (cro-optimizer, seo-optimizer+internal-linker, campaign-strategist+channel-selector)
+4. Editor rewrite (core mission change)
+5. Command routing updates (write.md, audit.md, optimize.md)
+6. Standardize context loading across all content-facing agents
+7. Cleanup (delete merged files, update CLAUDE.md, progress.md)
+
+**Status:** ✅ All phases complete. 11 agents remain (18 → 11).
+
+**Phase 1 completed:**
+- ✅ Deleted `keyword-mapper.md`, `output-formatter.md`, `channel-selector.md`
+
+**Phase 2 completed:**
+- ✅ Genericized brand refs in `seo-optimizer.md` — replaced "Castos" and "podcast creators" with dynamic context references
+- ✅ Genericized brand refs in `performance.md` — replaced all "Castos" with generic references
+
+**Phase 3 completed:**
+- ✅ Created `conversion-optimizer.md` — merged cro-analyst psychology + landing-page-optimizer structural CRO (renamed from `cro-optimizer` to `conversion-optimizer` per user request)
+- ✅ Expanded `seo-optimizer.md` — absorbed internal-linker methodology (link placement strategy, anchor text best practices, topic cluster awareness)
+- ✅ Expanded `campaign-strategist.md` — absorbed channel-selector scoring rubric (audience presence, intent match, economics, readiness — 0-10 each, total /40)
+
+**Phase 4 completed:**
+- ✅ Rewrote `editor.md` — new mission: return rewritten content + brief change summary (not scored reports). Absorbed headline-generator formulas (10 headline patterns with scoring criteria)
+- ✅ Enhanced `seo-optimizer.md` meta section — absorbed meta-creator title/description formulas
+- ✅ Deleted `headline-generator.md` and `meta-creator.md`
+
+**Phase 5 completed:**
+- ✅ Updated `write.md` — 4-agent chain → 2-agent pipeline (editor → seo-optimizer)
+- ✅ Updated `audit.md` — CRO routing: `cro-analyst + landing-page-optimizer` → `conversion-optimizer`
+- ✅ Updated `optimize.md` — engagement: `editor + headline-generator` → `editor`; CRO: `cro-analyst` → `conversion-optimizer`
+- ✅ Updated `strategy.md` — `channel-selector` → `campaign-strategist` (channel scoring built in)
+
+**Phase 6 completed:**
+- ✅ Standardized "## Context Loading" section in all 9 content-facing agents: editor, seo-optimizer, conversion-optimizer, content-analyzer, performance, campaign-strategist, audience-analyst, lifecycle-planner, brand-strategist
+
+**Phase 7 completed:**
+- ✅ Deleted merged files: `cro-analyst.md`, `landing-page-optimizer.md`, `internal-linker.md`
+- ✅ Final agent roster (11): editor, seo-optimizer, conversion-optimizer, content-analyzer, performance, campaign-strategist, audience-analyst, lifecycle-planner, brand-strategist, brand-researcher, publishing-adapter
+- ✅ Stale reference sweep: updated 7 additional commands (ads.md, publish.md, 5 seomachine commands) + 1 skill (sem-ppc/SKILL.md)
+- ✅ Updated agent roster table in progress.md (18 → 11)
+
+---
+
+### 2026-02-18 — Agent & Command Consolidation: Phases 2–7 complete (session 2)
+
+**Done:**
+- Phase 2: Genericized brand refs in `seo-optimizer.md` (replaced "podcast creators", "Castos") and `performance.md` (replaced all "Castos" with context-driven references)
+- Phase 3: Created `conversion-optimizer.md` (merged cro-analyst + landing-page-optimizer); expanded `seo-optimizer.md` with internal-linker methodology; expanded `campaign-strategist.md` with channel-selector scoring rubric
+- Phase 4: Rewrote `editor.md` (new mission: return rewritten content, not reports; absorbed headline-generator formulas). Enhanced `seo-optimizer.md` meta section with meta-creator formulas. Deleted `headline-generator.md` and `meta-creator.md`
+- Phase 5: Updated command routing in `write.md` (4→2 agent chain), `audit.md`, `optimize.md`, `strategy.md`
+- Phase 6: Standardized "## Context Loading" sections across all 9 content-facing agents
+- Phase 7: Deleted merged files (`cro-analyst.md`, `landing-page-optimizer.md`, `internal-linker.md`); swept all commands and skills for stale agent references — fixed 7 additional commands + 1 skill
+
+**Decisions:**
+- Renamed `cro-optimizer` → `conversion-optimizer` (user preference)
+- Editor returns rewritten content directly, not scored reports — fundamental mission change
+- Meta-creator removed from `/write` pipeline — seo-optimizer handles meta when needed
+- Channel scoring absorbed into campaign-strategist (no separate agent needed)
+- Context Loading sections are essential because agents run as Task sub-processes without parent context
+
+**Next:**
+- End-to-end test all commands against real brand context
+- Mac Mini infrastructure + maiar.work domain setup
+- Configure Resend API key for production email

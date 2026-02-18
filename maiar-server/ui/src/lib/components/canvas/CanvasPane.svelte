@@ -145,13 +145,24 @@
     </div>
   {/if}
 
-  <!-- Body: split editor -->
+  <!-- Body -->
   <div class="flex-1 flex overflow-hidden">
-    {#if $chat.streaming && !editContent}
-      <!-- Streaming: show skeleton in canvas area -->
+    {#if $chat.streaming && editContent}
+      <!-- Streaming mode: raw text to avoid expensive markdown parsing on every delta -->
+      <div class="flex-1 flex flex-col overflow-hidden" style="min-width:0">
+        <div class="px-3 py-1.5 text-xs shrink-0 flex items-center gap-2" style="color: var(--text-faint); border-bottom: 1px solid var(--border-subtle)">
+          <Spinner size="sm" />
+          <span>Generating...</span>
+        </div>
+        <div class="flex-1 overflow-y-auto px-5 py-4">
+          <pre class="whitespace-pre-wrap text-sm" style="color: var(--text-primary); font-family: inherit; line-height: 1.7; background: transparent; margin: 0; border: none; padding: 0;">{editContent}</pre>
+        </div>
+      </div>
+    {:else if $chat.streaming && !editContent}
+      <!-- Waiting for first delta -->
       <div class="flex-1 flex flex-col items-center justify-center gap-3">
         <Spinner />
-        <p class="text-xs" style="color: var(--text-faint)">Generating draft…</p>
+        <p class="text-xs" style="color: var(--text-faint)">Generating draft...</p>
       </div>
     {:else if editContent}
       <!-- Split pane: editor left, preview right -->
@@ -168,7 +179,7 @@
             class="flex-1 w-full resize-none p-4 text-sm font-mono focus:outline-none"
             style="background: transparent; color: var(--text-primary); line-height: 1.6; caret-color: var(--accent)"
             spellcheck="true"
-            placeholder="Start writing…"
+            placeholder="Start writing..."
           ></textarea>
         </div>
 

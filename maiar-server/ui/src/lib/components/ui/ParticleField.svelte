@@ -4,22 +4,26 @@
 
   let canvas: HTMLCanvasElement
   let animFrame: number
-  let particles: Array<{ x: number; y: number; vx: number; vy: number; alpha: number; size: number }> = []
+  let particles: Array<{ x: number; y: number; vx: number; vy: number; alpha: number; size: number; sparkle: boolean; phase: number }> = []
+  let frameCount = 0
 
   function init(w: number, h: number) {
-    particles = Array.from({ length: 48 }, () => ({
+    particles = Array.from({ length: 48 }, (_, i) => ({
       x: Math.random() * w,
       y: Math.random() * h,
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,
       alpha: Math.random() * 0.5 + 0.1,
-      size: Math.random() * 2 + 0.5
+      size: Math.random() * 2 + 0.5,
+      sparkle: i % 6 === 0,
+      phase: Math.random() * Math.PI * 2
     }))
   }
 
   function draw(ctx: CanvasRenderingContext2D, w: number, h: number, isDark: boolean) {
     ctx.clearRect(0, 0, w, h)
-    const color = isDark ? '139, 132, 255' : '108, 99, 255'
+    const color = isDark ? '194, 130, 60' : '180, 110, 50'
+    frameCount++
 
     for (const p of particles) {
       p.x += p.vx
@@ -29,9 +33,17 @@
       if (p.y < 0) p.y = h
       if (p.y > h) p.y = 0
 
+      let a = p.alpha
+      let s = p.size
+
+      if (p.sparkle) {
+        a = p.alpha * (0.5 + 0.5 * Math.sin(frameCount * 0.04 + p.phase))
+        s = 2.5 + 0.5 * Math.sin(frameCount * 0.03 + p.phase)
+      }
+
       ctx.beginPath()
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(${color}, ${p.alpha})`
+      ctx.arc(p.x, p.y, s, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(${color}, ${a})`
       ctx.fill()
     }
   }

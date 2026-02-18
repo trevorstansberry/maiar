@@ -39,12 +39,10 @@ Create marketing content of any type. Maiar reads your brand context and produce
 
 ## Agent Chain (SEO content)
 
-For SEO-optimized content, 4 agents run automatically after writing:
+For SEO-optimized content, 2 agents run automatically after writing:
 
-1. `editor` — brand voice consistency, clarity, and structural quality
-2. `seo-optimizer` — keyword analysis, placement, density, and LSI keyword coverage
-3. `meta-creator` — title tag and meta description options
-4. `internal-linker` — internal link suggestions from `context/products/[product]/internal-links-map.md`
+1. `editor` — rewrites for human voice, engagement, headline quality, and brand consistency; returns the improved draft
+2. `seo-optimizer` — keyword analysis, meta title/description options, and internal link recommendations (reads `internal-links-map.md`)
 
 For short-form content (social posts, short ads), only `editor` runs — no SEO pipeline needed.
 
@@ -54,7 +52,7 @@ For short-form content (social posts, short ads), only `editor` runs — no SEO 
 2. **Clarifies if needed:** If the content type or audience isn't clear, asks one focused question before proceeding
 3. **Determines format:** Chooses the appropriate structure, length, and format for the content type
 4. **Writes:** Produces content in brand voice for the right audience
-5. **Routes:** Long-form/SEO content → 4-agent chain; short-form → editor only
+5. **Routes:** Long-form/SEO content → editor + seo-optimizer; short-form → editor only
 6. **Saves:** Suggests saving to `drafts/[filename].md`
 
 ## Content Types Supported
@@ -85,4 +83,4 @@ All content is evaluated against:
 
 ---
 
-Read core context files, determine what's being requested, and produce the appropriate content. For SEO content: run through editor → seo-optimizer → meta-creator → internal-linker. For short-form content: run through editor only. If the content type, format, or target audience is ambiguous, ask one focused clarifying question before writing.
+Read core context files, determine what's being requested, and produce the appropriate content. For SEO content: run through editor → seo-optimizer. For short-form content: run through editor only. If the content type, format, or target audience is ambiguous, ask one focused clarifying question before writing.

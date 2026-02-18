@@ -2,7 +2,7 @@
   import { page } from '$app/stores'
   import { goto } from '$app/navigation'
   import { auth } from '$lib/api/client'
-  import { Activity } from 'lucide-svelte'
+  import WizardIcon from '$lib/components/ui/WizardIcon.svelte'
 
   let password = ''
   let confirmPassword = ''
@@ -47,7 +47,7 @@
 >
   <div
     class="fixed inset-0 pointer-events-none"
-    style="background: radial-gradient(ellipse 60% 50% at 50% 10%, rgba(255,99,15,0.12) 0%, transparent 70%)"
+    style="background: radial-gradient(ellipse 60% 50% at 50% 10%, rgba(194,101,42,0.12) 0%, transparent 70%)"
   ></div>
 
   <div class="w-full max-w-sm relative">
@@ -57,7 +57,7 @@
           class="w-12 h-12 rounded-2xl flex items-center justify-center"
           style="background: var(--accent); box-shadow: var(--shadow-glow)"
         >
-          <Activity size={22} color="white" />
+          <WizardIcon size={22} />
         </div>
         <div class="text-center">
           <h1 class="text-xl font-semibold" style="color: var(--text-primary)">Maiar</h1>

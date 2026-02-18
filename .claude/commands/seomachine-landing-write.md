@@ -325,7 +325,7 @@ After scrubbing, score the landing page using:
 python data_sources/modules/landing_page_scorer.py landing-pages/[filename].md --type [seo|ppc] --goal [trial|demo|lead]
 ```
 
-Or run via the landing-page-optimizer agent.
+Or run via the conversion-optimizer agent.
 
 ### Score Requirements
 - **Minimum Score**: 75/100 to be publish-ready
@@ -343,21 +343,16 @@ Or run via the landing-page-optimizer agent.
 
 After saving and scrubbing, run these agents:
 
-### 1. Landing Page Optimizer Agent
-- **Agent**: `landing-page-optimizer`
-- **Input**: Full landing page content
-- **Output**: CRO optimization report
-- **Analyzes**: Above-fold, CTAs, trust signals, structure
+### 1. Conversion Optimizer Agent
+- **Agent**: `conversion-optimizer`
+- **Input**: Full landing page content and goal
+- **Output**: CRO optimization report (psychology + structural analysis)
+- **Analyzes**: Above-fold, CTAs, trust signals, persuasion principles, friction points
 
-### 2. Headline Generator Agent
-- **Agent**: `headline-generator`
-- **Input**: Page content and keyword
-- **Output**: 10+ headline variations for A/B testing
-
-### 3. CRO Analyst Agent
-- **Agent**: `cro-analyst`
-- **Input**: Page content and goal
-- **Output**: Psychology and persuasion analysis
+### 2. Editor Agent
+- **Agent**: `editor`
+- **Input**: Page content
+- **Output**: Improved copy with headline alternatives and engagement fixes
 
 ---
 

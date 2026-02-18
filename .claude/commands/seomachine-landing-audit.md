@@ -296,7 +296,7 @@ Then compare the audit reports side-by-side.
 **After Audit:**
 1. Use findings to create improved version: `/landing-write [topic] --type [type] --goal [goal]`
 2. Or run competitor analysis: `/landing-competitor [url]`
-3. Or generate new headlines: Agent `headline-generator`
+3. Or improve headlines and copy: Agent `editor`
 
 **Before Publishing:**
 1. Run audit on draft: `/landing-audit landing-pages/[file].md`

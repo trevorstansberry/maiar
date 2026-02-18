@@ -221,4 +221,4 @@ Search ads perform best when landing pages:
 
 ## Related Skills
 
-`paid-ads`, `page-cro`, `copywriting`, `analytics-tracking`, `landing-page-optimizer`
+`paid-ads`, `page-cro`, `copywriting`, `analytics-tracking`

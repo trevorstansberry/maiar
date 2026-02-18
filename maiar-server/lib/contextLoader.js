@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, existsSync, statSync } from 'fs'
 import { join } from 'path'
 import { config } from './config.js'
-import { readFile } from './fileSystem.js'
+import { readFile, clientRoot } from './fileSystem.js'
 
 const FILL_MIN_PARTIAL = 50
 const FILL_MIN_FILLED = 200
@@ -14,7 +14,7 @@ export function loadContext(clientSlug) {
   const parts = []
 
   // Company context
-  const companyDir = join(config.maiarRoot, 'clients', clientSlug, 'context', 'company')
+  const companyDir = join(clientRoot(clientSlug), 'context', 'company')
   if (existsSync(companyDir)) {
     const files = readdirSync(companyDir).filter(f => f.endsWith('.md')).sort()
     for (const file of files) {
@@ -26,7 +26,7 @@ export function loadContext(clientSlug) {
   // Active product context
   const activeSlug = getActiveProduct(clientSlug)
   if (activeSlug) {
-    const productDir = join(config.maiarRoot, 'clients', clientSlug, 'context', 'products', activeSlug)
+    const productDir = join(clientRoot(clientSlug), 'context', 'products', activeSlug)
     if (existsSync(productDir)) {
       const files = readdirSync(productDir).filter(f => f.endsWith('.md')).sort()
       for (const file of files) {
@@ -77,7 +77,7 @@ export function getActiveProduct(clientSlug) {
 export function getContextFileList(clientSlug) {
   const result = { company: [], products: [] }
 
-  const companyDir = join(config.maiarRoot, 'clients', clientSlug, 'context', 'company')
+  const companyDir = join(clientRoot(clientSlug), 'context', 'company')
   if (existsSync(companyDir)) {
     for (const file of readdirSync(companyDir).filter(f => f.endsWith('.md'))) {
       const content = readFileSync(join(companyDir, file), 'utf8')
@@ -93,7 +93,7 @@ export function getContextFileList(clientSlug) {
 
   const { products } = getProducts(clientSlug)
   for (const product of products) {
-    const productDir = join(config.maiarRoot, 'clients', clientSlug, 'context', 'products', product.slug)
+    const productDir = join(clientRoot(clientSlug), 'context', 'products', product.slug)
     if (existsSync(productDir)) {
       for (const file of readdirSync(productDir).filter(f => f.endsWith('.md'))) {
         const content = readFileSync(join(productDir, file), 'utf8')

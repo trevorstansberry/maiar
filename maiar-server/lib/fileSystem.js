@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, renameSy
 import { join, extname, basename, dirname } from 'path'
 import { config } from './config.js'
 
-function clientRoot(clientSlug) {
+export function clientRoot(clientSlug) {
   if (config.adminWorkspace && clientSlug === 'admin') {
     return config.adminWorkspace
   }

@@ -25,7 +25,7 @@ Or with a specific goal:
 1. Reads the content (from file or paste)
 2. Reads seo-guidelines.md, brand-voice.md, and audience-profiles.md
 3. Identifies optimization opportunities based on goal
-4. Applies relevant agents (seo-optimizer, cro-analyst, headline-generator, meta-creator)
+4. Applies relevant agents (seo-optimizer, conversion-optimizer, editor)
 5. Returns scored content with prioritized changes
 
 ## SEO Optimization
@@ -46,7 +46,7 @@ Applies `seo-optimizer` agent:
 
 ## Conversion Optimization
 
-Applies `cro-analyst` agent:
+Applies `conversion-optimizer` agent:
 - CTA analysis (clarity, placement, frequency)
 - Value proposition strength
 - Objection handling
@@ -55,10 +55,10 @@ Applies `cro-analyst` agent:
 
 ## Engagement Optimization
 
-Applies `editor` and `headline-generator` agents:
+Applies `editor` agent:
 - Hook strength (opening paragraph)
 - Readability and scanability
-- Headline and subheading quality
+- Headline and subheading quality (editor generates improved alternatives)
 - Content flow and structure
 - Pull quotes and highlight opportunities
 

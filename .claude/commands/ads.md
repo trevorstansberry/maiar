@@ -39,14 +39,14 @@ Write ad copy and strategy for paid advertising campaigns.
 ## Agent Chain
 
 1. Writes ad copy using `paid-ads` + `sem-ppc` (for Google) + `marketing-psychology` skills
-2. `cro-analyst` agent reviews landing page fit and message-match recommendations
+2. `conversion-optimizer` agent reviews landing page fit and message-match recommendations
 
 ## What Happens
 
 1. Reads core context files + products-services.md + competitors.md
 2. Writes copy for all required ad formats for the platform
 3. Provides targeting recommendations
-4. `cro-analyst` agent reviews landing page requirements for message match
+4. `conversion-optimizer` agent reviews landing page requirements for message match
 
 ## Output Per Platform
 
@@ -84,8 +84,8 @@ Write ad copy and strategy for paid advertising campaigns.
 - Platform-specific format and character limits respected
 - Targeting strategy brief
 - A/B test recommendation (what to test first)
-- Landing page message-match notes (from `cro-analyst`)
+- Landing page message-match notes (from `conversion-optimizer`)
 
 ---
 
-Read core context files, then write the ad copy for the specified platform using `paid-ads`, `sem-ppc`, and `marketing-psychology` skills. Invoke `cro-analyst` agent for landing page message-match review.
+Read core context files, then write the ad copy for the specified platform using `paid-ads`, `sem-ppc`, and `marketing-psychology` skills. Invoke `conversion-optimizer` agent for landing page message-match review.

@@ -1,23 +1,28 @@
 <script lang="ts">
   import { page } from '$app/stores'
   import { goto } from '$app/navigation'
-  import { assets } from '$lib/api/client'
+  import { assets, assetRecords } from '$lib/api/client'
   import { chat } from '$lib/stores/chat'
+  import { user } from '$lib/stores/auth'
   import { formatDistanceToNow, parseISO } from 'date-fns'
   import Badge from '$lib/components/ui/Badge.svelte'
   import Spinner from '$lib/components/ui/Spinner.svelte'
   import MarkdownRenderer from '$lib/components/chat/MarkdownRenderer.svelte'
-  import { FileText, Upload, Trash2, Edit2, Eye, Copy, X, Columns2 } from 'lucide-svelte'
+  import { FileText, Upload, Trash2, Edit2, Eye, Copy, X, Columns2, Pencil, Plus, Users, User as UserIcon } from 'lucide-svelte'
 
-  const FOLDERS = ['drafts', 'published', 'campaigns', 'research']
+  const FOLDERS = ['drafts', 'published', 'campaigns', 'research', 'templates']
   const FOLDER_LABELS: Record<string, string> = {
-    drafts: 'Drafts', published: 'Published', campaigns: 'Campaigns', research: 'Research'
+    drafts: 'Drafts', published: 'Published', campaigns: 'Campaigns', research: 'Research', templates: 'Templates'
   }
+  const FILTERABLE_FOLDERS = new Set(['drafts', 'published'])
 
   $: folder = $page.params.folder
 
   let files: any[] = []
+  let allFiles: any[] = []
   let loading = true
+  let viewMode: 'mine' | 'all' = 'mine'
+  let assetMap: Map<string, any> = new Map()
 
   // Canvas panel state
   let panelFile: any = null
@@ -26,12 +31,44 @@
   let saving = false
   let copied = false
 
+  // Rename state
+  let renamingFile: string | null = null
+  let renameValue = ''
+  let renamingPanel = false
+  let renamePanelValue = ''
+
   async function loadFiles() {
     loading = true
     try {
-      files = await assets.list(folder)
+      // Fetch disk files and DB records in parallel
+      const [diskFiles, dbRecords] = await Promise.all([
+        assets.list(folder),
+        assetRecords.list({ folder }).catch(() => [] as any[])
+      ])
+
+      // Build map of filePath → DB record for enrichment
+      assetMap = new Map()
+      for (const rec of dbRecords) {
+        assetMap.set(rec.filePath, rec)
+      }
+
+      allFiles = diskFiles
+      applyFilter()
     } catch {}
     loading = false
+  }
+
+  function applyFilter() {
+    if (!FILTERABLE_FOLDERS.has(folder) || viewMode === 'all') {
+      files = allFiles
+      return
+    }
+    // "mine" mode: show files owned by current user (or with no DB record for backward compat)
+    const currentUserId = $user?.id
+    files = allFiles.filter(f => {
+      const rec = assetMap.get(`${folder}/${f.name}`)
+      return !rec || !rec.userId || rec.userId === currentUserId
+    })
   }
 
   async function openPanel(file: any, mode: 'preview' | 'edit' = 'preview') {
@@ -39,11 +76,13 @@
     panelContent = content
     panelFile = file
     panelMode = mode
+    renamingPanel = false
   }
 
   function closePanel() {
     panelFile = null
     panelContent = ''
+    renamingPanel = false
   }
 
   async function saveEdit() {
@@ -82,9 +121,71 @@
     loadFiles()
   }
 
+  function startRename(file: any) {
+    renamingFile = file.name
+    renameValue = file.slug
+  }
+
+  async function confirmRename(oldName: string) {
+    const newFilename = renameValue.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.md'
+    if (newFilename === oldName || !renameValue.trim()) {
+      renamingFile = null
+      return
+    }
+    try {
+      await assets.rename(folder, oldName, newFilename)
+      if (panelFile?.name === oldName) {
+        panelFile = { ...panelFile, name: newFilename, slug: newFilename.replace('.md', '') }
+      }
+      loadFiles()
+    } catch {}
+    renamingFile = null
+  }
+
+  function startPanelRename() {
+    renamingPanel = true
+    renamePanelValue = panelFile.slug.replace(/-/g, ' ')
+  }
+
+  async function confirmPanelRename() {
+    if (!panelFile) return
+    const newFilename = renamePanelValue.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.md'
+    if (newFilename === panelFile.name || !renamePanelValue.trim()) {
+      renamingPanel = false
+      return
+    }
+    try {
+      await assets.rename(folder, panelFile.name, newFilename)
+      panelFile = { ...panelFile, name: newFilename, slug: newFilename.replace('.md', '') }
+      loadFiles()
+    } catch {}
+    renamingPanel = false
+  }
+
   $: wordCount = panelContent.split(/\s+/).filter(Boolean).length
 
-  $: folder, loadFiles()
+  // Create new file (templates)
+  let showNewFile = false
+  let newFileName = ''
+
+  async function createFile() {
+    if (!newFileName.trim()) return
+    const name = newFileName.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.md'
+    try {
+      await assets.save(folder, name, `# ${newFileName.trim()}\n\n`)
+      showNewFile = false
+      newFileName = ''
+      await loadFiles()
+      const created = files.find((f: any) => f.name === name)
+      if (created) openPanel(created, 'edit')
+    } catch {}
+  }
+
+  $: if (folder) {
+    viewMode = folder === 'published' ? 'all' : 'mine'
+    loadFiles()
+  }
+  $: viewMode, applyFilter()
 </script>
 
 <div class="flex h-full overflow-hidden">
@@ -106,6 +207,52 @@
           {FOLDER_LABELS[f]}
         </a>
       {/each}
+      <div class="flex-1"></div>
+      {#if FILTERABLE_FOLDERS.has(folder)}
+        <div class="flex rounded-lg overflow-hidden" style="border: 1px solid var(--border)">
+          <button
+            on:click={() => viewMode = 'mine'}
+            class="flex items-center gap-1 px-2.5 py-1.5 text-xs transition-colors"
+            style="background: {viewMode === 'mine' ? 'var(--accent-muted)' : 'transparent'}; color: {viewMode === 'mine' ? 'var(--accent-light)' : 'var(--text-muted)'}"
+          >
+            <UserIcon size={12} />
+            Mine
+          </button>
+          <button
+            on:click={() => viewMode = 'all'}
+            class="flex items-center gap-1 px-2.5 py-1.5 text-xs transition-colors"
+            style="background: {viewMode === 'all' ? 'var(--accent-muted)' : 'transparent'}; color: {viewMode === 'all' ? 'var(--accent-light)' : 'var(--text-muted)'}"
+          >
+            <Users size={12} />
+            Team
+          </button>
+        </div>
+      {/if}
+      {#if folder === 'templates'}
+        {#if showNewFile}
+          <div class="flex items-center gap-1">
+            <input
+              bind:value={newFileName}
+              placeholder="Template name"
+              class="px-2.5 py-1.5 rounded-lg text-xs outline-none"
+              style="background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary)"
+              on:keydown={(e) => { if (e.key === 'Enter') createFile(); if (e.key === 'Escape') { showNewFile = false; newFileName = '' } }}
+              autofocus
+            />
+            <button on:click={createFile} class="px-2.5 py-1.5 rounded-lg text-xs font-medium" style="background: var(--accent); color: white">Create</button>
+            <button on:click={() => { showNewFile = false; newFileName = '' }} class="px-2 py-1.5 rounded-lg text-xs" style="color: var(--text-muted)">Cancel</button>
+          </div>
+        {:else}
+          <button
+            on:click={() => showNewFile = true}
+            class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+            style="background: var(--accent-muted); color: var(--accent-light)"
+          >
+            <Plus size={12} />
+            New Template
+          </button>
+        {/if}
+      {/if}
     </div>
 
     <div class="flex-1 overflow-y-auto p-5" style="background: var(--bg-surface); border-top: 1px solid var(--border)">
@@ -115,11 +262,12 @@
         <div class="flex flex-col items-center justify-center h-64 gap-3 text-center">
           <FileText size={32} style="color: var(--text-faint)" />
           <div>
-            <p class="font-medium" style="color: var(--text-secondary)">No files in {FOLDER_LABELS[folder]}</p>
+            <p class="font-medium font-decorative" style="color: var(--text-secondary)">No files in {FOLDER_LABELS[folder]}</p>
             <p class="text-sm mt-1" style="color: var(--text-muted)">
               {folder === 'drafts' ? 'Use /write, /email, or /social to create your first draft' :
                folder === 'published' ? "Move drafts here when they're ready" :
                folder === 'campaigns' ? 'Use /campaign to build a campaign plan' :
+               folder === 'templates' ? 'Create reusable templates — email formats, brief structures, campaign frameworks' :
                'Use /research or /competitor to generate research'}
             </p>
           </div>
@@ -136,9 +284,24 @@
               on:keydown={(e) => e.key === 'Enter' && openPanel(file)}
             >
               <div class="flex items-start justify-between gap-2 mb-2">
-                <p class="font-medium text-sm truncate flex-1" style="color: var(--text-primary)">
-                  {file.slug.replace(/-/g, ' ')}
-                </p>
+                {#if renamingFile === file.name}
+                  <input
+                    bind:value={renameValue}
+                    on:click|stopPropagation
+                    on:keydown|stopPropagation={(e) => {
+                      if (e.key === 'Enter') confirmRename(file.name)
+                      if (e.key === 'Escape') renamingFile = null
+                    }}
+                    on:blur={() => confirmRename(file.name)}
+                    class="font-medium text-sm flex-1 px-1.5 py-0.5 rounded outline-none"
+                    style="background: var(--bg-input); border: 1px solid var(--accent); color: var(--text-primary)"
+                    autofocus
+                  />
+                {:else}
+                  <p class="font-medium text-sm truncate flex-1" style="color: var(--text-primary)">
+                    {file.slug.replace(/-/g, ' ')}
+                  </p>
+                {/if}
                 <Badge variant="default">{file.wordCount}w</Badge>
               </div>
 
@@ -158,6 +321,12 @@
                     class="p-1.5 rounded hover:bg-[--bg-glass-hover]"
                     style="color: var(--text-muted)"
                   ><Eye size={14} /></button>
+                  <button
+                    on:click|stopPropagation={() => startRename(file)}
+                    title="Rename"
+                    class="p-1.5 rounded hover:bg-[--bg-glass-hover]"
+                    style="color: var(--text-muted)"
+                  ><Pencil size={14} /></button>
                   <button
                     on:click|stopPropagation={() => openPanel(file, 'edit')}
                     title="Edit in panel"
@@ -203,7 +372,27 @@
       <div class="flex items-center justify-between px-4 py-3 shrink-0" style="border-bottom: 1px solid var(--border-subtle)">
         <div class="flex items-center gap-2 min-w-0">
           <FileText size={14} style="color: var(--accent-light); flex-shrink: 0" />
-          <span class="font-medium text-sm truncate" style="color: var(--text-primary)">{panelFile.slug.replace(/-/g, ' ')}</span>
+          {#if renamingPanel}
+            <input
+              bind:value={renamePanelValue}
+              on:keydown={(e) => {
+                if (e.key === 'Enter') confirmPanelRename()
+                if (e.key === 'Escape') renamingPanel = false
+              }}
+              on:blur={confirmPanelRename}
+              class="font-medium text-sm flex-1 px-1.5 py-0.5 rounded outline-none min-w-0"
+              style="background: var(--bg-input); border: 1px solid var(--accent); color: var(--text-primary)"
+              autofocus
+            />
+          {:else}
+            <span class="font-medium text-sm truncate" style="color: var(--text-primary)">{panelFile.slug.replace(/-/g, ' ')}</span>
+            <button
+              on:click={startPanelRename}
+              title="Rename"
+              class="p-1 rounded hover:bg-[--bg-glass-hover] shrink-0"
+              style="color: var(--text-muted)"
+            ><Pencil size={12} /></button>
+          {/if}
           <span class="text-xs px-1.5 py-0.5 rounded-full shrink-0" style="background: var(--bg-elevated); color: var(--text-faint)">{wordCount}w</span>
         </div>
 
@@ -248,7 +437,7 @@
             bind:value={panelContent}
             class="w-full h-full p-5 text-sm font-mono resize-none outline-none"
             style="background: var(--bg-base); color: var(--text-primary); line-height: 1.6; min-height: 100%"
-          />
+          ></textarea>
         {/if}
       </div>
 

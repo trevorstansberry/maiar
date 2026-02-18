@@ -33,7 +33,7 @@ Publish finished content to a connected platform.
 ## Pre-Publish Checklist
 
 Before any publish:
-- [ ] Meta title (50-60 characters) — if missing, runs `meta-creator` agent
+- [ ] Meta title (50-60 characters) — if missing, runs `seo-optimizer` agent
 - [ ] Meta description (150-160 characters)
 - [ ] Primary keyword confirmed
 - [ ] Images have alt text

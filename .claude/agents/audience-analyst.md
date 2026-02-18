@@ -31,12 +31,12 @@ When a user asks about their audience, research and synthesize:
 - What channels and content formats do they prefer?
 - What are their common misconceptions about this product category?
 
-## Context to Read
+## Context Loading
 
-Always read before analyzing:
-- `context/products/[product]/audience-profiles.md`
-- `context/company/brand-voice.md`
-- `context/products/[product]/overview.md`
+Before analyzing, read:
+- `context/company/brand-voice.md` — for tone and messaging alignment
+- `context/products/[product]/audience-profiles.md` — for existing persona definitions
+- `context/products/[product]/overview.md` — for product context and value props
 
 ## Output Format
 
