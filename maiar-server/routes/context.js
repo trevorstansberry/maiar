@@ -17,7 +17,24 @@ contextRouter.get('/', (req, res) => {
     const fileList = getContextFileList(clientSlug)
     res.json(fileList)
   } catch (err) {
-    res.status(500).json({ error: err.message })
+    console.error('[context] list error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Quick health check — are core context files populated?
+contextRouter.get('/status', (req, res) => {
+  const { clientSlug } = req.user
+  try {
+    const files = getContextFileList(clientSlug)
+    const essentials = [
+      files.company.find(f => f.filename === 'brand-voice.md'),
+      ...files.products.filter(f => f.filename === 'overview.md')
+    ]
+    const ready = essentials.some(f => f?.fillStatus === 'filled')
+    res.json({ ready })
+  } catch {
+    res.json({ ready: false })
   }
 })
 
@@ -27,7 +44,8 @@ contextRouter.get('/products', (req, res) => {
   try {
     res.json(getProducts(clientSlug))
   } catch (err) {
-    res.status(500).json({ error: err.message })
+    console.error('[context] products error:', err)
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -65,9 +83,15 @@ contextRouter.post('/products', (req, res) => {
 
 // Read a specific context file
 // section = 'company' or 'products/[slug]'
+const VALID_SECTIONS = /^(company|products\/[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?)$/
+
 contextRouter.get('/:section/:filename', (req, res) => {
   const { clientSlug } = req.user
   const { section, filename } = req.params
+
+  if (!VALID_SECTIONS.test(section)) {
+    return res.status(400).json({ error: 'Invalid section' })
+  }
 
   if (!filename.endsWith('.md')) {
     return res.status(400).json({ error: 'Only .md files supported' })
@@ -89,6 +113,10 @@ contextRouter.put('/:section/:filename', (req, res) => {
   const { section, filename } = req.params
   const { content } = req.body
 
+  if (!VALID_SECTIONS.test(section)) {
+    return res.status(400).json({ error: 'Invalid section' })
+  }
+
   if (!filename.endsWith('.md')) {
     return res.status(400).json({ error: 'Only .md files supported' })
   }
@@ -101,6 +129,7 @@ contextRouter.put('/:section/:filename', (req, res) => {
     writeFile(clientSlug, `context/${section}/${filename}`, content)
     res.json({ ok: true })
   } catch (err) {
-    res.status(500).json({ error: err.message })
+    console.error('[context] write error:', err)
+    res.status(500).json({ error: 'Internal server error' })
   }
 })

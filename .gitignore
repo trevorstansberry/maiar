@@ -5,6 +5,9 @@
 drafts/
 published/
 
+# Client workspaces — contain workspace-specific context and content
+clients/
+
 # System files
 .DS_Store
 node_modules/

@@ -6,7 +6,7 @@
  */
 import 'dotenv/config'
 import bcrypt from 'bcrypt'
-import { randomUUID } from 'crypto'
+import { randomUUID, randomBytes } from 'crypto'
 import { db } from '../lib/db.js'
 import { users } from '../db/schema.js'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
@@ -15,8 +15,8 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 
 // ── EDIT THESE ──────────────────────────────────────────────
-const EMAIL = 'admin@yourmaiar.com'
-const PASSWORD = 'change-me-immediately'
+const EMAIL = process.env.ADMIN_EMAIL ?? 'admin@yourmaiar.com'
+const PASSWORD = process.env.ADMIN_PASSWORD ?? randomBytes(16).toString('hex')
 const CLIENT_SLUG = 'admin'
 // ────────────────────────────────────────────────────────────
 
@@ -40,13 +40,14 @@ try {
     email: EMAIL.toLowerCase(),
     passwordHash,
     clientSlug: CLIENT_SLUG,
-    role: 'admin',
+    role: 'super_admin',
     active: true
   })
   console.log(`✓ Admin user created: ${EMAIL}`)
   console.log(`  ID: ${id}`)
   console.log(`  Client slug: ${CLIENT_SLUG}`)
-  console.log('\n⚠  Change the password before going live.')
+  console.log(`  Password: ${PASSWORD}`)
+  console.log('\n⚠  Save this password — it will not be shown again. Change it after first login.')
 } catch (err) {
   if (err.message?.includes('UNIQUE')) {
     console.log(`Admin user already exists: ${EMAIL}`)
